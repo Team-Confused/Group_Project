@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Group_Project.iml" filepath="$PROJECT_DIR$/Group_Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Todo_Manager.iml" filepath="$PROJECT_DIR$/.idea/modules/Todo_Manager.iml" group="Todo_Manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Todo_Manager/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app_main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app_main.iml" group="Todo_Manager/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app_test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app_test.iml" group="Todo_Manager/app" />
     </modules>
   </component>
 </project>

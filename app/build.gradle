@@ -9,7 +9,15 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+
+
+    id 'io.freefair.lombok' version '5.3.0'
+
     id 'org.openjfx.javafxplugin' version '0.0.9'
+
+
+
+
 }
 
 repositories {
@@ -39,11 +47,22 @@ application {
     mainClass = 'Todo_Manager.App'
 }
 
+
+java {
+    modularity.inferModulePath = true
+}
+
+        test {
+            useJUnitPlatform()
+        }
+
+
+
 test {
     useJUnitPlatform()
 }
  javafx{
+
     version = "15"
     modules = ['javafx.controls']
 }
-
