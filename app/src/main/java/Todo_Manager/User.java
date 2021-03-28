@@ -2,14 +2,16 @@ package Todo_Manager;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.util.UUID;
 
 @ToString
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 
 
-public class User {
+public class User{
 
     @NonNull
     @Getter
@@ -17,6 +19,9 @@ public class User {
     @NonNull
     @Getter
     private String lastName;
+    @NonNull
+    @Getter
+    private String password;
     @NonNull
     @Getter
     private UUID id;
@@ -28,7 +33,7 @@ public class User {
     private String email;
     @NonNull
     @Getter
-    private Path photo;
+    private String photo;
     @Getter
     private boolean isAdmin;
 
