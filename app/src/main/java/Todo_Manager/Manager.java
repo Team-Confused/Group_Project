@@ -3,7 +3,6 @@ package Todo_Manager;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.java.Log;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -11,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -123,6 +121,20 @@ public class Manager {
         labelList = gson.fromJson(test.readLine(), labelsToken);
         test.close();
     }
+
+    private static String Search(String object){
+        ArrayList<String> labelList = new ArrayList<>();
+        for (String element : labelList){
+            if(element.contains(object)){
+                return object;
+            }
+
+        }
+
+
+        return object;
+    }
+
 
     public static void main(String args[]) throws IOException {
         //tests for various methods
