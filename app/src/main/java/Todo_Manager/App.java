@@ -8,6 +8,7 @@ package Todo_Manager;
 
 import lombok.extern.java.Log;
 
+import java.io.IOException;
 import java.util.UUID;
 import java.nio.file.Paths;
 
@@ -20,12 +21,14 @@ public class App {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println(new App().getGreeting());
-        User test = new User("kevin","bacon",UUID.randomUUID(),"bip","uwu@gmail.com", Paths.get("C/users"),false);
-        System.out.println(test);
+
+
+        System.out.println();
         System.out.println(UUID.randomUUID());
+
     }
 }
 
