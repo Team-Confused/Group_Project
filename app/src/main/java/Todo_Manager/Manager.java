@@ -131,6 +131,7 @@ public class Manager {
 
     private static String Search(String object){
         ArrayList<String> labelList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         for (String element : labelList){
             if(element.contains(object)){
                 return object;
