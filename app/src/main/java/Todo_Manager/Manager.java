@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -121,6 +122,12 @@ public class Manager {
         labelList = gson.fromJson(test.readLine(), labelsToken);
         test.close();
     }
+    private void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted){
+        ArrayList<Task> tasks = new ArrayList<>();
+        Task task = new Task();
+        tasks.add(task);
+
+    }
 
     private static String Search(String object){
         ArrayList<String> labelList = new ArrayList<>();
@@ -128,6 +135,7 @@ public class Manager {
             if(element.contains(object)){
                 return object;
             }
+
 
         }
 
