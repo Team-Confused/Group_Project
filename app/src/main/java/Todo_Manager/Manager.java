@@ -145,21 +145,22 @@ public class Manager {
 
     //logoutUser
     /*
-        logout a user by their unique user id (UUID)
-        returns a 0
+        Logout a user by their unique user id (UUID)
+        There is no return
     */
-    public static int logoutUser(UUID id) throws IOException {
-        //set the "loggedInUser" variable to "null" to signify that there is no user logged in
-        loggedInUser = null;
-
+    public static void logoutUser(UUID id) throws IOException {
         //write to log that no users are logged in
         log.info("logged out user:" + id);
 
-        //return of 0 to convey command execution
-        return 0;
+        //set the "loggedInUser" variable to "null" to signify that there is no user logged in
+        loggedInUser = null;
+
+        //save the user's data
+        saveUserData();
+        log.info("saving user "+id+"'s data due to logout");
     }
 
-    
+
 
     public static void main(String args[]) throws IOException {
         //tests for various methods
