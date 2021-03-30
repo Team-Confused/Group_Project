@@ -131,16 +131,43 @@ public class Manager {
 
     private static String Search(String object){
         ArrayList<String> labelList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         for (String element : labelList){
             if(element.contains(object)){
                 return object;
             }
+            else{
+                System.out.println("Search not found");
+            }
+        }
+        for(Task element : tasks){
+            if(element.getTitle() == object){
+                return object;
 
-
+            }
+            else{
+                System.out.println("Search not found");
+            }
         }
 
 
+
         return object;
+    }
+
+    private static String sort(){  //
+        ArrayList<Task> tasks = new ArrayList<>();
+        boolean task;
+        boolean subTask;
+        Date date;
+
+       for(Task element : tasks){
+           if(task = true){
+              System.out.println(tasks);   // not to sure if this solves I tried using return tasks which resulted in an error
+           }
+
+       }
+    return null;
     }
 
     //logoutUser
