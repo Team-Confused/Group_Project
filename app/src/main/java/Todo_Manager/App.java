@@ -22,13 +22,8 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-
-        System.out.println(new App().getGreeting());
-
-
-        System.out.println();
-        System.out.println(UUID.randomUUID());
-
+        Manager.loadUsers();
+        UI.main(args);
     }
 }
 

@@ -29,7 +29,6 @@ public class Manager {
         for (User u : users) {
             if (u.getEmail().equals(email)) {
                 //at this point, user exists
-                temp = u;
                 if (u.getPassword().equals(password)) {
                     //at this point, user exists and password is correct.
                     loggedInUser = u;
@@ -76,7 +75,7 @@ public class Manager {
         }
     }
 
-    private static void loadUsers() throws IOException {
+    public static void loadUsers() throws IOException {
         //loads user list
         Gson gson = new Gson();
         Type usersType = new TypeToken<ArrayList<User>>() {
@@ -109,18 +108,22 @@ public class Manager {
 
     private static void loadUserData() throws IOException {
         Gson gson = new Gson();
-        loggedInUser = users.get(0);//todo remove after implementing login
-        BufferedReader test = new BufferedReader(new FileReader("./UserFiles/" + loggedInUser.getId() + ".json"));
-        Type tasksToken = new TypeToken<ArrayList<Task>>() {
-        }.getType();
-        tasks = gson.fromJson(test.readLine(), tasksToken);
-        Type sectionsToken = new TypeToken<ArrayList<Section>>() {
-        }.getType();
-        sections = gson.fromJson(test.readLine(), sectionsToken);
-        Type labelsToken = new TypeToken<ArrayList<String>>() {
-        }.getType();
-        labelList = gson.fromJson(test.readLine(), labelsToken);
-        test.close();
+        File tempFile = new File("./UserFiles/" + loggedInUser.getId() + ".json");
+        boolean exists = tempFile.exists();
+        if (exists) {
+            loggedInUser = users.get(0);//todo remove after implementing login
+            BufferedReader test = new BufferedReader(new FileReader("./UserFiles/" + loggedInUser.getId() + ".json"));
+            Type tasksToken = new TypeToken<ArrayList<Task>>() {
+            }.getType();
+            tasks = gson.fromJson(test.readLine(), tasksToken);
+            Type sectionsToken = new TypeToken<ArrayList<Section>>() {
+            }.getType();
+            sections = gson.fromJson(test.readLine(), sectionsToken);
+            Type labelsToken = new TypeToken<ArrayList<String>>() {
+            }.getType();
+            labelList = gson.fromJson(test.readLine(), labelsToken);
+            test.close();
+        }
     }
     private void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted){
         ArrayList<Task> tasks = new ArrayList<>();
