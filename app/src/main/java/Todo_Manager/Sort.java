@@ -3,7 +3,7 @@ package Todo_Manager;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class sort {
+public class Sort {
     ArrayList<Task> tasks = new ArrayList<>();
     ArrayList<String> labelList = new ArrayList<>();
     boolean label;
@@ -16,7 +16,7 @@ public class sort {
         this.date = date;
     }
 
-    public sort() {  //
+    public Sort() {  //
 
         for (Task element : tasks) {
             if (task = true) {
