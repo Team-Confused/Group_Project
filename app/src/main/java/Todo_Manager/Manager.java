@@ -126,22 +126,30 @@ public class Manager {
         }
     }
     private void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted){
-        ArrayList<Task> tasks = new ArrayList<>();
-        Task task = new Task();
+        Task task = new Task( title, description, deadline,priority,taskCompleted, labelList);
         tasks.add(task);
 
     }
 
     private static String Search(String object){
-        ArrayList<String> labelList = new ArrayList<>();
-        ArrayList<Task> tasks = new ArrayList<>();
         for (String element : labelList){
             if(element.contains(object)){
-                return object;
+                return element;
             }
-
-
+            else{
+                System.out.println("Search not found");
+            }
         }
+        for(Task element : tasks){
+            if(element.getTitle() == object){
+                return String.valueOf(element);
+
+            }
+            else{
+                System.out.println("Search not found");
+            }
+        }
+
 
 
         return object;
