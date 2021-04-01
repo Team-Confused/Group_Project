@@ -21,6 +21,7 @@ public class User{
     private String lastName;
     @NonNull
     @Getter
+    @Setter
     private String password;
     @NonNull
     @Getter
