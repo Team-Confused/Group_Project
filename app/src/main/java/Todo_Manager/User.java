@@ -16,27 +16,29 @@ public class User{
     @NonNull
     @Getter
     private String firstName;
+
+
     @NonNull
     @Getter
-    private String lastName;
+    public String lastName;
     @NonNull
     @Getter
     @Setter
-    private String password;
+    public String password;
     @NonNull
     @Getter
-    private UUID id;
+    public UUID id;
     @NonNull
     @Getter
-    private String bio;
+    public String bio;
     @NonNull
     @Getter
-    private String email;
+    public String email;
     @NonNull
     @Getter
-    private String photo;
+    public String photo;
     @Getter
-    private boolean isAdmin;
+    public boolean isAdmin;
 
 
 

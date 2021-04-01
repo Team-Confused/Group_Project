@@ -190,8 +190,10 @@ public class Manager {
         reset the user's password
         return 1 if success and -1 if failure
      */
-    public static int userPasswordReset(UUID id, String newPassword) throws IOException {
+    public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
+
+        //User user = new User(loggedInUser.getFirstName(), loggedInUser.getLastName(), loggedInUser.getPassword(), loggedInUser.getId(), loggedInUser.getBio(), loggedInUser.getEmail(), loggedInUser.getPhoto(), false);
 
         //method 1 [works, but is a bit slower]:
         /*
@@ -231,7 +233,10 @@ public class Manager {
 
 
     }
-
+    public static int userPasswordReset(String newPassword) throws IOException {
+        //call adminPasswordReset with the parameters of the current user and the new password
+        return adminPasswordReset(loggedInUser.getId(), newPassword);
+    }
 
 
     public static void main(String args[]) throws IOException {
@@ -246,6 +251,12 @@ public class Manager {
                         Path.of("/home/john/pictures/img.pdf"),
                         false);
 
+        //login generic user
+        login("example@gmail.com","Pa55w0rd");
+
+        //reset password of generic user
+        userPasswordReset("newP455W0rd");
+        
         //loadUsers();
         saveUsers();
         System.out.println(users);

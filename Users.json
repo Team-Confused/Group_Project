@@ -1,42 +1,12 @@
 [
   {
-    "firstName": "sadf",
-    "lastName": "test",
-    "password": "test",
-    "id": "479f3d48-4b7a-4221-9e9c-36f0e73e8a31",
-    "bio": "test",
-    "email": "test",
-    "photo": "C:\\Users\\Tim\\Pictures\\bearfish output.png",
-    "isAdmin": false
-  },
-  {
-    "firstName": "sdaf",
-    "lastName": "asdf",
-    "password": "asdf",
-    "id": "78012661-decf-432d-9ae4-47324cba0b47",
-    "bio": "sadf\nsdf\nsd\nfsd\n",
-    "email": "asdf",
-    "photo": "C:\\Users\\Tim\\Pictures\\bearfishDLL output.png",
-    "isAdmin": false
-  },
-  {
-    "firstName": "ASD",
-    "lastName": "DSF",
-    "password": "SDF",
-    "id": "1ccfaed5-a36f-465c-b91e-d1f0f45fa0e5",
-    "bio": "SDF",
-    "email": "SDF",
-    "photo": "C:\\Users\\Tim\\Pictures\\bearfishDLL output.png",
-    "isAdmin": false
-  },
-  {
-    "firstName": "sdfsdf",
-    "lastName": "asdfsdf",
-    "password": "test",
-    "id": "5b3db0ea-e380-4b54-a175-4389b70588c8",
-    "bio": "tsfsdfasdfsdfsd",
-    "email": "uvu",
-    "photo": "C:\\Users\\Tim\\Pictures\\2pw1.png",
+    "firstName": "John",
+    "lastName": "Doe",
+    "password": "newP455W0rd",
+    "id": "cb41e19f-d933-4cdf-bc80-0a257bf381ea",
+    "bio": "Only child of Jack and Jill Doe",
+    "email": "example@gmail.com",
+    "photo": "/home/john/pictures/img.pdf",
     "isAdmin": false
   }
 ]
