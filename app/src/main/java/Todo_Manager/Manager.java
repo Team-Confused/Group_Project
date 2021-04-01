@@ -131,6 +131,11 @@ public class Manager {
 
     }
 
+    private void addSection(String title, String description){
+        Section section = new Section(title, description);
+        sections.add(section);
+    }
+
     private static ArrayList<String> Search(String object){
         ArrayList<String> labelSearch = new ArrayList<>();
         for (String element : labelList){
