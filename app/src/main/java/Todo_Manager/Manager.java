@@ -187,13 +187,11 @@ public class Manager {
 
     //user password reset
     /*
-        reset the user's password
+        reset any user's password
         return 1 if success and -1 if failure
      */
     public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
-
-        //User user = new User(loggedInUser.getFirstName(), loggedInUser.getLastName(), loggedInUser.getPassword(), loggedInUser.getId(), loggedInUser.getBio(), loggedInUser.getEmail(), loggedInUser.getPhoto(), false);
 
         //method 1 [works, but is a bit slower]:
         /*
@@ -211,7 +209,7 @@ public class Manager {
         //method 2 [also works, but is a bit faster]
         //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
         List<User> active = users.stream().filter(user -> user.getId()==id).collect(Collectors.toList());
-
+        
         //perform password reset on first user in list (there should only be one user with the id anyways)
         if(!active.isEmpty())
         {
@@ -233,6 +231,14 @@ public class Manager {
 
 
     }
+
+
+
+    //admin password reset
+    /*
+        reset the user's password
+        returns whatever "adminPasswordReset" returns with the ID of the currently logged-in user as its UUID id parameter
+     */
     public static int userPasswordReset(String newPassword) throws IOException {
         //call adminPasswordReset with the parameters of the current user and the new password
         return adminPasswordReset(loggedInUser.getId(), newPassword);
@@ -256,7 +262,7 @@ public class Manager {
 
         //reset password of generic user
         userPasswordReset("newP455W0rd");
-        
+
         //loadUsers();
         saveUsers();
         System.out.println(users);
