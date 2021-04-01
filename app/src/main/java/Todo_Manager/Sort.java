@@ -16,7 +16,7 @@ public class Sort {
         this.date = date;
     }
 
-    public Sort() {  //
+    public Sort() {
 
         for (Task element : tasks) {
             if (task = true) {

@@ -131,28 +131,29 @@ public class Manager {
 
     }
 
-    private static String Search(String object){
+    private static ArrayList<String> Search(String object){
+        ArrayList<String> labelSearch = new ArrayList<>();
         for (String element : labelList){
             if(element.contains(object)){
-                return element;
+                labelSearch.add(element);
             }
             else{
                 System.out.println("Search not found");
             }
         }
+        return labelSearch;
+    }
+    private static ArrayList<Task> searchTask(Task object){
+        ArrayList<Task> taskSearch = new ArrayList<>();
         for(Task element : tasks){
-            if(element.getTitle() == object){
-                return String.valueOf(element);
-
+            if(element == object){
+                taskSearch.add(element);
             }
             else{
                 System.out.println("Search not found");
             }
         }
-
-
-
-        return object;
+        return taskSearch;
     }
 
 
@@ -162,6 +163,7 @@ public class Manager {
         loadUsers();
         saveUsers();
         System.out.println(users);
+
 
 
         //loadUserData();

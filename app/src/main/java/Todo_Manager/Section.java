@@ -5,7 +5,9 @@ import lombok.*;
 @ToString
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class Section {
+public class
+
+Section {
     @NonNull
     @Getter
     private String title;
