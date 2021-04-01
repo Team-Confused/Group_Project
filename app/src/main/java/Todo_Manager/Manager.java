@@ -11,7 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Log
@@ -108,12 +110,13 @@ public class Manager {
 
     private static void loadUserData() throws IOException {
         Gson gson = new Gson();
+
         File tempFile = new File("./UserFiles/" + loggedInUser.getId() + ".json");
         boolean exists = tempFile.exists();
         if (exists) {
             loggedInUser = users.get(0);//todo remove after implementing login
             BufferedReader test = new BufferedReader(new FileReader("./UserFiles/" + loggedInUser.getId() + ".json"));
-            Type tasksToken = new TypeToken<ArrayList<Task>>() {
+            Type tasksToken = new TypeToken<ArrayList<Task>>(){
             }.getType();
             tasks = gson.fromJson(test.readLine(), tasksToken);
             Type sectionsToken = new TypeToken<ArrayList<Section>>() {
@@ -162,10 +165,88 @@ public class Manager {
     }
 
 
+
+    //logoutUser
+    /*
+        Logout a user by their unique user id (UUID)
+        There is no return
+    */
+    public static void logoutUser(UUID id) throws IOException {
+        //write to log that no users are logged in
+        log.info("logged out user:" + id);
+
+        //set the "loggedInUser" variable to "null" to signify that there is no user logged in
+        loggedInUser = null;
+
+        //save the user's data
+        saveUserData();
+        log.info("saving user "+id+"'s data due to logout");
+    }
+
+
+
+    //user password reset
+    /*
+        reset the user's password
+        return 1 if success and -1 if failure
+     */
+    public static int userPasswordReset(UUID id, String newPassword) throws IOException {
+        log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
+
+        //method 1 [works, but is a bit slower]:
+        /*
+        for (User person : users)
+        {
+            if(person.getId() == id)
+            {
+                System.out.println("user detected!");
+                person.setPassword(newPassword);
+            }
+            System.out.println("new password:" + person.getPassword());
+        }
+        */
+
+        //method 2 [also works, but is a bit faster]
+        //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
+        List<User> active = users.stream().filter(user -> user.getId()==id).collect(Collectors.toList());
+
+        //perform password reset on first user in list (there should only be one user with the id anyways)
+        if(!active.isEmpty())
+        {
+            //set the user's password to the function-parameter password
+            active.get(0).setPassword(newPassword);
+
+            //save the updated user data
+            saveUserData();
+            return 1;
+        }
+
+        //return error message if the list is empty
+        else
+        {
+            log.info("Error: The list of users is empty");
+            return -1;
+        }
+
+
+
+    }
+
+
+
     public static void main(String args[]) throws IOException {
         //tests for various methods
 
-        loadUsers();
+        //generic user account
+        addUser("John",
+                "Doe",
+                "Pa55w0rd",
+                     "Only child of Jack and Jill Doe",
+                  "example@gmail.com",
+                        Path.of("/home/john/pictures/img.pdf"),
+                        false);
+
+        //loadUsers();
         saveUsers();
         System.out.println(users);
 
