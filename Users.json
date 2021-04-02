@@ -3,11 +3,7 @@
     "firstName": "John",
     "lastName": "Doe",
     "password": "newP455W0rd",
-<<<<<<< HEAD
-    "id": "8687a64f-7605-4919-8485-76fc23e27ce3",
-=======
-    "id": "4df4ff5f-f955-4a8a-ac7f-bdda0a0efcd1",
->>>>>>> 38581f1e6388e8e1312d9301cec9f737481e94ec
+    "id": "175b3934-3c22-470a-984c-565982c9b0ba",
     "bio": "Only child of Jack and Jill Doe",
     "email": "example@gmail.com",
     "photo": "\\home\\john\\pictures\\img.pdf",

@@ -30,6 +30,10 @@ dependencies {
     // Use JUnit test framework.
     testImplementation 'junit:junit:4.13'
 
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:5.5.2"
+    testRuntime "org.junit.platform:junit-platform-runner:1.5.2"
+
+
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
 
@@ -52,10 +56,11 @@ java {
     modularity.inferModulePath = true
 }
 test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
 }
  javafx{
 
     version = "15.0.1"
     modules = ['javafx.controls']
 }
+

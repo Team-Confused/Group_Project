@@ -44,8 +44,7 @@ public class LoginScreen {
             if (check == false){
                 error.setVisible(true);
             }else{
-                error.setVisible(true);
-                error.setText("login successful");
+                primaryStage.setScene(MainScreen.getMainScene(primaryStage));
             }
 
         });

@@ -2,6 +2,7 @@ package Todo_Manager;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import lombok.Getter;
 import lombok.extern.java.Log;
 
 import java.io.*;
@@ -18,16 +19,18 @@ import java.util.stream.Collectors;
 
 @Log
 public class Manager {
-
+    @Getter
     private static ArrayList<User> users = new ArrayList<>();
+    @Getter
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static ArrayList<String> labelList = new ArrayList<>();
-    private static User loggedInUser;//todo: this should be set to user on login and null on logout and/or startup
+    private static User loggedInUser;
     private static ArrayList<Section> sections = new ArrayList<>();
 
 
     public static boolean login(String email, String password) throws IOException {
         User temp;
+        System.out.println(users);
         for (User u : users) {
             if (u.getEmail().equals(email)) {
                 //at this point, user exists
@@ -43,6 +46,15 @@ public class Manager {
             }
         }//if user does not exist or password is incorrect it will return false
         return false;
+    }
+    public static void logout() throws IOException {
+        saveUserData();
+        saveUsers();
+        loggedInUser = null;
+        tasks = null;
+        labelList = null;
+        sections = null;
+
     }
 
     public static boolean addUser(String firstName, String lastName, String password, String bio, String
@@ -92,9 +104,7 @@ public class Manager {
     private static void saveUserData() throws IOException {
         //saves data of the logged in user
         Gson gson = new Gson();
-
         FileWriter file = new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", true);
-        loggedInUser = users.get(0);//todo remove after implementing login
         BufferedWriter blankWriter = new BufferedWriter(new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", false));
         blankWriter.write("");
         blankWriter.close();
@@ -105,16 +115,15 @@ public class Manager {
         writer.newLine();
         writer.write(gson.toJson(labelList));
         writer.close();
-
     }
 
     private static void loadUserData() throws IOException {
         Gson gson = new Gson();
-
+        //checks if file exists
         File tempFile = new File("./UserFiles/" + loggedInUser.getId() + ".json");
         boolean exists = tempFile.exists();
         if (exists) {
-            loggedInUser = users.get(0);//todo remove after implementing login
+            //if it exists, reads in each type
             BufferedReader test = new BufferedReader(new FileReader("./UserFiles/" + loggedInUser.getId() + ".json"));
             Type tasksToken = new TypeToken<ArrayList<Task>>(){
             }.getType();
@@ -128,13 +137,14 @@ public class Manager {
             test.close();
         }
     }
-    private void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted){
-        Task task = new Task( title, description, deadline,priority,taskCompleted, labelList);
-        tasks.add(task);
 
+    private static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
+        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList);
+        tasks.add(task);
+        saveUserData();
     }
 
-    private void addSection(String title, String description){
+    private static void addSection(String title, String description){
         Section section = new Section(title, description);
         sections.add(section);
     }
@@ -192,26 +202,12 @@ public class Manager {
      */
     public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
-        //method 1 [works, but is a bit slower]:
-        /*
-        for (User person : users)
-        {
-            if(person.getId() == id)
-            {
-                System.out.println("user detected!");
-                person.setPassword(newPassword);
-            }
-            System.out.println("new password:" + person.getPassword());
-        }
-        */
 
-        //method 2 [also works, but is a bit faster]
         //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
         List<User> active = users.stream().filter(user -> user.getId()==id).collect(Collectors.toList());
 
         //perform password reset on first user in list (there should only be one user with the id anyways)
-        if(!active.isEmpty())
-        {
+        if(!active.isEmpty())        {
             //set the user's password to the function-parameter password
             active.get(0).setPassword(newPassword);
 
@@ -221,14 +217,10 @@ public class Manager {
         }
 
         //return error message if the list is empty
-        else
-        {
+        else        {
             log.info("Error: The list of users is empty");
             return -1;
         }
-
-
-
     }
 
 
@@ -248,28 +240,29 @@ public class Manager {
         //tests for various methods
 
         //generic user account
-        addUser("John",
-                "Doe",
-                "Pa55w0rd",
-                     "Only child of Jack and Jill Doe",
-                  "example@gmail.com",
-                        Path.of("/home/john/pictures/img.pdf"),
-                        false);
-
-        //login generic user
-        login("example@gmail.com","Pa55w0rd");
-
-        //reset password of generic user
-        userPasswordReset("newP455W0rd");
-
-        //loadUsers();
-        saveUsers();
-        System.out.println(users);
-
-
-
-        //loadUserData();
-        //saveUserData();
+//        addUser("John",
+//                "Doe",
+//                "Pa55w0rd",
+//                     "Only child of Jack and Jill Doe",
+//                  "example@gmail.com",
+//                        Path.of("/home/john/pictures/img.pdf"),
+//                        false);
+//
+//        //login generic user
+            login("example@gmail.com","Pa55w0rd");
+//
+//        //reset password of generic user
+//        userPasswordReset("newP455W0rd");
+//
+//        loadUsers();
+//        addTask("test","test",new Date(555,5,4),"test",false);
+//        saveUsers();
+//        System.out.println(users);
+//
+//
+//
+//        //loadUserData();
+//        saveUserData();
 
     }
 

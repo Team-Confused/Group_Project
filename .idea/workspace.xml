@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="479cbd79-efc7-4313-9942-026144c20ae1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserFiles/ff03ef43-f354-45f5-bd72-753a3ce93dcf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/MainScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/passwordResetUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/Todo_Manager/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserFiles/4df4ff5f-f955-4a8a-ac7f-bdda0a0efcd1.json" beforeDir="false" afterPath="$PROJECT_DIR$/UserFiles/175b3934-3c22-470a-984c-565982c9b0ba.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserFiles/b95d746a-bab4-4ccc-989d-bfd3858f18b2.json" beforeDir="false" afterPath="$PROJECT_DIR$/UserFiles/38e96f9e-3209-46f8-8f10-86cdcb20d053.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserFiles/bb2fe37b-b283-4eff-abaf-abfe3808788f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserFiles/cb41e19f-d933-4cdf-bc80-0a257bf381ea.json" beforeDir="false" afterPath="$PROJECT_DIR$/UserFiles/49005183-3802-417e-90ed-ee25956e8c80.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/LoginScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Sort.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Sort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/SearchScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
