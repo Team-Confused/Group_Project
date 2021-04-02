@@ -202,26 +202,12 @@ public class Manager {
      */
     public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
-        //method 1 [works, but is a bit slower]:
-        /*
-        for (User person : users)
-        {
-            if(person.getId() == id)
-            {
-                System.out.println("user detected!");
-                person.setPassword(newPassword);
-            }
-            System.out.println("new password:" + person.getPassword());
-        }
-        */
 
-        //method 2 [also works, but is a bit faster]
         //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
         List<User> active = users.stream().filter(user -> user.getId()==id).collect(Collectors.toList());
 
         //perform password reset on first user in list (there should only be one user with the id anyways)
-        if(!active.isEmpty())
-        {
+        if(!active.isEmpty())        {
             //set the user's password to the function-parameter password
             active.get(0).setPassword(newPassword);
 
@@ -231,14 +217,10 @@ public class Manager {
         }
 
         //return error message if the list is empty
-        else
-        {
+        else        {
             log.info("Error: The list of users is empty");
             return -1;
         }
-
-
-
     }
 
 

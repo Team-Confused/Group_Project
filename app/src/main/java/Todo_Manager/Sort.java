@@ -20,7 +20,7 @@ public class Sort {
 
         for (Task element : tasks) {
             if (task = true) {
-                System.out.println(tasks);   // not to sure if this solves I tried using return tasks which resulted in an error
+                System.out.println(tasks);
             }
         }
 
