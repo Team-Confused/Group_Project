@@ -209,7 +209,7 @@ public class Manager {
         //method 2 [also works, but is a bit faster]
         //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
         List<User> active = users.stream().filter(user -> user.getId()==id).collect(Collectors.toList());
-        
+
         //perform password reset on first user in list (there should only be one user with the id anyways)
         if(!active.isEmpty())
         {
