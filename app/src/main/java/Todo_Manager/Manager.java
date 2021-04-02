@@ -192,7 +192,6 @@ public class Manager {
      */
     public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
-
         //method 1 [works, but is a bit slower]:
         /*
         for (User person : users)
@@ -209,7 +208,7 @@ public class Manager {
         //method 2 [also works, but is a bit faster]
         //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
         List<User> active = users.stream().filter(user -> user.getId()==id).collect(Collectors.toList());
-        
+
         //perform password reset on first user in list (there should only be one user with the id anyways)
         if(!active.isEmpty())
         {
@@ -233,7 +232,6 @@ public class Manager {
     }
 
 
-
     //admin password reset
     /*
         reset the user's password
@@ -241,6 +239,7 @@ public class Manager {
      */
     public static int userPasswordReset(String newPassword) throws IOException {
         //call adminPasswordReset with the parameters of the current user and the new password
+        log.info("adminPasswordReset called with \""+ newPassword +"\" being the new password.");
         return adminPasswordReset(loggedInUser.getId(), newPassword);
     }
 
