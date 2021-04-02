@@ -12,33 +12,30 @@ import java.util.UUID;
 
 
 public class User{
-
     @NonNull
     @Getter
     private String firstName;
-
-
     @NonNull
     @Getter
-    public String lastName;
+    private String lastName;
     @NonNull
     @Getter
     @Setter
-    public String password;
+    private String password;
     @NonNull
     @Getter
-    public UUID id;
+    private UUID id;
     @NonNull
     @Getter
-    public String bio;
+    private String bio;
     @NonNull
     @Getter
-    public String email;
+    private String email;
     @NonNull
     @Getter
-    public String photo;
+    private String photo;
     @Getter
-    public boolean isAdmin;
+    private boolean isAdmin;
 
 
 
