@@ -192,7 +192,6 @@ public class Manager {
      */
     public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: "+loggedInUser.getId()+" password changed from:\""+loggedInUser.getPassword()+"\" to: \""+newPassword);
-
         //method 1 [works, but is a bit slower]:
         /*
         for (User person : users)
@@ -233,7 +232,6 @@ public class Manager {
     }
 
 
-
     //admin password reset
     /*
         reset the user's password
@@ -241,6 +239,7 @@ public class Manager {
      */
     public static int userPasswordReset(String newPassword) throws IOException {
         //call adminPasswordReset with the parameters of the current user and the new password
+        log.info("adminPasswordReset called with \""+ newPassword +"\" being the new password.");
         return adminPasswordReset(loggedInUser.getId(), newPassword);
     }
 
