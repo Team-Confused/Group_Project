@@ -3,10 +3,10 @@
     "firstName": "John",
     "lastName": "Doe",
     "password": "newP455W0rd",
-    "id": "cb41e19f-d933-4cdf-bc80-0a257bf381ea",
+    "id": "8687a64f-7605-4919-8485-76fc23e27ce3",
     "bio": "Only child of Jack and Jill Doe",
     "email": "example@gmail.com",
-    "photo": "/home/john/pictures/img.pdf",
+    "photo": "\\home\\john\\pictures\\img.pdf",
     "isAdmin": false
   }
 ]
