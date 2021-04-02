@@ -17,13 +17,11 @@ public class Sort {
     }
 
     public Sort() {
-
         for (Task element : tasks) {
             if (task = true) {
                 System.out.println(tasks);
             }
         }
-
         for (Task element : tasks) {
             if (sortDate = true) {
                 if (date == element.getDeadline()) {
@@ -35,8 +33,6 @@ public class Sort {
             if (label = true) {
                 System.out.println(labelList);
             }
-
-
         }
     }
 }

@@ -139,7 +139,7 @@ public class Manager {
         sections.add(section);
     }
 
-    private static ArrayList<String> Search(String object){
+    static ArrayList<String> Search(String object) throws IOException{
         ArrayList<String> labelSearch = new ArrayList<>();
         for (String element : labelList){
             if(element.contains(object)){
@@ -151,10 +151,10 @@ public class Manager {
         }
         return labelSearch;
     }
-    private static ArrayList<Task> searchTask(Task object){
+     static ArrayList<Task> searchTask(String object) throws IOException{
         ArrayList<Task> taskSearch = new ArrayList<>();
         for(Task element : tasks){
-            if(element == object){
+            if(element.getTitle() == object){
                 taskSearch.add(element);
             }
             else{
