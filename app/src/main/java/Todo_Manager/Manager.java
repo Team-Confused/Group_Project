@@ -98,6 +98,7 @@ public class Manager {
         }.getType();
         try {
             users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
+            //System.out.println("users:"+users);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -214,7 +215,8 @@ public class Manager {
             active.get(0).setPassword(newPassword);
 
             //save the updated user data
-            saveUserData();
+            //saveUserData();
+            saveUsers();
             return 1;
         }
 

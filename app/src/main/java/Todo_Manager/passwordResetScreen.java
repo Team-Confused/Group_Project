@@ -18,6 +18,7 @@ import lombok.extern.java.Log;
 
 import java.io.IOException;
 
+//start/generate logging class
 @Log
 public class passwordResetScreen {
 
@@ -47,32 +48,40 @@ public class passwordResetScreen {
         //labels
         Label oldPasswordL = new Label("Old Password: ");
         Label newPasswordL = new Label("New Password: ");
-        Label error = new Label("The password or email is wrong.");
+        Label error = new Label("Error in resetting password.");
 
         //text field
         Text userMode = new Text("User Password Reset");
 
         error.setVisible(false);
-        Button login = new Button("Login");
+        Button changePassword = new Button("changePassword");
 
         //lambda expression to run when button is pressed
-        login.setOnAction(value -> {
-            boolean check = false;
-            String email = oldPassword.getText();
-            String password = newPassword.getText();
-            if (email.isBlank() || password.isBlank()) {
-                Boolean cleck = false;
-            } else {
+        changePassword.setOnAction(value -> {
+            int resetPassword = -1;
+
+            String oldPasswordText = oldPassword.getText();
+            String newPasswordText = newPassword.getText();
+            if (oldPasswordText.isBlank() || newPasswordText.isBlank()) {
+                resetPassword = -1;
+            }
+            else if(oldPasswordText.equals(Manager.getLoggedInUser().getPassword())){
                 try {
-                    check = Manager.login(email, password);
+                    resetPassword = Manager.userPasswordReset(newPasswordText);
                 } catch (IOException e) {
                     e.printStackTrace();
+
                 }
             }
-            if (check == false) {
-                error.setVisible(true);
-            } else {
+
+            if (resetPassword == 1) {
                 primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+
+            }
+            //if there was an error in changing the password
+            else {
+                error.setVisible(true);
+
             }
 
         });
@@ -81,13 +90,13 @@ public class passwordResetScreen {
         GridPane passwordResetScreen = new GridPane();
         passwordResetScreen.setBackground(BLUEBACKGROUND);
         passwordResetScreen.setAlignment(Pos.CENTER);
-        passwordResetScreen.add(userMode, 0,1);
-        passwordResetScreen.add(oldPasswordL,0,0);
-        passwordResetScreen.add(newPasswordL,0,1);
-        passwordResetScreen.add(oldPassword,1,0);
-        passwordResetScreen.add(newPassword,1,1);
-        passwordResetScreen.add(login,1,2);
-        passwordResetScreen.add(error,1,3);
+        passwordResetScreen.add(userMode, 1,0);
+        passwordResetScreen.add(oldPasswordL,0,1);
+        passwordResetScreen.add(newPasswordL,0,2);
+        passwordResetScreen.add(oldPassword,1,1);
+        passwordResetScreen.add(newPassword,1,2);
+        passwordResetScreen.add(changePassword,1,3);
+        passwordResetScreen.add(error,1,4);
         passwordResetScreen.setHgap(5);
         passwordResetScreen.setVgap(5);
 
