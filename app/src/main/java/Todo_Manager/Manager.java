@@ -29,6 +29,7 @@ public class Manager {
 
 
     public static boolean login(String email, String password) throws IOException {
+        loadUsers();
         User temp;
         System.out.println(users);
         for (User u : users) {
