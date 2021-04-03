@@ -49,8 +49,15 @@ public class Manager {
         }//if user does not exist or password is incorrect it will return false
         return false;
     }
+
+    
+    //logout
+    /*
+        logout the active user by setting the "loggedInUser" variable to null.
+        Save the user data.
+        Then, clear the tasks, labels, and sections
+     */
     public static void logout() throws IOException {
-        //saveUserData();
         saveUsers();
         loggedInUser = null;
         tasks = null;
