@@ -24,11 +24,13 @@ public class Manager {
     @Getter
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static ArrayList<String> labelList = new ArrayList<>();
+    @Getter
     private static User loggedInUser;
     private static ArrayList<Section> sections = new ArrayList<>();
 
 
     public static boolean login(String email, String password) throws IOException {
+        loadUsers();
         User temp;
         System.out.println(users);
         for (User u : users) {
@@ -76,11 +78,14 @@ public class Manager {
 
     private static void saveUsers() throws IOException {
         //functionality for saving user list
+        //loadUsers();
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
+        System.out.println("users (from saveUser):" + users);
         String json = gson.toJson(users);
         try {
+            //Files.put(Paths.get("./Users.json"), json);
             Files.writeString(Paths.get("./Users.json"), json);
 
 
@@ -96,6 +101,7 @@ public class Manager {
         }.getType();
         try {
             users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
+            //System.out.println("users:"+users);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -215,7 +221,8 @@ public class Manager {
             active.get(0).setPassword(newPassword);
 
             //save the updated user data
-            saveUserData();
+            //saveUserData();
+            saveUsers();
             return 1;
         }
 

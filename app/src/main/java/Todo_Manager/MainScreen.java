@@ -65,10 +65,15 @@ public class MainScreen {
             }
             primaryStage.setScene(LoginOrRegisterScreen.getLogRegScreen(primaryStage));
         });
-        Button reset = new Button("Password Reset");
-        reset.setOnAction(value->{
 
+        //"Password Reset" button
+        Button reset = new Button("Password Reset");
+        //on the clicking of button "Password Reset", go to the password reset page
+        reset.setOnAction(value->{
+            //go to the password reset page
+            primaryStage.setScene(passwordResetScreen.getPasswordResetScreen(primaryStage));
         });
+
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
         innerThree.getChildren().addAll(close,logout);
