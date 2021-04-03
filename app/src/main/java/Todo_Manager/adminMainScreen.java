@@ -1,22 +1,43 @@
 package Todo_Manager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class adminMainScreen {
+    public static List stringOfUsers()
+    {
+        List<String> stringofUsers = new ArrayList<String>();
+        for(User user : Manager.getUsers())
+        {
+            stringofUsers.add(user.getFirstName() + " " + user.getLastName() + "\tUUID:" + user.getId());
+        }
+
+        return stringofUsers;
+    }
+
+
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
     public static Scene getAdminMainScene(Stage primaryStage){
 
-        ListView<Task> taskListView= new ListView<>();
-        taskListView.getItems().addAll(Manager.getTasks());
+        ListView<String> taskListView= new ListView<>();
+        taskListView.getItems().addAll(stringOfUsers());
 
         //VBoxes
         VBox one = new VBox();
@@ -58,6 +79,8 @@ public class adminMainScreen {
         innerThree.setSpacing(10);
         three.getChildren().addAll(innerThree,reset);
         HBox root = new HBox();
+
+
         root.getChildren().addAll(taskListView,one,two,three);
         one.setSpacing(10);
         two.setSpacing(10);

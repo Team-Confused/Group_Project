@@ -50,7 +50,7 @@ public class Manager {
         return false;
     }
     public static void logout() throws IOException {
-        saveUserData();
+        //saveUserData();
         saveUsers();
         loggedInUser = null;
         tasks = null;
