@@ -73,7 +73,7 @@ public class MainScreen {
             //go to the password reset page
             primaryStage.setScene(passwordResetScreen.getPasswordResetScreen(primaryStage));
         });
-        
+
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
         innerThree.getChildren().addAll(close,logout);

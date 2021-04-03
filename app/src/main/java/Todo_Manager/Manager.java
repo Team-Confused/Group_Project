@@ -24,6 +24,7 @@ public class Manager {
     @Getter
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static ArrayList<String> labelList = new ArrayList<>();
+    @Getter
     private static User loggedInUser;
     private static ArrayList<Section> sections = new ArrayList<>();
 
