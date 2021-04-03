@@ -18,9 +18,10 @@ import java.io.IOException;
 
 public class passwordResetScreen {
 
-
+    //definition of background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
-    public static Scene getLoginScene(Stage primaryStage){
+
+    public static Scene getPasswordResetScreen(Stage primaryStage){
         TextField emailIn = new TextField();
         PasswordField passwordIn = new PasswordField();
         Label emailL  = new Label("Email: ");
