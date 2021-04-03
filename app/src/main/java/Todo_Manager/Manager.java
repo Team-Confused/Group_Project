@@ -78,11 +78,14 @@ public class Manager {
 
     private static void saveUsers() throws IOException {
         //functionality for saving user list
+        //loadUsers();
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
+        System.out.println("users (from saveUser):" + users);
         String json = gson.toJson(users);
         try {
+            //Files.put(Paths.get("./Users.json"), json);
             Files.writeString(Paths.get("./Users.json"), json);
 
 

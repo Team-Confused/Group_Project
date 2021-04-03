@@ -6,7 +6,7 @@
     "id": "175b3934-3c22-470a-984c-565982c9b0ba",
     "bio": "Only child of Jack and Jill Doe",
     "email": "example@gmail.com",
-    "photo": "\\home\\john\\pictures\\img.pdf",
+    "photo": "\\home\\pictures\\img.pdf",
     "isAdmin": false
   }
 ]

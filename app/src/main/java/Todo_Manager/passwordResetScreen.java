@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
+import java.util.UUID;
 
 //start/generate logging class
 @Log
@@ -79,9 +80,92 @@ public class passwordResetScreen {
             if (oldPasswordText.isBlank() || newPasswordText.isBlank()) {
                 resetPassword = -1;
             }
+            //confirm that the user-imputed "old password" matches what the password is currently known as
             else if(oldPasswordText.equals(Manager.getLoggedInUser().getPassword())){
                 try {
+
+                    //reset the password
                     resetPassword = Manager.userPasswordReset(newPasswordText);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+
+                }
+            }
+
+            //on success of resetting the password, return to the main screen
+            if (resetPassword == 1) {
+                primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+
+            }
+            //if there was an error in changing the password
+            else {
+                error.setVisible(true);
+
+            }
+
+        });
+
+        //assemble the various elements in the GridPane
+        GridPane passwordResetScreen = new GridPane();
+        passwordResetScreen.setBackground(BLUEBACKGROUND);
+        passwordResetScreen.setAlignment(Pos.CENTER);
+        passwordResetScreen.add(userMode, 1,0);
+        passwordResetScreen.add(oldPasswordL,0,1);
+        passwordResetScreen.add(newPasswordL,0,2);
+        passwordResetScreen.add(oldPassword,1,1);
+        passwordResetScreen.add(newPassword,1,2);
+        passwordResetScreen.add(changePassword,1,3);
+        passwordResetScreen.add(error,1,4);
+        passwordResetScreen.setHgap(5);
+        passwordResetScreen.setVgap(5);
+
+        //return the assembled scene
+        return new Scene(passwordResetScreen, 600, 350);
+    }
+
+
+    public static Scene getAdminPasswordResetScreen(Stage primaryStage)
+    {
+        //text input fields (old password, new password)
+        TextField user = new TextField();
+        TextField oldPassword = new TextField();
+        PasswordField newPassword = new PasswordField();
+
+        //labels
+        Label userL = new Label("User UUID:");
+        Label oldPasswordL = new Label("Old Password: ");
+        Label newPasswordL = new Label("New Password: ");
+        Label error = new Label("Error in resetting password.");
+
+        //text field
+        Text userMode = new Text("Admin Password Reset");
+
+        //set the visibility of "error" to not visible
+        error.setVisible(false);
+
+        //button to change the password
+        Button changePassword = new Button("Change User's Password");
+
+        //lambda expression to run when button is pressed
+        changePassword.setOnAction(value -> {
+            //value to determine if success in resetting the password
+            int resetPassword = -1;
+
+            //get the strings the user had provided
+            String userUUIDText = user.getText();
+            String newPasswordText = newPassword.getText();
+
+            //filter out (auto-fail) if either of the fields is empty
+            if (newPasswordText.isBlank() || userUUIDText.isBlank()) {
+                resetPassword = -1;
+            }
+
+            //reset the selected user's password
+            else{
+                try {
+                    //reset the password
+                    resetPassword = Manager.adminPasswordReset( UUID.fromString(userUUIDText), newPasswordText);
                 } catch (IOException e) {
                     e.printStackTrace();
 
@@ -101,27 +185,27 @@ public class passwordResetScreen {
         });
 
 
+        //grid pane
         GridPane passwordResetScreen = new GridPane();
         passwordResetScreen.setBackground(BLUEBACKGROUND);
         passwordResetScreen.setAlignment(Pos.CENTER);
+
+        //labels
         passwordResetScreen.add(userMode, 1,0);
-        passwordResetScreen.add(oldPasswordL,0,1);
-        passwordResetScreen.add(newPasswordL,0,2);
-        passwordResetScreen.add(oldPassword,1,1);
-        passwordResetScreen.add(newPassword,1,2);
-        passwordResetScreen.add(changePassword,1,3);
-        passwordResetScreen.add(error,1,4);
+        passwordResetScreen.add(userL,0,1);
+        passwordResetScreen.add(oldPasswordL,0,2);
+        passwordResetScreen.add(newPasswordL,0,3);
+
+        //text input fields
+        passwordResetScreen.add(user,1,1);
+        passwordResetScreen.add(oldPassword,1,2);
+        passwordResetScreen.add(newPassword,1,3);
+        passwordResetScreen.add(changePassword,1,4);
+        passwordResetScreen.add(error,1,5);
         passwordResetScreen.setHgap(5);
         passwordResetScreen.setVgap(5);
 
+        //return the scene
         return new Scene(passwordResetScreen, 600, 350);
-    }
-
-
-    public static Scene getAdminPasswordResetScreen(Stage primaryStage)
-    {
-        GridPane AdminPasswordResetScreen = new GridPane();
-
-        return new Scene(AdminPasswordResetScreen, 600, 350);
     }
 }
