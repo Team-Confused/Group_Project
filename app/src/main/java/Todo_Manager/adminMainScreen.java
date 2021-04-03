@@ -13,39 +13,17 @@ import java.io.IOException;
 
 public class adminMainScreen {
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
-    public static Scene getMainScene(Stage primaryStage){
+    public static Scene getAdminMainScene(Stage primaryStage){
 
         ListView<Task> taskListView= new ListView<>();
         taskListView.getItems().addAll(Manager.getTasks());
+
+        //VBoxes
         VBox one = new VBox();
-        Button sort = new Button("Sort");
-        sort.setOnAction(value->{
-
-        });
-        Button newTask = new Button("Add new Task");
-        newTask.setOnAction(value->{
-
-        });
-        Button newSubTask = new Button("Add new Subtask");
-        newSubTask.setOnAction(value->{
-
-        });
-        one.getChildren().addAll(sort,newTask,newSubTask);
         VBox two = new VBox();
-        Button search = new Button("Search");
-        search.setOnAction(value->{ primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
-
-        });
-        Button modifyTask = new Button("Modify Task");
-        modifyTask.setOnAction(value->{
-
-        });
-        Button addSection = new Button("Add new Section");
-        addSection.setOnAction(value->{
-
-        });
-        two.getChildren().addAll(search,modifyTask,addSection);
         VBox three = new VBox();
+
+
 
         Button close = new Button("Exit Program");
         close.setOnAction(value->{
@@ -67,7 +45,7 @@ public class adminMainScreen {
         });
 
         //"Password Reset" button
-        Button reset = new Button("Password Reset");
+        Button reset = new Button("Admin-level Password Reset");
         //on the clicking of button "Password Reset", go to the password reset page
         reset.setOnAction(value->{
             //go to the password reset page
