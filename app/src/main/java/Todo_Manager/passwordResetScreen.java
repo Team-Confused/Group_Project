@@ -31,15 +31,22 @@ public class passwordResetScreen {
 
         log.info("user "+Manager.getLoggedInUser().getFirstName() + " " + Manager.getLoggedInUser().getLastName() + " is an admin: " + isAdmin);
 
-        //if the user is not admin
+        //if the user is admin
         if(isAdmin)
             return getAdminPasswordResetScreen(primaryStage);
 
+        //if the user is not an admin, or some error occurs in determining if the user is an admin (for security reasons)
         else
             return getUserPasswordResetScreen(primaryStage);
     }
 
 
+    //getUserPasswordResetScreen
+    /*
+            UI for a user to reset their password
+            Upon fulfilling a few initial conditions, the method userPasswordReset in Manager is called
+            The return is a scene
+    */
     public static Scene getUserPasswordResetScreen(Stage primaryStage) {
         //text input fields (old password, new password)
         TextField oldPassword = new TextField();
@@ -53,15 +60,22 @@ public class passwordResetScreen {
         //text field
         Text userMode = new Text("User Password Reset");
 
+        //set the visibility of "error" to not visible
         error.setVisible(false);
+
+        //button to change the password
         Button changePassword = new Button("changePassword");
 
         //lambda expression to run when button is pressed
         changePassword.setOnAction(value -> {
+            //value to determine if success in resetting the password
             int resetPassword = -1;
 
+            //get the strings the user had provided
             String oldPasswordText = oldPassword.getText();
             String newPasswordText = newPassword.getText();
+
+            //filter out (auto-fail) if either of the fields is empty
             if (oldPasswordText.isBlank() || newPasswordText.isBlank()) {
                 resetPassword = -1;
             }
