@@ -12,12 +12,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class Test extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+public class SortScreen  {
+
+
+    public static Scene getSortScene(Stage primaryStage)  {
 
 
         // Sort button
@@ -39,9 +37,10 @@ public class Test extends Application {
         box.getChildren().add(button);
         box.setAlignment(Pos.CENTER_RIGHT);
 
+        DatePicker date = new DatePicker();
 
-        HBox dropdownbox = new HBox();
-        dropdownbox.getChildren().add(comboBox);
+        VBox dropdownbox = new VBox();
+        dropdownbox.getChildren().addAll(date,comboBox);
         dropdownbox.setAlignment(Pos.CENTER_LEFT);
         dropdownbox.setSpacing(50);
 
@@ -52,23 +51,17 @@ public class Test extends Application {
         box1.setSpacing(35);
         box1.setAlignment(Pos.TOP_LEFT);
 
-        //Date Picker
-        DatePicker date = new DatePicker();
-        HBox datebox = new HBox();
-        datebox.getChildren().add(date);
-        datebox.setAlignment(Pos.CENTER_LEFT);
-
 
         //Boderpane
         BorderPane sortbar = new BorderPane();
-        sortbar.setLeft(box1);
-        sortbar.setBottom(box);
+        sortbar.setLeft(box1); // checkbox - vbox
+        sortbar.setBottom(box); // sort button
         sortbar.setCenter(dropdownbox);
-        sortbar.setRight(datebox);
         sortbar.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Scene scene = new Scene(sortbar, 600, 400);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+       // primaryStage.setScene(scene);
+        //primaryStage.show();
+        return scene;
     }
 }

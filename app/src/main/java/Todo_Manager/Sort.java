@@ -15,24 +15,34 @@ public class Sort {
     public void setDate(Date date) {
         this.date = date;
     }
+    public enum Priority {
+        Low,Medium,High,ASAP;
+    }
 
     public Sort() {
         for (Task element : tasks) {
-            if (task = true) {
+            if (task == true) {
                 System.out.println(tasks);
             }
         }
         for (Task element : tasks) {
-            if (sortDate = true) {
-                if (date == element.getDeadline()) {
+            if (sortDate == true) {
+                if (date.before(element.getDeadline())) {
                     System.out.println(element);
                 }
             }
         }
         for (String element : labelList) {
-            if (label = true) {
+            if (label == true) {
                 System.out.println(labelList);
             }
         }
+        for (Task element : tasks){
+            if(priority == true){
+
+            }
+
+        }
+
     }
 }
