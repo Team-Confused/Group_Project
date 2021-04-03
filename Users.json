@@ -8,5 +8,15 @@
     "email": "example@gmail.com",
     "photo": "\\home\\john\\pictures\\img.pdf",
     "isAdmin": false
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Igboke",
+    "password": "tyyuiio",
+    "id": "cde6ba99-2ca3-48b3-86ef-b18f0d782b81",
+    "bio": "edw3d",
+    "email": "igbodai@isu.edu",
+    "photo": "C:\\Users\\ITS Loaner\\Pictures\\Saved Pictures\\TAPPS1.png",
+    "isAdmin": false
   }
 ]

@@ -33,7 +33,7 @@ public class MainScreen {
         one.getChildren().addAll(sort,newTask,newSubTask);
         VBox two = new VBox();
         Button search = new Button("Search");
-        search.setOnAction(value->{
+        search.setOnAction(value->{ primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
 
         });
         Button modifyTask = new Button("Modify Task");

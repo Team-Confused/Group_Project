@@ -8,8 +8,8 @@ public class Sort {
     ArrayList<String> labelList = new ArrayList<>();
     boolean label;
     boolean task;
-    boolean subTask;
     boolean sortDate;
+    boolean priority;
     Date date;
 
     public void setDate(Date date) {

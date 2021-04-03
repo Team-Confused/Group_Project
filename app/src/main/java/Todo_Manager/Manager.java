@@ -173,7 +173,10 @@ public class Manager {
         }
         return taskSearch;
     }
+    private static void Sort(){
+        Sort sort = new Sort();
 
+        }
 
 
     //logoutUser
@@ -238,6 +241,7 @@ public class Manager {
 
     public static void main(String args[]) throws IOException {
         //tests for various methods
+        Manager.Sort();
 
         //generic user account
 //        addUser("John",
@@ -265,6 +269,7 @@ public class Manager {
 //        saveUserData();
 
     }
+
 
 
 }
