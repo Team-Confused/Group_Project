@@ -129,12 +129,10 @@ public class passwordResetScreen {
     {
         //text input fields (old password, new password)
         TextField user = new TextField();
-        TextField oldPassword = new TextField();
         PasswordField newPassword = new PasswordField();
 
         //labels
         Label userL = new Label("User UUID:");
-        Label oldPasswordL = new Label("Old Password: ");
         Label newPasswordL = new Label("New Password: ");
         Label error = new Label("Error in resetting password.");
 
@@ -193,12 +191,10 @@ public class passwordResetScreen {
         //labels
         passwordResetScreen.add(userMode, 1,0);
         passwordResetScreen.add(userL,0,1);
-        passwordResetScreen.add(oldPasswordL,0,2);
         passwordResetScreen.add(newPasswordL,0,3);
 
         //text input fields
         passwordResetScreen.add(user,1,1);
-        passwordResetScreen.add(oldPassword,1,2);
         passwordResetScreen.add(newPassword,1,3);
         passwordResetScreen.add(changePassword,1,4);
         passwordResetScreen.add(error,1,5);
