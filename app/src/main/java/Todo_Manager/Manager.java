@@ -50,7 +50,7 @@ public class Manager {
         return false;
     }
 
-    
+
     //logout
     /*
         logout the active user by setting the "loggedInUser" variable to null.
@@ -58,8 +58,13 @@ public class Manager {
         Then, clear the tasks, labels, and sections
      */
     public static void logout() throws IOException {
+        log.info("saving user "+getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName()+"'s data due to logout");
         saveUsers();
+
+        log.info("logged out user:" + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName());
         loggedInUser = null;
+
+        //empty the tasks, labels, and sections
         tasks = null;
         labelList = null;
         sections = null;
@@ -190,25 +195,6 @@ public class Manager {
         Sort sort = new Sort();
 
         }
-
-
-    //logoutUser
-    /*
-        Logout a user by their unique user id (UUID)
-        There is no return
-    */
-    public static void logoutUser(UUID id) throws IOException {
-        //write to log that no users are logged in
-        log.info("logged out user:" + id);
-
-        //set the "loggedInUser" variable to "null" to signify that there is no user logged in
-        loggedInUser = null;
-
-        //save the user's data
-        saveUserData();
-        log.info("saving user "+id+"'s data due to logout");
-    }
-
 
 
     //user password reset
