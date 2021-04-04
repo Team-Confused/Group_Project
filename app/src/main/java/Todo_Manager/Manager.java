@@ -155,6 +155,10 @@ public class Manager {
         sections.add(section);
     }
 
+    private static void addSubTask(String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException{
+        SubTask subTask = new SubTask(title,description,deadline,priority,taskCompleted);
+       // tasks.add(subTask);
+    }
     static ArrayList<String> Search(String object) throws IOException{
         ArrayList<String> labelSearch = new ArrayList<>();
         for (String element : labelList){
