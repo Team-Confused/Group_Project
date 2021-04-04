@@ -38,7 +38,7 @@ public class Task {
     @NonNull
     private ArrayList<SubTask> subtaskList;
 
-    public Task(String title, String description, Date deadline,String priority,boolean taskCompleted, ArrayList<String> labelist, ArrayList<SubTask> subtaskList){
+    public Task(String title, String description, Date deadline,String priority,boolean taskCompleted, ArrayList<String> labelist){
      this.title = title;
      this.description = description;
      this.deadline = deadline;

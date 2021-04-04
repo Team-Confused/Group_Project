@@ -160,12 +160,12 @@ public class Manager {
     }
 
     private static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
-        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
+        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList);
         tasks.add(task);
         saveUserData();
     }
 
-    private static void addSection(String title, String description){
+    private static void addSection(String title, String description) throws IOException{
         Section section = new Section(title, description);
         sections.add(section);
     }

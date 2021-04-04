@@ -48,7 +48,6 @@ public class AddSubTaskScreen extends Application {
         grid.add(date, 1,1);
         grid.add(combobox, 1,2);
         grid.add(description, 1,3);
-       // grid.add(hBox,10,10);
         grid.setHgap(10);
         grid.setVgap(10);
 
