@@ -6,18 +6,25 @@ import java.util.Date;
 
 public class Sort {
 
+    //arrayLists
     ArrayList<Task> tasks = new ArrayList<>();
     ArrayList<String> labelList = new ArrayList<>();
+
+    //booleans
     boolean label;
     boolean task;
     boolean sortDate;
     boolean priority;
+
     Date date;
     String p;
 
+    //date setter
     public void setDate(Date date) {
         this.date = date;
     }
+
+    //enum for Priority
     public enum Priority {
         Low,Medium,High,ASAP;
     }

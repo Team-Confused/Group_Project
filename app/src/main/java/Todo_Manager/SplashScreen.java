@@ -10,15 +10,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 public class SplashScreen {
+    //define the backgound color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    //splash screen
     public static Scene getSplashScene() {
+        //copyright information
         Label copyright = new Label("Copyright Info Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
         copyright.setAlignment(Pos.BOTTOM_CENTER);
         copyright.setMaxSize(550, 350);
         copyright.setWrapText(true);
         copyright.setTextAlignment(TextAlignment.CENTER);
 
-
+        //include team image in splashscreen
         Image img = new Image("file:ConfusedLogo.jpg");
         BackgroundImage backgroundImage = new BackgroundImage(new Image(img.getUrl(), 800, 300, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
@@ -26,7 +30,9 @@ public class SplashScreen {
         Pane pane = new Pane();
         pane.getChildren().addAll(copyright);
 
+        //set the background
         pane.setBackground(new Background(backgroundImage));
+
         Scene splashScene = new Scene(pane, 600, 350);
         return splashScene;
     }

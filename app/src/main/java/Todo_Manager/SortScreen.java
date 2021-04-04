@@ -38,8 +38,10 @@ public class SortScreen  {
         box.getChildren().add(button);
         box.setAlignment(Pos.CENTER_RIGHT);
 
+        //datepicker to select date for sort parameter
         DatePicker date = new DatePicker();
 
+        //dropdown menu
         VBox dropdownbox = new VBox();
         dropdownbox.getChildren().addAll(date,comboBox);
         dropdownbox.setAlignment(Pos.CENTER_LEFT);
@@ -63,6 +65,8 @@ public class SortScreen  {
         Scene scene = new Scene(sortbar, 600, 400);
        // primaryStage.setScene(scene);
         //primaryStage.show();
+
+        //return the scene
         return scene;
     }
 }

@@ -18,30 +18,52 @@ import java.io.IOException;
 
 public class LoginScreen {
 
-
+    //define the background
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    //login screen scene
     public static Scene getLoginScene(Stage primaryStage){
+        //text field (email, password)
         TextField emailIn = new TextField();
         PasswordField passwordIn = new PasswordField();
+
+        //labels
         Label emailL  = new Label("Email: ");
         Label passwordL = new Label("Password: ");
         Label error = new Label("The password or email is wrong.");
+
+        //set the visibility of the "error" label
         error.setVisible(false);
+
+        //login button
         Button login = new Button("Login");
+        //when the login button is pressed
         login.setOnAction(value->{
             boolean check = false;
+
+            //get the inputted strings the user gave
             String email = emailIn.getText();
             String password = passwordIn.getText();
+
+            //auto-fail if the email or password is blank
             if(email.isBlank() || password.isBlank()){
                 Boolean cleck = false;
-            }else {
+            }
+
+            // when the user enters both an email and a password
+            else {
                 try {
+                    //run the login method from Manager with the email and password as its parameters
                     check = Manager.login(email, password);
-                } catch (IOException e) {
+                }
+                //exception catch
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            //if there is a failure in logging in (causable by leaving a box blank or inputting bad credentials)
             if (check == false){
+                //set the visibility for the "error" label to visible
                 error.setVisible(true);
             }
 
@@ -59,6 +81,7 @@ public class LoginScreen {
 
         });
 
+        //build the scene
         GridPane grid = new GridPane();
         grid.setBackground(BLUEBACKGROUND);
         grid.setAlignment(Pos.CENTER);

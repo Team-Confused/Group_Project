@@ -8,5 +8,15 @@
     "email": "Igbo@isu.edu",
     "photo": "C:\\Users\\Daniel\\Downloads\\11_1.jpg",
     "isAdmin": false
+  },
+  {
+    "firstName": "Noufumi",
+    "lastName": "Shield",
+    "password": "downWithKingTrash",
+    "id": "ea8d96ef-4e7c-4bc6-93d9-7d5e142ff13f",
+    "bio": "The Shield Hero",
+    "email": "theShieldHero@fourHChurch.com",
+    "photo": "/home/john/Pictures/Star Wars sith.jpg",
+    "isAdmin": false
   }
 ]

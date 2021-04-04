@@ -9,10 +9,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class
-UI extends Application {
-
-
+public class UI extends Application {
 
 
     public static void main(String[] args) {
@@ -38,6 +35,7 @@ UI extends Application {
             }
         };
         sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
             @Override
             public void handle(WorkerStateEvent event) {
                 //this block is the code that happens after 6 seconds

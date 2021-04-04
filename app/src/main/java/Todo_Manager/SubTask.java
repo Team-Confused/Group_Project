@@ -3,6 +3,8 @@ package Todo_Manager;
 import lombok.*;
 
 import java.util.Date;
+
+//project lombok calls
 @ToString
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

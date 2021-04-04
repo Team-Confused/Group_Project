@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 
 @Log
 public class Manager {
+
+    //variable definitions with relavent setters, getters, etc.
     @Getter
     private static ArrayList<User> users = new ArrayList<>();
     @Getter
@@ -32,19 +34,33 @@ public class Manager {
     private static ArrayList<SubTask> subtaskList = new ArrayList<>();
 
 
+    //login method
+    /*
+        returns a boolean (true on login success, false on failure)
+        parameters are the email and password (both of which are strings)
+     */
     public static boolean login(String email, String password) throws IOException {
+        //load the users
         loadUsers();
-        User temp;
-        System.out.println(users);
+        User temp;  //create a temporary user
+        log.info("Users: "+users);
+
+        //for each user in the set of users,
         for (User u : users) {
+            //if the inputted email matches a user
             if (u.getEmail().equals(email)) {
-                //at this point, user exists
+                //and the unputted password matches the same user's.  At this point, user exists
                 if (u.getPassword().equals(password)) {
                     //at this point, user exists and password is correct.
+                    //set this person in the list of users to be "logged in"
                     loggedInUser = u;
+                    //load their user data
                     loadUserData();
+                    //return a success
                     return true;
-                } else {
+                }
+                //if the password is not correct,
+                else {
                     //if password is incorrect, break from loop
                     break;
                 }
@@ -74,6 +90,11 @@ public class Manager {
 
     }
 
+    //addUser
+    /*
+        add a user (typically from the register screen)
+        returns a boolean (true is the new user has been added, false if the user email is already linked to a user)
+     */
     public static boolean addUser(String firstName, String lastName, String password, String bio, String
             email, Path picture, Boolean isAdmin) throws IOException {
         //ui should call this and return to login screen
@@ -91,6 +112,12 @@ public class Manager {
         return true;
     }
 
+    //saveUsers
+    /*
+        save the list of users and some of their data to a JSon file
+        there is no return
+        there are no parameters
+     */
     private static void saveUsers() throws IOException {
         //functionality for saving user list
         //loadUsers();
@@ -109,12 +136,20 @@ public class Manager {
         }
     }
 
+
+    //loadUsers
+    /*
+        load the list of users and some of their data from a JSON file
+        there is no return
+        there are no parameters
+     */
     public static void loadUsers() throws IOException {
         //loads user list
         Gson gson = new Gson();
         Type usersType = new TypeToken<ArrayList<User>>() {
         }.getType();
         try {
+            //populate the "users" ArrayList with the data from the JSON file
             users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
             //System.out.println("users:"+users);
         } catch (IOException ex) {
@@ -122,11 +157,19 @@ public class Manager {
         }
     }
 
+    //saveUserData
+    /*
+        saves the data of the currently-logged-in user to a JSON file.
+        there are no returns
+        there are no parameters
+     */
     private static void saveUserData() throws IOException {
         //saves data of the logged in user
         Gson gson = new Gson();
+        //open the user's dedicated file
         FileWriter file = new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", true);
         BufferedWriter blankWriter = new BufferedWriter(new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", false));
+        //write to the file
         blankWriter.write("");
         blankWriter.close();
         BufferedWriter writer = new BufferedWriter(file);
@@ -138,6 +181,12 @@ public class Manager {
         writer.close();
     }
 
+    //loadUserData
+    /*
+        load the data for the currently logged in user from their dedicated JSON file
+        there are no parameters
+        there is no return
+     */
     private static void loadUserData() throws IOException {
         Gson gson = new Gson();
         //checks if file exists
@@ -159,55 +208,91 @@ public class Manager {
         }
     }
 
+    //addTask
+    /*
+        add a task
+        the parameters are (String title, String description, Date deadline,String priority,boolean taskCompleted)
+        there is no return
+     */
     public static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
-        System.out.println("task is empty1? "+ tasks == null);
-        System.out.println("tasks:" + tasks);
-        //ArrayList<Task> tasks = null;
-        //tasks.clear();
-
-        System.out.println("labellist"+getLabelList());
-        System.out.println("subtasklist"+getSubtaskList());
+        //temporary task
         Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
-        System.out.println("task is empty? "+ tasks.isEmpty());
+        //add the task to the list of tasks "tasks"
         tasks.add(task);
-        System.out.println("addtask:" + task);
+        //save the user's data
         saveUserData();
     }
 
+
+    //addSection
+    /*
+        add a new section
+        the parameters are Title and Description (both are strings)
+        there is no return
+     */
     private static void addSection(String title, String description){
         Section section = new Section(title, description);
+        //add the new section to sections
         sections.add(section);
     }
 
+    //addSubTask
+    /*
+        add a new sub-task to a task
+        parameters: title of sub-task, description, deadline, priority, and boolean of completeness
+     */
    private static void addSubTask(String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException{
         SubTask subTask = new SubTask(title,description,deadline,priority,taskCompleted);
+        //add new subtask
         subtaskList.add(subTask);
 
     }
 
 
+    //search
+    /*
+        search the labels
+        parameter: Object of a search parameter
+        returns an arrayList of labels matching the search parameter
+     */
     static ArrayList<String> Search(String object) throws IOException{
         ArrayList<String> labelSearch = new ArrayList<>();
+        //for each element in the list of labels
         for (String element : labelList){
+            //if the element contains the search parameter
             if(element.contains(object)){
+                //add it to the returned ArrayList
                 labelSearch.add(element);
             }
+            //if there are no matches, log as such
             else{
-                System.out.println("Search not found");
+                log.info("Search not found for:" + object);
             }
         }
+        //retrun the array list
         return labelSearch;
     }
+
+    //searchTask
+    /*
+        searches through the tasks for an inputted parameter
+        parameter: search parameter (String)
+        returns and arrayList of all tasks containing the search parameter
+     */
      static ArrayList<Task> searchTask(String object) throws IOException{
         ArrayList<Task> taskSearch = new ArrayList<>();
+        //search thorough each element in the list of tasks for any matches to the parameter
         for(Task element : tasks){
             if(element.getTitle() == object){
+                //if one is found, add it to the returned list
                 taskSearch.add(element);
             }
+            //if no matches are found, log it as such
             else{
-                System.out.println("Search not found");
+                System.out.println("Search not found for: "+object);
             }
         }
+        //return the list of matches
         return taskSearch;
     }
 
@@ -255,6 +340,7 @@ public class Manager {
     }
 
 
+    //main method (it is mainly used for testing of Manager methods)
     public static void main(String args[]) throws IOException {
         //tests for various methods
        // Manager.Sort();
