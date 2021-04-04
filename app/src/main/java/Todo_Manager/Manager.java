@@ -23,6 +23,7 @@ public class Manager {
     private static ArrayList<User> users = new ArrayList<>();
     @Getter
     private static ArrayList<Task> tasks = new ArrayList<>();
+    @Getter
     private static ArrayList<String> labelList = new ArrayList<>();
     @Getter
     private static User loggedInUser;
@@ -179,10 +180,7 @@ public class Manager {
         }
         return taskSearch;
     }
-    private static void Sort(){
-        Sort sort = new Sort();
 
-        }
 
 
     //logoutUser
@@ -248,7 +246,7 @@ public class Manager {
 
     public static void main(String args[]) throws IOException {
         //tests for various methods
-        Manager.Sort();
+       // Manager.Sort();
 
         //generic user account
 //        addUser("John",

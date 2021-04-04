@@ -4,6 +4,7 @@ import java.util.Date;
 
 
 public class Sort {
+
     ArrayList<Task> tasks = new ArrayList<>();
     ArrayList<String> labelList = new ArrayList<>();
     boolean label;
@@ -11,6 +12,7 @@ public class Sort {
     boolean sortDate;
     boolean priority;
     Date date;
+    String p;
 
     public void setDate(Date date) {
         this.date = date;
@@ -39,10 +41,10 @@ public class Sort {
         }
         for (Task element : tasks){
             if(priority == true){
-
+                if(p == element.getPriority()){
+                    System.out.print(tasks);
+                }
             }
-
         }
-
     }
 }
