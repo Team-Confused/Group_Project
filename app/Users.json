@@ -1,0 +1,22 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "password": "newPassword",
+    "id": "175b3934-3c22-470a-984c-565982c9b0ba",
+    "bio": "Only child of Jack and Jill Doe",
+    "email": "example@gmail.com",
+    "photo": "\\home\\john\\pictures\\img.pdf",
+    "isAdmin": false
+  },
+  {
+    "firstName": "kevin",
+    "lastName": "bacon",
+    "password": "password",
+    "id": "2cb64fb9-2e98-4ca1-8dfb-40c773c1ad7a",
+    "bio": "sdfsadfsdf",
+    "email": "email@gmail.com",
+    "photo": "..\\ConfusedLogo.jpg",
+    "isAdmin": false
+  }
+]
