@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class SortScreen  {
 
 
+    //create the a scene to sort
     public static Scene getSortScene(Stage primaryStage)  {
 
 

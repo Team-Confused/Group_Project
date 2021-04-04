@@ -1,4 +1,5 @@
 package Todo_Manager;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,7 +22,9 @@ public class Sort {
         Low,Medium,High,ASAP;
     }
 
-    public Sort() {
+    public Sort(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority) throws IOException {
+
+
         for (Task element : tasks) {
             if (task == true) {
                 System.out.println(tasks);
@@ -47,5 +50,7 @@ public class Sort {
                 }
             }
         }
+
+
     }
 }

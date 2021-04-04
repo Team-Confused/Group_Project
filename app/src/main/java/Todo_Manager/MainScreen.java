@@ -12,14 +12,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainScreen {
+    //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    //main screen
     public static Scene getMainScene(Stage primaryStage){
 
+        //
         ListView<Task> taskListView= new ListView<>();
         taskListView.getItems().addAll(Manager.getTasks());
         VBox one = new VBox();
+
+        //sort button
         Button sort = new Button("Sort");
         sort.setOnAction(value->{
+            primaryStage.setScene(SortScreen.getSortScene(primaryStage));
 
         });
         Button newTask = new Button("Add new Task");

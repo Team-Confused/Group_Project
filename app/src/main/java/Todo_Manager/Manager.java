@@ -22,7 +22,7 @@ public class Manager {
     @Getter
     private static ArrayList<User> users = new ArrayList<>();
     @Getter
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
     @Getter
     private static ArrayList<String> labelList = new ArrayList<>();
     @Getter
@@ -159,9 +159,18 @@ public class Manager {
         }
     }
 
-    private static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
+    public static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
+        System.out.println("task is empty1? "+ tasks == null);
+        System.out.println("tasks:" + tasks);
+        //ArrayList<Task> tasks = null;
+        //tasks.clear();
+
+        System.out.println("labellist"+getLabelList());
+        System.out.println("subtasklist"+getSubtaskList());
         Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
+        System.out.println("task is empty? "+ tasks.isEmpty());
         tasks.add(task);
+        System.out.println("addtask:" + task);
         saveUserData();
     }
 

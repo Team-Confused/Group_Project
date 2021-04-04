@@ -22,6 +22,7 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
+        new Sort(true, true, true, true);//TODO remove once sort works
         Manager.loadUsers();
         UI.main(args);
     }

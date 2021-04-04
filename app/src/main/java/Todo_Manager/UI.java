@@ -9,7 +9,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class UI extends Application {
+public class
+UI extends Application {
 
 
 
