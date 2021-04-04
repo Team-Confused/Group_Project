@@ -22,4 +22,6 @@ public class SubTask {
     @Getter
     @Setter
     private boolean taskCompleted;
+
+
 }

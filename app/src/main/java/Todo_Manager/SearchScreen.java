@@ -16,7 +16,7 @@ public class SearchScreen  {
 
 
             TextField searchText = new TextField();
-            searchText.setPromptText("Search");
+            //searchText.setPromptText();
 
 
             // Button

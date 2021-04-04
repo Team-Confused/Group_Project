@@ -28,6 +28,8 @@ public class Manager {
     @Getter
     private static User loggedInUser;
     private static ArrayList<Section> sections = new ArrayList<>();
+    @Getter
+    private static ArrayList<SubTask> subtaskList = new ArrayList<>();
 
 
     public static boolean login(String email, String password) throws IOException {
@@ -50,10 +52,22 @@ public class Manager {
         }//if user does not exist or password is incorrect it will return false
         return false;
     }
+
+
+    //logout
+    /*
+        logout the active user by setting the "loggedInUser" variable to null.
+        Save the user data.
+        Then, clear the tasks, labels, and sections
+     */
     public static void logout() throws IOException {
-        saveUserData();
+        log.info("saving user "+getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName()+"'s data due to logout");
         saveUsers();
+
+        log.info("logged out user:" + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName());
         loggedInUser = null;
+
+        //empty the tasks, labels, and sections
         tasks = null;
         labelList = null;
         sections = null;
@@ -146,7 +160,7 @@ public class Manager {
     }
 
     private static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
-        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList);
+        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
         tasks.add(task);
         saveUserData();
     }
@@ -155,6 +169,13 @@ public class Manager {
         Section section = new Section(title, description);
         sections.add(section);
     }
+
+   private static void addSubTask(String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException{
+        SubTask subTask = new SubTask(title,description,deadline,priority,taskCompleted);
+        subtaskList.add(subTask);
+
+    }
+
 
     static ArrayList<String> Search(String object) throws IOException{
         ArrayList<String> labelSearch = new ArrayList<>();
@@ -179,25 +200,6 @@ public class Manager {
             }
         }
         return taskSearch;
-    }
-
-
-
-    //logoutUser
-    /*
-        Logout a user by their unique user id (UUID)
-        There is no return
-    */
-    public static void logoutUser(UUID id) throws IOException {
-        //write to log that no users are logged in
-        log.info("logged out user:" + id);
-
-        //set the "loggedInUser" variable to "null" to signify that there is no user logged in
-        loggedInUser = null;
-
-        //save the user's data
-        saveUserData();
-        log.info("saving user "+id+"'s data due to logout");
     }
 
 

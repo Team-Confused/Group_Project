@@ -27,6 +27,7 @@ public class Sort {
                 System.out.println(tasks);
             }
         }
+
         for (Task element : tasks) {
             if (sortDate == true) {
                 if (date.before(element.getDeadline())) {

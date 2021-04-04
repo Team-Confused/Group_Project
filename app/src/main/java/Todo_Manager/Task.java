@@ -38,13 +38,14 @@ public class Task {
     @NonNull
     private ArrayList<SubTask> subtaskList;
 
-    public Task(String title, String description, Date deadline,String priority,boolean taskCompleted, ArrayList<String> labelist){
+    public Task(String title, String description, Date deadline,String priority,boolean taskCompleted, ArrayList<String> labelist, ArrayList<SubTask> subtaskList){
      this.title = title;
      this.description = description;
      this.deadline = deadline;
      this.priority = priority;
      this.taskCompleted = taskCompleted;
      this.lableList=labelist;
+     this.subtaskList = subtaskList;
 
     }
 

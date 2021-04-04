@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="479cbd79-efc7-4313-9942-026144c20ae1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Sort.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Sort.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/SearchScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/Todo_Manager/SearchScreen.java" afterDir="false" />
+>>>>>>> 2acb4cf01d9d43153961ab6c7c67d09050a72006
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +68,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Homework2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Todo_Manager.App" />
       <module name="Todo_Manager.app.main" />
@@ -87,8 +97,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SearchScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Todo_Manager.SearchScreen" />
+    <configuration name="SortScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Todo_Manager.SortScreen" />
       <module name="Todo_Manager.app.main" />
       <extension name="coverage">
         <pattern>
@@ -100,8 +110,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SortScreen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Todo_Manager.SortScreen" />
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Todo_Manager.Test" />
       <module name="Todo_Manager.app.main" />
       <extension name="coverage">
         <pattern>
@@ -128,11 +138,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.UI" />
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.Manager" />
         <item itemvalue="Application.SortScreen" />
-        <item itemvalue="Application.SearchScreen" />
-        <item itemvalue="Application.UI" />
       </list>
     </recent_temporary>
   </component>
