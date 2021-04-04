@@ -43,8 +43,18 @@ public class LoginScreen {
             }
             if (check == false){
                 error.setVisible(true);
-            }else{
-                primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+            }
+
+            //based on if the user is an admin or not, enter the main scene or the admin main scene
+            else{
+                boolean isAdmin = Manager.getLoggedInUser().isAdmin();
+
+                //if the user is an admin, get the admin scene
+                if(isAdmin) primaryStage.setScene(adminMainScreen.getAdminMainScene(primaryStage));
+
+                //if the user is not an admin, get the generic main scene
+                else primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+
             }
 
         });
