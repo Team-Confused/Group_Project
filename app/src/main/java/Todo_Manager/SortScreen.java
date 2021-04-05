@@ -23,7 +23,6 @@
  */
 package Todo_Manager;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,6 +35,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class SortScreen  {
 
@@ -56,6 +58,10 @@ public class SortScreen  {
         comboBox.getItems().addAll("Highest","High", "Medium","Low");
 
 
+        //datepicker to select date for sort parameter
+        DatePicker date = new DatePicker();//LocalDate.now());
+        //Date date1 = Date.from(Instant.from(date.getValue()));
+
         // Sort button
         Button button = new Button();
         button.setText("Sort");
@@ -64,7 +70,8 @@ public class SortScreen  {
 
             //call sort
             try {
-                new Sort(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected());
+                Sort.setDate(date.getValue());
+                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -89,8 +96,6 @@ public class SortScreen  {
         box.getChildren().add(button);
         box.setAlignment(Pos.CENTER_RIGHT);
 
-        //datepicker to select date for sort parameter
-        DatePicker date = new DatePicker();
 
 
         //dropdown menu

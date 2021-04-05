@@ -26,6 +26,7 @@ import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,8 +34,8 @@ import java.util.stream.Collectors;
 public class Sort {
 
     //arrayLists
-    ArrayList<Task> tasks = new ArrayList<>();
-    ArrayList<Task> sortedTasks = new ArrayList<>();
+    static ArrayList<Task> tasks = new ArrayList<>();
+    static ArrayList<Task> sortedTasks = new ArrayList<>();
     ArrayList<String> labelList = new ArrayList<>();
 
     //booleans
@@ -47,8 +48,8 @@ public class Sort {
     String p;
 
     //date setter
-    public void setDate(Date date) {
-        this.date = date;
+    public static void setDate(LocalDate date) {
+        date = date;
     }
 
     //enum for Priority
@@ -57,7 +58,7 @@ public class Sort {
     }
 
     //sort by the task name (alphabetical)
-    void sortByTask(ArrayList tasks)
+    static void sortByTask(ArrayList tasks)
     {
         log.info("sort tasks by task");
         ArrayList simpleTasks = new ArrayList();
@@ -70,18 +71,24 @@ public class Sort {
         tasks = sortedTasks;
     }
 
-    void sortbyLabel(ArrayList tasks)
+    static void sortbyLabel(ArrayList tasks)
     {
+        log.info("sort by label");
+    }
 
+    static void sortbyDate(ArrayList tasks)
+    {
 
     }
 
-    public Sort(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority) throws IOException {
+    public static void sortBy(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority) throws IOException {
         //list of tasks
         ArrayList tasks = Manager.getTasks();
 
         //if we are sorting by task
         if(isTask)sortByTask(tasks);
+        else if(isLabel)sortbyLabel(tasks);
+        else if(isDate)sortbyDate(tasks);
 
 
         /*
