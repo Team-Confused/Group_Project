@@ -23,43 +23,6 @@
  */
 package Todo_Manager;
 
-import lombok.*;
-
-import java.util.Date;
-
-
-//project lombok calls
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class SubTask {
-    @NonNull
-    @Getter
-    private String title;
-    @Getter
-    @NonNull
-    private String description;
-    @Getter
-    @NonNull
-    private Date deadline;
-    @Getter
-    @NonNull
-    private Priority priority;
-    @Getter
-    @Setter
-    private boolean taskCompleted;
-
-    public SubTask(String title, String description, Date deadline, Priority priority) {
-        this.title = title;
-        this.description = description;
-        this.deadline = deadline;
-        this.priority = priority;
-    }
-
-
-    public String toString(){
-        String ret = "\n"+title+"\n"+description+"\n"+deadline+"\n"+priority+"\nIs this complete? "+taskCompleted;
-        return ret;
-    }
-
-
+public enum Priority {
+    Low,Medium,High,ASAP;
 }

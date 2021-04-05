@@ -1,11 +1,42 @@
 [
   {
-    "firstName": "kevin",
-    "lastName": "bacon",
-    "id": "bb2fe37b-b283-4eff-abaf-abfe3808788f",
-    "bio": "bip",
-    "email": "uwu@gmail.com",
-    "photo": "C\\users",
+    "firstName": "John",
+    "lastName": "Doe",
+    "password": "newPassword",
+    "id": "175b3934-3c22-470a-984c-565982c9b0ba",
+    "bio": "Only child of Jack and Jill Doe",
+    "email": "example@gmail.com",
+    "photo": "\\home\\pictures\\img.pdf",
     "isAdmin": false
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Igbokwe",
+    "password": "daniel",
+    "id": "1bab041e-1c9c-4521-845f-340ac056c8c5",
+    "bio": "I am a god",
+    "email": "Igbo@isu.edu",
+    "photo": "C:\\Users\\Daniel\\Downloads\\11_1.jpg",
+    "isAdmin": false
+  },
+  {
+    "firstName": "Noufumi",
+    "lastName": "Shield",
+    "password": "downWithKingTrash",
+    "id": "ea8d96ef-4e7c-4bc6-93d9-7d5e142ff13f",
+    "bio": "The Shield Hero",
+    "email": "theShieldHero@fourHChurch.com",
+    "photo": "/home/john/Pictures/Star Wars sith.jpg",
+    "isAdmin": false
+  },
+  {
+    "firstName": "Aqua",
+    "lastName": "Priestess",
+    "password": "AquaChurch4evr",
+    "id": "42a2a0c2-bb16-446b-8037-f0b95e161e45",
+    "bio": "The goddess Agua",
+    "email": "HolyGreatness@heavenmail.org",
+    "photo": "/home/john/CS2263/Group_Project/Group_Project/ConfusedLogo.jpg",
+    "isAdmin": true
   }
 ]
