@@ -116,8 +116,23 @@ public class MainScreen {
             }
         });
 
+        Button addLabel = new Button("Add label");
+        addLabel.setOnAction(value->{
+            if(!taskListView.getItems().isEmpty()) {
+                primaryStage.setScene(AddLabelScreen.getAddLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
+            }
+        });
+        Button removeSubTask = new Button("Remove Subtask");
+        removeSubTask.setOnAction(value->{
+            if(!taskListView.getItems().isEmpty()) {
+                primaryStage.setScene(RemoveSubTaskScreen.getRemoveSubTaskScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
+
+            }
+        });
+
+
         //add sort, newtask, and newSubTask into a VBox
-        one.getChildren().addAll(sort,newTask,newSubTask,markAsComplete);
+        one.getChildren().addAll(sort,newTask,newSubTask,markAsComplete,addLabel,removeSubTask);
 
 
 
@@ -158,11 +173,15 @@ public class MainScreen {
             taskListView.getSelectionModel().selectFirst();
         });
 
+        Button removeLabel = new Button("Remove label");
+        removeLabel.setOnAction(value->{
+            if(!taskListView.getItems().isEmpty()) {
+                primaryStage.setScene(RemoveLabelScreen.getAddLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
+            }
+        });
+
     //put search, modifyTask, and addSection in the same VBox
-        two.getChildren().addAll(search,modifyTask,addSection,removeTask);
-
-
-
+        two.getChildren().addAll(search,modifyTask,addSection,removeTask,removeLabel);
 
 
         VBox three = new VBox();

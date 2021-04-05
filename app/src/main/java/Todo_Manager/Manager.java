@@ -150,10 +150,8 @@ public class Manager {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
-        System.out.println("users (from saveUser):" + users);
         String json = gson.toJson(users);
         try {
-            //Files.put(Paths.get("./Users.json"), json);
             Files.writeString(Paths.get("./Users.json"), json);
 
 
@@ -275,6 +273,19 @@ public class Manager {
         //add the task to the list of tasks "tasks"
         tasks.add(task);
         //save the user's data
+        saveUserData();
+    }
+
+    public static void addLabel(Task workingTask,String label) throws IOException {
+        workingTask.addLabel(label);
+        saveUserData();
+    }
+    public static void removeLabel(Task workingTask,String label) throws IOException {
+        workingTask.removeLabel(label);
+        saveUserData();
+    }
+    public static void removeSubTask(Task workingTask, SubTask subtask) throws IOException {
+        workingTask.removeSubTask(subtask);
         saveUserData();
     }
 
@@ -415,40 +426,9 @@ public class Manager {
     }
 
 
-    //main method (it is mainly used for testing of Manager methods)
+
     public static void main(String args[]) throws IOException {
-        //tests for various methods
-        // Manager.Sort();
 
-
-        //generic user account
-//        addUser("John",
-//                "Doe",
-//                "Pa55w0rd",
-//                     "Only child of Jack and Jill Doe",
-//                  "example@gmail.com",
-//                        Path.of("/home/john/pictures/img.pdf"),
-//                        false);
-//
-//        //login generic user
-        // Manager.loadUsers();
-        //System.out.println(users);
-        // login("example@gmail.com","newPassword");
-        //saveUserData();
-        // addTask("sdfsdf","sdf sdf sd weg re grerge rgeerg.",new Date(444,4,4),Priority.Low,false);
-
-//        //reset password of generic user
-//        userPasswordReset("newP455W0rd");
-//
-//        loadUsers();
-//        addTask("test","test",new Date(555,5,4),"test",false);
-//        saveUsers();
-//        System.out.println(users);
-//
-//
-
-//        //loadUserData();
-//        saveUserData();
 
 
     }

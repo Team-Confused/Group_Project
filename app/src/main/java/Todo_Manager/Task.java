@@ -53,7 +53,7 @@ public class Task {
     @Setter
     private boolean taskCompleted;
     @Getter
-    private ArrayList<String> lableList;
+    private ArrayList<String> labelList;
     @Getter
     private String taskProject;
     @Getter
@@ -72,14 +72,26 @@ public class Task {
      this.deadline = deadline;
      this.priority = priority;
      this.taskCompleted = taskCompleted;
-     //this.lableList=labelist;
+     this.labelList=new ArrayList<>();
+     this.subtaskList = new ArrayList<>();
      this.taskCompleted = false;
 
+    }
+    public void addLabel(String label){
+        labelList.add(label);
+
+    }
+    public void removeLabel(String label){
+        labelList.remove(label);
+    }
+    public void removeSubTask(SubTask subtask){
+        subtaskList.remove(subtask);
     }
 
     public String toString(){
         String ret = title+"\n"+description+"\n"+deadline+"\n"+priority+"\nIs this complete? "+taskCompleted;
-            ret+="\nSubtasks:"+subtaskList;
+        ret+="\nSubtasks:"+subtaskList;
+        ret+="\nLabels: "+labelList;
         return ret;
     }
 
