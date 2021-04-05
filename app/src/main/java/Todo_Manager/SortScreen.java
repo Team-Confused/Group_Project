@@ -12,6 +12,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class SortScreen  {
 
 
@@ -19,9 +21,6 @@ public class SortScreen  {
     public static Scene getSortScene(Stage primaryStage)  {
 
 
-        // Sort button
-        Button button = new Button();
-        button.setText("Sort");
 
         // Check box for sort
         CheckBox cb1 = new CheckBox("Task");
@@ -33,6 +32,22 @@ public class SortScreen  {
         ComboBox comboBox = new ComboBox();
         comboBox.getItems().addAll("Highest","High", "Medium","Low");
 
+
+        // Sort button
+        Button button = new Button();
+        button.setText("Sort");
+        //when button is pressed
+        button.setOnAction(value ->{
+
+            //call sort
+            try {
+                new Sort(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
         //Adding button to hbox
         HBox box = new HBox();
         box.getChildren().add(button);
@@ -41,11 +56,13 @@ public class SortScreen  {
         //datepicker to select date for sort parameter
         DatePicker date = new DatePicker();
 
+
         //dropdown menu
         VBox dropdownbox = new VBox();
         dropdownbox.getChildren().addAll(date,comboBox);
         dropdownbox.setAlignment(Pos.CENTER_LEFT);
         dropdownbox.setSpacing(50);
+
 
         // Adding checkbox to vbox
         VBox box1 = new VBox();
