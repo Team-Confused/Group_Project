@@ -1,3 +1,26 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2021 Team-Confused
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package Todo_Manager;
 
 import javafx.application.Application;
@@ -12,15 +35,15 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class SortScreen  {
 
 
+    //create the a scene to sort
     public static Scene getSortScene(Stage primaryStage)  {
 
 
-        // Sort button
-        Button button = new Button();
-        button.setText("Sort");
 
         // Check box for sort
         CheckBox cb1 = new CheckBox("Task");
@@ -32,17 +55,37 @@ public class SortScreen  {
         ComboBox comboBox = new ComboBox();
         comboBox.getItems().addAll("Highest","High", "Medium","Low");
 
+
+        // Sort button
+        Button button = new Button();
+        button.setText("Sort");
+        //when button is pressed
+        button.setOnAction(value ->{
+
+            //call sort
+            try {
+                new Sort(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+
         //Adding button to hbox
         HBox box = new HBox();
         box.getChildren().add(button);
         box.setAlignment(Pos.CENTER_RIGHT);
 
+        //datepicker to select date for sort parameter
         DatePicker date = new DatePicker();
 
+
+        //dropdown menu
         VBox dropdownbox = new VBox();
         dropdownbox.getChildren().addAll(date,comboBox);
         dropdownbox.setAlignment(Pos.CENTER_LEFT);
         dropdownbox.setSpacing(50);
+
 
         // Adding checkbox to vbox
         VBox box1 = new VBox();
@@ -62,6 +105,8 @@ public class SortScreen  {
         Scene scene = new Scene(sortbar, 600, 400);
        // primaryStage.setScene(scene);
         //primaryStage.show();
+
+        //return the scene
         return scene;
     }
 }

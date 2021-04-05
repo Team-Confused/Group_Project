@@ -1,27 +1,79 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2021 Team-Confused
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package Todo_Manager;
+import lombok.extern.java.Log;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
-
+@Log
 public class Sort {
 
+    //arrayLists
     ArrayList<Task> tasks = new ArrayList<>();
     ArrayList<String> labelList = new ArrayList<>();
+
+    //booleans
     boolean label;
     boolean task;
     boolean sortDate;
     boolean priority;
+
     Date date;
     String p;
 
+    //date setter
     public void setDate(Date date) {
         this.date = date;
     }
+
+    //enum for Priority
     public enum Priority {
         Low,Medium,High,ASAP;
     }
 
-    public Sort() {
+    //sort by the task name (alphabetical)
+    void sortByTask(ArrayList tasks)
+    {
+        log.info("sort tasks by task");
+        Collections.sort(tasks);
+        log.info("sorted tasks:" +tasks);
+
+    }
+
+    public Sort(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority) throws IOException {
+        //list of tasks
+        ArrayList tasks = Manager.getTasks();
+
+        //if we are sorting by task
+        if(isTask)sortByTask(tasks);
+
+
+        /*
         for (Task element : tasks) {
             if (task == true) {
                 System.out.println(tasks);
@@ -42,10 +94,16 @@ public class Sort {
         }
         for (Task element : tasks){
             if(priority == true){
-                if(p == element.getPriority()){
+                if(p.equals(element.getPriority())){
                     System.out.print(tasks);
                 }
             }
         }
+
+
+
+         */
     }
+
+
 }

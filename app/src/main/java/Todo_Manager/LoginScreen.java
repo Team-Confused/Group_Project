@@ -1,3 +1,26 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2021 Team-Confused
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package Todo_Manager;
 
 import javafx.geometry.Insets;
@@ -18,30 +41,52 @@ import java.io.IOException;
 
 public class LoginScreen {
 
-
+    //define the background
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    //login screen scene
     public static Scene getLoginScene(Stage primaryStage){
+        //text field (email, password)
         TextField emailIn = new TextField();
         PasswordField passwordIn = new PasswordField();
+
+        //labels
         Label emailL  = new Label("Email: ");
         Label passwordL = new Label("Password: ");
         Label error = new Label("The password or email is wrong.");
+
+        //set the visibility of the "error" label
         error.setVisible(false);
+
+        //login button
         Button login = new Button("Login");
+        //when the login button is pressed
         login.setOnAction(value->{
             boolean check = false;
+
+            //get the inputted strings the user gave
             String email = emailIn.getText();
             String password = passwordIn.getText();
+
+            //auto-fail if the email or password is blank
             if(email.isBlank() || password.isBlank()){
                 Boolean cleck = false;
-            }else {
+            }
+
+            // when the user enters both an email and a password
+            else {
                 try {
+                    //run the login method from Manager with the email and password as its parameters
                     check = Manager.login(email, password);
-                } catch (IOException e) {
+                }
+                //exception catch
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            //if there is a failure in logging in (causable by leaving a box blank or inputting bad credentials)
             if (check == false){
+                //set the visibility for the "error" label to visible
                 error.setVisible(true);
             }
 
@@ -59,6 +104,7 @@ public class LoginScreen {
 
         });
 
+        //build the scene
         GridPane grid = new GridPane();
         grid.setBackground(BLUEBACKGROUND);
         grid.setAlignment(Pos.CENTER);

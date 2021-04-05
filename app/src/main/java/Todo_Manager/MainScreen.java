@@ -1,61 +1,188 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2021 Team-Confused
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package Todo_Manager;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
 public class MainScreen {
+    //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    //main screen
     public static Scene getMainScene(Stage primaryStage){
 
+        //initialize taskListView and have it hold the tasks
         ListView<Task> taskListView= new ListView<>();
         taskListView.getItems().addAll(Manager.getTasks());
+
+        //The entire lambda expression below makes text wrap.
+        taskListView.setCellFactory(param -> new ListCell<Task>(){
+            @Override
+            protected void updateItem(Task item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item==null) {
+                    setGraphic(null);
+                    setText(null);
+                    // other stuff to do...
+
+                }else{
+
+                    // set the width's
+                    setMinWidth(param.getWidth());
+                    setMaxWidth(param.getWidth());
+                    setPrefWidth(param.getWidth());
+
+                    // allow wrapping
+                    setWrapText(true);
+
+                    setText(item.toString());
+
+
+                }
+            }
+        });
+        taskListView.getSelectionModel().selectFirst();
+
+
+
+
+
+
         VBox one = new VBox();
+
+        //sort button
         Button sort = new Button("Sort");
+        //when sort button is pressed
         sort.setOnAction(value->{
-
+            //enter the sort screen
+            primaryStage.setScene(SortScreen.getSortScene(primaryStage));
         });
+
+        //add a new task
         Button newTask = new Button("Add new Task");
+        //if the button is pressed to add a new task
         newTask.setOnAction(value->{
-
+            primaryStage.setScene(CreateTaskScreen.getCreateTaskScene(primaryStage));
         });
+
+        //add a new subtask
         Button newSubTask = new Button("Add new Subtask");
+        //if the button is pressed to add a new subtask
         newSubTask.setOnAction(value->{
 
         });
-        one.getChildren().addAll(sort,newTask,newSubTask);
+
+
+        Button markAsComplete = new Button("Mark as complete");
+        markAsComplete.setOnAction(value->{
+            taskListView.getSelectionModel().getSelectedItem().setTaskCompleted(true);
+            try {
+                Manager.saveUserData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        //add sort, newtask, and newSubTask into a VBox
+        one.getChildren().addAll(sort,newTask,newSubTask,markAsComplete);
+
+
+
+
         VBox two = new VBox();
+
+        //search button
         Button search = new Button("Search");
-        search.setOnAction(value->{ primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
-
+        //when the search button is pressed
+        search.setOnAction(value->{
+            //enter the Search page
+            primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
         });
+
+        //modify task button
         Button modifyTask = new Button("Modify Task");
+        //when the "modify task" button is pressed
         modifyTask.setOnAction(value->{
-
+            primaryStage.setScene(ModifyTaskScreen.getModifyTaskScene(primaryStage,taskListView.getSelectionModel().getSelectedItem()));
         });
+
+        //add new section button
         Button addSection = new Button("Add new Section");
+        //when the "add new section" button is pressed
         addSection.setOnAction(value->{
 
         });
-        two.getChildren().addAll(search,modifyTask,addSection);
+
+        Button removeTask = new Button("Remove Task");
+        removeTask.setOnAction(value ->{
+            Task workingTask = taskListView.getSelectionModel().getSelectedItem();
+            try {
+                Manager.removeTask(workingTask);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            taskListView.getItems().remove(workingTask);
+            taskListView.getSelectionModel().selectFirst();
+        });
+
+    //put search, modifyTask, and addSection in the same VBox
+        two.getChildren().addAll(search,modifyTask,addSection,removeTask);
+
+
+
+
+
         VBox three = new VBox();
 
+        //exit program
         Button close = new Button("Exit Program");
+        //when the user clicks the "exit program" button
         close.setOnAction(value->{
+            //try to logout the user
             try {
+                //logout the user
                 Manager.logout();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //close the program
             System.exit(0);
         });
+
+        //logout button
         Button logout = new Button("Logout");
         logout.setOnAction(value->{
             try {
@@ -74,6 +201,11 @@ public class MainScreen {
             primaryStage.setScene(passwordResetScreen.getPasswordResetScreen(primaryStage));
         });
 
+
+
+
+
+        //build the scene
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
         innerThree.getChildren().addAll(close,logout);
@@ -86,7 +218,12 @@ public class MainScreen {
         three.setSpacing(240);
         root.setSpacing(10);
         root.setBackground(BLUEBACKGROUND);
+
+
+
+        //return the sceen
         return new Scene(root,600,350);
+
 
     }
 }

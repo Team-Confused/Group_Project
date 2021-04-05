@@ -24,6 +24,7 @@ public class Test extends Application {
         //Button
         Button button = new Button("Add");
         button.setAlignment(Pos.CENTER_RIGHT);
+      //  button.setOnAction();
 
         //HBox
         HBox hBox = new HBox();
