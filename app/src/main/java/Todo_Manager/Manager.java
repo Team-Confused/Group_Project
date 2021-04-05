@@ -1,18 +1,18 @@
 /**
  * MIT License
- *
+ * <p>
  * Copyright (c) 2021 Team-Confused
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,9 +33,16 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 import java.util.stream.Collectors;
 
 
@@ -258,7 +265,8 @@ public class Manager {
         tasks.remove(workingTask);
         saveUserData();
     }
-    public static void removeSubTask(Task workingTask,SubTask subtask) throws IOException {
+
+    public static void removeSubTask(Task workingTask, SubTask subtask) throws IOException {
         workingTask.removeSubTask(subtask);
         saveUserData();
     }
@@ -267,6 +275,7 @@ public class Manager {
         workingTask.addLabel(label);
         saveUserData();
     }
+
     public static void removeLabel(String label, Task workingTask) throws IOException {
         workingTask.removeLabel(label);
         saveUserData();
@@ -284,87 +293,88 @@ public class Manager {
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
-        //add the task to the list of tasks "tasks"
-        tasks.add(task);
-        //save the user's data
-        saveUserData();
     }
+        //add the task to the list of tasks "tasks"
 
 
-    //addSection
+
+        //addSection
     /*
         add a new section
         the parameters are Title and Description (both are strings)
         there is no return
      */
-     static void addSection(String title, String description) throws IOException {
-        Section section = new Section(title, description);
-        //add the new section to sections
-        sections.add(section);
-        saveUserData();
-    }
+        static void addSection (String title, String description) throws IOException {
+            Section section = new Section(title, description);
+            //add the new section to sections
+            sections.add(section);
+            saveUserData();
+        }
 
-    //addSubTask
+        //addSubTask
     /*
         add a new sub-task to a task
         parameters: title of sub-task, description, deadline, priority, and boolean of completeness
      */
-     static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException {
-        SubTask subTask = new SubTask(title, description, deadline, priority);
-        //add new subtask
-        subtaskList.add(subTask);
-    }
+        static void addSubTask (String title, String description, Date deadline, Priority priority) throws IOException {
+            SubTask subTask = new SubTask(title, description, deadline, priority);
+            //add new subtask
+            subtaskList.add(subTask);
+        }
 
 
-    //search
+        //search
     /*
         search the labels
         parameter: Object of a search parameter
         returns an arrayList of labels matching the search parameter
      */
-    static ArrayList<String> Search(String object) throws IOException {
-        ArrayList<String> labelSearch = new ArrayList<>();
-        //for each element in the list of labels
-        for (String element : labelList) {
-            //if the element contains the search parameter
-            if (element.contains(object)) {
-                //add it to the returned ArrayList
-                labelSearch.add(element);
-            }
-            //if there are no matches, log as such
-            else {
-                log.info("Search not found for:" + object);
-            }
-        }
-        return labelSearch;
-    }
 
 
-    //searchTask
+        //searchTask
     /*
         searches through the tasks for an inputted parameter
         parameter: search parameter (String)
         returns and arrayList of all tasks containing the search parameter
      */
-    static ArrayList<Task> searchTask(String object) throws IOException {
-        ArrayList<Task> taskSearch = new ArrayList<>();
-        //search thorough each element in the list of tasks for any matches to the parameter
-        for (Task element : tasks) {
-            if (element.getTitle() == object) {
-                //if one is found, add it to the returned list
-                taskSearch.add(element);
+        static ArrayList<Task> searchTask (String object) throws IOException {
+            ArrayList<Task> taskSearch = new ArrayList<>();
+            //search thorough each element in the list of tasks for any matches to the parameter
+            for (Task element : tasks) {
+                if (element.getTitle() == object) {
+                    //if one is found, add it to the returned list
+                    taskSearch.add(element);
+                }
+                //if no matches are found, log it as such
+                else {
+                    System.out.println("Search not found for: " + object);
+                }
             }
-            //if no matches are found, log it as such
-            else {
-                System.out.println("Search not found for: " + object);
-            }
+            return taskSearch;
         }
-        return taskSearch;
+        public static String Search (String object){
+            for (String element : labelList) {
+                if (element.contains(object)) {
+                    return element;
+                } else {
+                    System.out.println("Search not found");
+                }
+            }
+            for (Task element : tasks) {
+                if (element.getTitle() == object) {
+                    return String.valueOf(element);
 
-    }
+                } else {
+                    System.out.println("Search not found");
+
+                }
+            }
+            //return taskSearch;
+            return null;
+        }
 
 
-    //logoutUser
+        //logoutUser
     /*
         Logout a user by their unique user id (UUID)
         There is no return
@@ -384,14 +394,95 @@ public class Manager {
 //    }
 
 
-    //user password reset
+        //user password reset
     /*
         reset any user's password
         return 1 if success and -1 if failure
      */
-    public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
+        public static int adminPasswordReset (UUID id, String newPassword) throws IOException {
+            log.info("user: " + loggedInUser.getId() + " password changed from:\"" + loggedInUser.getPassword() + "\" to: \"" + newPassword);
+
+
+            //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
+            List<User> active = users.stream().filter(user -> user.getId() == id).collect(Collectors.toList());
+
+            //perform password reset on first user in list (there should only be one user with the id anyways)
+            if (!active.isEmpty()) {
+                //set the user's password to the function-parameter password
+                active.get(0).setPassword(newPassword);
+
+                //save the updated user data
+                //saveUserData();
+                saveUsers();
+                return 1;
+            }
+
+            //return error message if the list is empty
+            else {
+                log.info("Error: The list of users is empty");
+                return -1;
+            }
+        }
+
+
+        //admin password reset
+    /*
+        reset the user's password
+        returns whatever "adminPasswordReset" returns with the ID of the currently logged-in user as its UUID id parameter
+     */
+        public static int userPasswordReset (String newPassword) throws IOException {
+            //call adminPasswordReset with the parameters of the current user and the new password
+            log.info("adminPasswordReset called with \"" + newPassword + "\" being the new password.");
+            return adminPasswordReset(loggedInUser.getId(), newPassword);
+        }
+
+
+        //main method (it is mainly used for testing of Manager methods)
+
+
+
+
+
+    //logoutUser
+    /*
+        Logout a user by their unique user id (UUID)
+        There is no return
+    */
+    public static void logoutUser(UUID id) throws IOException {
+        //write to log that no users are logged in
+        log.info("logged out user:" + id);
+
+        //set the "loggedInUser" variable to "null" to signify that there is no user logged in
+        loggedInUser = null;
+
+        //save the user's data
+        saveUserData();
+        log.info("saving user " + id + "'s data due to logout");
+    }
+
+
+    //user password reset
+    /*
+        reset the user's password
+        return 1 if success and -1 if failure
+     */
+    public static int userPasswordReset(UUID id, String newPassword) throws IOException {
         log.info("user: " + loggedInUser.getId() + " password changed from:\"" + loggedInUser.getPassword() + "\" to: \"" + newPassword);
 
+        //method 1 [works, but is a bit slower]:
+        /*
+        for (User person : users)
+        {
+            if(person.getId() == id)
+            {
+                System.out.println("user detected!");
+                person.setPassword(newPassword);
+            }
+            System.out.println("new password:" + person.getPassword());
+        }
+        */
+
+        //method 2 [also works, but is a bit faster]
         //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
         List<User> active = users.stream().filter(user -> user.getId() == id).collect(Collectors.toList());
 
@@ -401,8 +492,7 @@ public class Manager {
             active.get(0).setPassword(newPassword);
 
             //save the updated user data
-            //saveUserData();
-            saveUsers();
+            saveUserData();
             return 1;
         }
 
@@ -411,22 +501,11 @@ public class Manager {
             log.info("Error: The list of users is empty");
             return -1;
         }
+
+
     }
 
 
-    //admin password reset
-    /*
-        reset the user's password
-        returns whatever "adminPasswordReset" returns with the ID of the currently logged-in user as its UUID id parameter
-     */
-    public static int userPasswordReset(String newPassword) throws IOException {
-        //call adminPasswordReset with the parameters of the current user and the new password
-        log.info("adminPasswordReset called with \"" + newPassword + "\" being the new password.");
-        return adminPasswordReset(loggedInUser.getId(), newPassword);
-    }
-
-
-    //main method (it is mainly used for testing of Manager methods)
     public static void main(String args[]) throws IOException {
         //tests for various methods
         // Manager.Sort();

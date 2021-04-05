@@ -1,18 +1,19 @@
+
 /**
  * MIT License
- *
+ * <p>
  * Copyright (c) 2021 Team-Confused
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,6 +23,7 @@
  * SOFTWARE.
  */
 package Todo_Manager;
+
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -54,16 +56,15 @@ public class Sort {
 
     //enum for Priority
     public enum Priority {
-        Low,Medium,High,ASAP;
+        Low, Medium, High, ASAP;
     }
 
     //sort by the task name (alphabetical)
-    static void sortByTask(ArrayList tasks)
-    {
+    static void sortByTask(ArrayList tasks) {
         log.info("sort tasks by task");
         ArrayList simpleTasks = new ArrayList();
-        for(int i =0; i<tasks.size(); i++)
-         simpleTasks.add(tasks.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++)
+            simpleTasks.add(tasks.get(i).toString());
         simpleTasks.sort((Comparator) tasks);
 
         log.info("sorted tasks:" + sortedTasks);
@@ -71,13 +72,11 @@ public class Sort {
         tasks = sortedTasks;
     }
 
-    static void sortbyLabel(ArrayList tasks)
-    {
+    static void sortbyLabel(ArrayList tasks) {
         log.info("sort by label");
     }
 
-    static void sortbyDate(ArrayList tasks)
-    {
+    static void sortbyDate(ArrayList tasks) {
 
     }
 
@@ -86,21 +85,51 @@ public class Sort {
         ArrayList tasks = Manager.getTasks();
 
         //if we are sorting by task
-        if(isTask)sortByTask(tasks);
-        else if(isLabel)sortbyLabel(tasks);
-        else if(isDate)sortbyDate(tasks);
+        if (isTask) sortByTask(tasks);
+        else if (isLabel) sortbyLabel(tasks);
+        else if (isDate) sortbyDate(tasks);
 
 
         /*
         for (Task element : tasks) {
             if (task == true) {
                 System.out.println(tasks);
+
+package Todo_Manager;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Sort {
+    ArrayList<Task> tasks = new ArrayList<>();
+    ArrayList<String> labelList = new ArrayList<>();
+    boolean label;
+    boolean task;
+    boolean subTask;
+    boolean sortDate;
+    Date date;
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Sort() {  //
+
+        for (Task element : tasks) {
+            if (task = true) {
+                System.out.println(tasks);   // not to sure if this solves I tried using return tasks which resulted in an error
+
             }
         }
 
         for (Task element : tasks) {
+
             if (sortDate == true) {
                 if (date.before(element.getDeadline())) {
+
+            if (sortDate = true) {
+                if (date == element.getDeadline()) {
+
                     System.out.println(element);
                 }
             }
@@ -124,4 +153,12 @@ public class Sort {
     }
 
 
+//            if (label = true) {
+//                System.out.println(labelList);
+//            }
+
+
 }
+
+
+

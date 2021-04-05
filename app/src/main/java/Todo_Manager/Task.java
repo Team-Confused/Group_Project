@@ -63,15 +63,20 @@ public class Task {
 
 
 
+
     //public Task(String title, String description, Date deadline,Priority priority,boolean taskCompleted, ArrayList<String> labelist, ArrayList<SubTask> subtaskList){
 
     public Task(String title, String description, Date deadline,Priority priority){
     //initializer for Task
+
+
+
      this.title = title;
      this.description = description;
      this.deadline = deadline;
      this.priority = priority;
      this.taskCompleted = taskCompleted;
+
      this.labelList=new ArrayList<>();
      this.subtaskList = new ArrayList<>();
      this.taskCompleted = false;
@@ -93,6 +98,8 @@ public class Task {
         ret+="\nSubtasks:"+subtaskList;
         ret+="\nLabels: "+labelList;
         return ret;
+
+
     }
 
 }
