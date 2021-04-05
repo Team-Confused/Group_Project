@@ -38,14 +38,19 @@ import java.nio.file.Paths;
 
 @Log
 public class App {
+    //log test
     public String getGreeting() {
         log.info("string log test");
         return "Hello World!";
 
     }
 
+    //main method
     public static void main(String[] args) throws IOException {
+        //load the users
         Manager.loadUsers();
+
+        //begin the UI
         UI.main(args);
     }
 }

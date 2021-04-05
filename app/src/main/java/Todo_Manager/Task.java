@@ -32,6 +32,7 @@ import java.util.Date;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Task {
+    //variable definitions
     @NonNull
     @Getter
     @Setter
@@ -61,9 +62,11 @@ public class Task {
     private ArrayList<SubTask> subtaskList;
 
 
+
     //public Task(String title, String description, Date deadline,Priority priority,boolean taskCompleted, ArrayList<String> labelist, ArrayList<SubTask> subtaskList){
 
     public Task(String title, String description, Date deadline,Priority priority){
+    //initializer for Task
      this.title = title;
      this.description = description;
      this.deadline = deadline;

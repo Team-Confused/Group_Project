@@ -41,10 +41,12 @@ import java.util.stream.Collectors;
 
 @Log
 public class Manager {
+
+    //variable definitions with relavent setters, getters, etc.
     @Getter
     private static ArrayList<User> users = new ArrayList<>();
     @Getter
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
     @Getter
     private static ArrayList<String> labelList = new ArrayList<>();
     @Getter
@@ -54,18 +56,33 @@ public class Manager {
     private static ArrayList<SubTask> subtaskList = new ArrayList<>();
 
 
+    //login method
+    /*
+        returns a boolean (true on login success, false on failure)
+        parameters are the email and password (both of which are strings)
+     */
     public static boolean login(String email, String password) throws IOException {
+        //load the users
         loadUsers();
-        User temp;
+        User temp;  //create a temporary user
+        log.info("Users: " + users);
+
+        //for each user in the set of users,
         for (User u : users) {
+            //if the inputted email matches a user
             if (u.getEmail().equals(email)) {
-                //at this point, user exists
+                //and the unputted password matches the same user's.  At this point, user exists
                 if (u.getPassword().equals(password)) {
                     //at this point, user exists and password is correct.
+                    //set this person in the list of users to be "logged in"
                     loggedInUser = u;
+                    //load their user data
                     loadUserData();
+                    //return a success
                     return true;
-                } else {
+                }
+                //if the password is not correct,
+                else {
                     //if password is incorrect, break from loop
                     break;
                 }
@@ -83,7 +100,7 @@ public class Manager {
      */
     public static void logout() throws IOException {
         saveUsers();
-        if(loggedInUser != null) {
+        if (loggedInUser != null) {
             log.info("saving user " + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName() + "'s data due to logout");
 
 
@@ -92,102 +109,134 @@ public class Manager {
         loggedInUser = null;
 
         //empty the tasks, labels, and sections
-        tasks = null;
-        labelList = null;
-        sections = null;
+        tasks = new ArrayList<>();
+        labelList = new ArrayList<>();
+        sections = new ArrayList<>();
     }
 
-        public static boolean addUser (String firstName, String lastName, String password, String bio, String
-        email, Path picture, Boolean isAdmin) throws IOException {
-            //ui should call this and return to login screen
-            //checks that email has not been used before
-            for (User u : users) {
-                if (u.getEmail().equals(email)) {
-                    return false;
-                }
-            }
-            //this creates user and converts the path to a string, users can't hold it as a path cause gson doesn't work with those.
-            User temp = new User(firstName, lastName, password, UUID.randomUUID(), bio, email, picture.toString(), isAdmin);
-            users.add(temp);
-            log.info("New user " + temp + " has been created.");
-            saveUsers();
-            return true;
-        }
 
-        private static void saveUsers () throws IOException {
-            //functionality for saving user list
-            //loadUsers();
-            Gson gson = new GsonBuilder()
-                    .setPrettyPrinting()
-                    .create();
-            System.out.println("users (from saveUser):" + users);
-            String json = gson.toJson(users);
-            try {
-                //Files.put(Paths.get("./Users.json"), json);
-                Files.writeString(Paths.get("./Users.json"), json);
-
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
+    //addUser
+    /*
+        add a user (typically from the register screen)
+        returns a boolean (true is the new user has been added, false if the user email is already linked to a user)
+     */
+    public static boolean addUser(String firstName, String lastName, String password, String bio, String
+            email, Path picture, Boolean isAdmin) throws IOException {
+        //ui should call this and return to login screen
+        //checks that email has not been used before
+        for (User u : users) {
+            if (u.getEmail().equals(email)) {
+                return false;
             }
         }
+        //this creates user and converts the path to a string, users can't hold it as a path cause gson doesn't work with those.
+        User temp = new User(firstName, lastName, password, UUID.randomUUID(), bio, email, picture.toString(), isAdmin);
+        users.add(temp);
+        log.info("New user " + temp + " has been created.");
+        saveUsers();
+        return true;
+    }
 
-        public static void loadUsers () throws IOException {
-            //loads user list
-            Gson gson = new Gson();
-            Type usersType = new TypeToken<ArrayList<User>>() {
+
+    //saveUsers
+    /*
+        save the list of users and some of their data to a JSon file
+        there is no return
+        there are no parameters
+     */
+    private static void saveUsers() throws IOException {
+        //functionality for saving user list
+        //loadUsers();
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        System.out.println("users (from saveUser):" + users);
+        String json = gson.toJson(users);
+        try {
+            //Files.put(Paths.get("./Users.json"), json);
+            Files.writeString(Paths.get("./Users.json"), json);
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        }
+    }
+
+
+    //loadUsers
+    /*
+        load the list of users and some of their data from a JSON file
+        there is no return
+        there are no parameters
+     */
+    public static void loadUsers() throws IOException {
+        //loads user list
+        Gson gson = new Gson();
+        Type usersType = new TypeToken<ArrayList<User>>() {
+        }.getType();
+        try {
+            //populate the "users" ArrayList with the data from the JSON file
+            users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
+            //System.out.println("users:"+users);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        }
+    }
+
+
+    //saveUserData
+    /*
+        saves the data of the currently-logged-in user to a JSON file.
+        there are no returns
+        there are no parameters
+     */
+    public static void saveUserData() throws IOException {
+        //saves data of the logged in user
+        Gson gson = new Gson();
+        //open the user's dedicated file
+        FileWriter file = new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", true);
+        BufferedWriter blankWriter = new BufferedWriter(new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", false));
+        //write to the file
+        blankWriter.write("");
+        blankWriter.close();
+        BufferedWriter writer = new BufferedWriter(file);
+        writer.write(gson.toJson(tasks));
+        writer.newLine();
+        writer.write(gson.toJson(sections));
+        writer.newLine();
+        writer.write(gson.toJson(labelList));
+        writer.close();
+    }
+
+    //loadUserData
+    /*
+        load the data for the currently logged in user from their dedicated JSON file
+        there are no parameters
+        there is no return
+     */
+    private static void loadUserData() throws IOException {
+        Gson gson = new Gson();
+        //checks if file exists
+        File tempFile = new File("./UserFiles/" + loggedInUser.getId() + ".json");
+        boolean exists = tempFile.exists();
+        if (exists) {
+            //if it exists, reads in each type
+            BufferedReader test = new BufferedReader(new FileReader("./UserFiles/" + loggedInUser.getId() + ".json"));
+            Type tasksToken = new TypeToken<ArrayList<Task>>() {
             }.getType();
-            try {
+            tasks = gson.fromJson(test.readLine(), tasksToken);
+            Type sectionsToken = new TypeToken<ArrayList<Section>>() {
+            }.getType();
+            sections = gson.fromJson(test.readLine(), sectionsToken);
+            Type labelsToken = new TypeToken<ArrayList<String>>() {
+            }.getType();
+            labelList = gson.fromJson(test.readLine(), labelsToken);
+            test.close();
 
-                users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
-                //System.out.println("users:"+users);
-
-                Path path = Paths.get("./Users.json");
-
-                String temp = Files.readString(path);
-                users = gson.fromJson(temp, usersType);
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         }
-
-        public static void saveUserData () throws IOException {
-            //saves data of the logged in user
-            Gson gson = new Gson();
-            FileWriter file = new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", true);
-            BufferedWriter blankWriter = new BufferedWriter(new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", false));
-            blankWriter.write("");
-            blankWriter.close();
-            BufferedWriter writer = new BufferedWriter(file);
-            writer.write(gson.toJson(tasks));
-            writer.newLine();
-            writer.write(gson.toJson(sections));
-            writer.newLine();
-            writer.write(gson.toJson(labelList));
-            writer.close();
-        }
-
-        private static void loadUserData () throws IOException {
-            Gson gson = new Gson();
-            //checks if file exists
-            File tempFile = new File("./UserFiles/" + loggedInUser.getId() + ".json");
-            boolean exists = tempFile.exists();
-            if (exists) {
-                //if it exists, reads in each type
-                BufferedReader test = new BufferedReader(new FileReader("./UserFiles/" + loggedInUser.getId() + ".json"));
-                Type tasksToken = new TypeToken<ArrayList<Task>>() {
-                }.getType();
-                tasks = gson.fromJson(test.readLine(), tasksToken);
-                Type sectionsToken = new TypeToken<ArrayList<Section>>() {
-                }.getType();
-                sections = gson.fromJson(test.readLine(), sectionsToken);
-                Type labelsToken = new TypeToken<ArrayList<String>>() {
-                }.getType();
-                labelList = gson.fromJson(test.readLine(), labelsToken);
-                test.close();
-            }
-        }
+    }
 
 
 //    public static void addTask( String title, String description, Date deadline,Priority priority,boolean taskCompleted) throws IOException {
@@ -195,72 +244,116 @@ public class Manager {
 //        tasks.add(task);
 //        saveUserData();
 //    }
-    //todo unfuck
-        public static void addTask (String title, String description, Date deadline, Priority priority) throws
-        IOException {
-            Task task = new Task(title, description, deadline, priority);
-            if(tasks == null){
-                tasks = new ArrayList<>();
-            }
-            tasks.add(task);
-            saveUserData();
-        }
-        public static void modifyTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
-            workingTask.setTitle(title);
-            workingTask.setDescription(description);
-            workingTask.setDeadline(deadline);
-            workingTask.setPriority(priority);
-            saveUserData();
-        }
-        public static void removeTask(Task workingTask) throws IOException {
-                tasks.remove(workingTask);
-                saveUserData();
-        }
 
-        private static void addSection (String title, String description) throws IOException {
-            Section section = new Section(title, description);
-            sections.add(section);
-            saveUserData();
-        }
+    public static void modifyTask(Task workingTask, String title, String description, Date
+            deadline, Priority priority) throws IOException {
+        workingTask.setTitle(title);
+        workingTask.setDescription(description);
+        workingTask.setDeadline(deadline);
+        workingTask.setPriority(priority);
+        saveUserData();
+    }
+
+    public static void removeTask(Task workingTask) throws IOException {
+        tasks.remove(workingTask);
+        saveUserData();
+    }
 
 
-   private static void addSubTask(String title, String description, Date deadline,Priority priority,boolean taskCompleted) throws IOException{
-        SubTask subTask = new SubTask(title,description,deadline,priority,taskCompleted);
+    //addTask
+    /*
+        add a task
+        the parameters are (String title, String description, Date deadline,String priority,boolean taskCompleted)
+        there is no return
+     */
+    public static void addTask(String title, String description, Date deadline, Priority priority) throws IOException {
+        //temporary task
+        Task task = new Task(title, description, deadline, priority);
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+        }
+        //add the task to the list of tasks "tasks"
+        tasks.add(task);
+        //save the user's data
+        saveUserData();
+    }
+
+
+    //addSection
+    /*
+        add a new section
+        the parameters are Title and Description (both are strings)
+        there is no return
+     */
+    private static void addSection(String title, String description) {
+        Section section = new Section(title, description);
+        //add the new section to sections
+        sections.add(section);
+    }
+
+    //addSubTask
+    /*
+        add a new sub-task to a task
+        parameters: title of sub-task, description, deadline, priority, and boolean of completeness
+     */
+    private static void addSubTask(String title, String description, Date deadline, Priority priority,
+                                   boolean taskCompleted) throws IOException {
+        SubTask subTask = new SubTask(title, description, deadline, priority, taskCompleted);
+        //add new subtask
         subtaskList.add(subTask);
 
     }
-        static ArrayList<String> Search (String object) throws IOException {
-            ArrayList<String> labelSearch = new ArrayList<>();
-            for (String element : labelList) {
-                if (element.contains(object)) {
-                    labelSearch.add(element);
-                } else {
-                    System.out.println("Search not found");
-                }
+
+
+    //search
+    /*
+        search the labels
+        parameter: Object of a search parameter
+        returns an arrayList of labels matching the search parameter
+     */
+    static ArrayList<String> Search(String object) throws IOException {
+        ArrayList<String> labelSearch = new ArrayList<>();
+        //for each element in the list of labels
+        for (String element : labelList) {
+            //if the element contains the search parameter
+            if (element.contains(object)) {
+                //add it to the returned ArrayList
+                labelSearch.add(element);
             }
-            return labelSearch;
-        }
-        static ArrayList<Task> searchTask (String object) throws IOException {
-            ArrayList<Task> taskSearch = new ArrayList<>();
-            for (Task element : tasks) {
-                if (element.getTitle() == object) {
-                    taskSearch.add(element);
-                } else {
-                    System.out.println("Search not found");
-                }
+            //if there are no matches, log as such
+            else {
+                log.info("Search not found for:" + object);
             }
-            return taskSearch;
         }
+        return labelSearch;
+    }
 
 
-
-        private static void Sort () {
-            Sort sort = new Sort();
+    //searchTask
+    /*
+        searches through the tasks for an inputted parameter
+        parameter: search parameter (String)
+        returns and arrayList of all tasks containing the search parameter
+     */
+    static ArrayList<Task> searchTask(String object) throws IOException {
+        ArrayList<Task> taskSearch = new ArrayList<>();
+        //search thorough each element in the list of tasks for any matches to the parameter
+        for (Task element : tasks) {
+            if (element.getTitle() == object) {
+                //if one is found, add it to the returned list
+                taskSearch.add(element);
+            }
+            //if no matches are found, log it as such
+            else {
+                System.out.println("Search not found for: " + object);
+            }
         }
+        return taskSearch;
+
+    }
 
 
-
-        //logoutUser
+    //logoutUser
     /*
         Logout a user by their unique user id (UUID)
         There is no return
@@ -280,56 +373,55 @@ public class Manager {
 //    }
 
 
-        //user password reset
+    //user password reset
     /*
         reset any user's password
         return 1 if success and -1 if failure
      */
-        public static int adminPasswordReset (UUID id, String newPassword) throws IOException {
-            log.info("user: " + loggedInUser.getId() + " password changed from:\"" + loggedInUser.getPassword() + "\" to: \"" + newPassword);
+    public static int adminPasswordReset(UUID id, String newPassword) throws IOException {
+        log.info("user: " + loggedInUser.getId() + " password changed from:\"" + loggedInUser.getPassword() + "\" to: \"" + newPassword);
 
-            //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
-            List<User> active = users.stream().filter(user -> user.getId() == id).collect(Collectors.toList());
+        //create list called "active" which takes the users list, filters it based on the logic (user.getId() == id)
+        List<User> active = users.stream().filter(user -> user.getId() == id).collect(Collectors.toList());
 
-            //perform password reset on first user in list (there should only be one user with the id anyways)
-            if (!active.isEmpty()) {
-                //set the user's password to the function-parameter password
-                active.get(0).setPassword(newPassword);
+        //perform password reset on first user in list (there should only be one user with the id anyways)
+        if (!active.isEmpty()) {
+            //set the user's password to the function-parameter password
+            active.get(0).setPassword(newPassword);
 
-                //save the updated user data
-                //saveUserData();
-                saveUsers();
-                return 1;
-            }
-
-            //return error message if the list is empty
-            else {
-                log.info("Error: The list of users is empty");
-                return -1;
-            }
+            //save the updated user data
+            //saveUserData();
+            saveUsers();
+            return 1;
         }
 
+        //return error message if the list is empty
+        else {
+            log.info("Error: The list of users is empty");
+            return -1;
+        }
+    }
 
-        //admin password reset
+
+    //admin password reset
     /*
         reset the user's password
         returns whatever "adminPasswordReset" returns with the ID of the currently logged-in user as its UUID id parameter
      */
-        public static int userPasswordReset (String newPassword) throws IOException {
-            //call adminPasswordReset with the parameters of the current user and the new password
-            log.info("adminPasswordReset called with \"" + newPassword + "\" being the new password.");
-            return adminPasswordReset(loggedInUser.getId(), newPassword);
-        }
+    public static int userPasswordReset(String newPassword) throws IOException {
+        //call adminPasswordReset with the parameters of the current user and the new password
+        log.info("adminPasswordReset called with \"" + newPassword + "\" being the new password.");
+        return adminPasswordReset(loggedInUser.getId(), newPassword);
+    }
 
 
+    //main method (it is mainly used for testing of Manager methods)
+    public static void main(String args[]) throws IOException {
+        //tests for various methods
+        // Manager.Sort();
 
 
-        public static void main (String args[]) throws IOException {
-            //tests for various methods
-            //Manager.Sort();
-
-
-            //generic user account
+        //generic user account
 //        addUser("John",
 //                "Doe",
 //                "Pa55w0rd",
@@ -339,11 +431,11 @@ public class Manager {
 //                        false);
 //
 //        //login generic user
-            // Manager.loadUsers();
-            //System.out.println(users);
-           // login("example@gmail.com","newPassword");
-            //saveUserData();
-            // addTask("sdfsdf","sdf sdf sd weg re grerge rgeerg.",new Date(444,4,4),Priority.Low,false);
+        // Manager.loadUsers();
+        //System.out.println(users);
+        // login("example@gmail.com","newPassword");
+        //saveUserData();
+        // addTask("sdfsdf","sdf sdf sd weg re grerge rgeerg.",new Date(444,4,4),Priority.Low,false);
 
 //        //reset password of generic user
 //        userPasswordReset("newP455W0rd");
@@ -359,10 +451,10 @@ public class Manager {
 //        saveUserData();
 
 
-        }
-
-
     }
+
+
+}
 
 
 

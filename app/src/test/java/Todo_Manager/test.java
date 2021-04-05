@@ -88,7 +88,7 @@ public class test {
         assertEquals("edited task should be equal to created task",expected,Manager.getTasks().get(Manager.getTasks().size()-1));
     }
 
-    
+
 
 
 }

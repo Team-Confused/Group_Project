@@ -38,8 +38,13 @@ import javafx.util.Callback;
 import java.io.IOException;
 
 public class MainScreen {
+    //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+
+    //main screen
     public static Scene getMainScene(Stage primaryStage){
+
+        //initialize taskListView and have it hold the tasks
         ListView<Task> taskListView= new ListView<>();
         taskListView.getItems().addAll(Manager.getTasks());
 
@@ -70,19 +75,36 @@ public class MainScreen {
             }
         });
         taskListView.getSelectionModel().selectFirst();
-        VBox one = new VBox();
-        Button sort = new Button("Sort");
-        sort.setOnAction(value->{
 
+
+
+
+
+
+        VBox one = new VBox();
+
+        //sort button
+        Button sort = new Button("Sort");
+        //when sort button is pressed
+        sort.setOnAction(value->{
+            //enter the sort screen
+            primaryStage.setScene(SortScreen.getSortScene(primaryStage));
         });
+
+        //add a new task
         Button newTask = new Button("Add new Task");
+        //if the button is pressed to add a new task
         newTask.setOnAction(value->{
             primaryStage.setScene(CreateTaskScreen.getCreateTaskScene(primaryStage));
         });
+
+        //add a new subtask
         Button newSubTask = new Button("Add new Subtask");
+        //if the button is pressed to add a new subtask
         newSubTask.setOnAction(value->{
 
         });
+
 
         Button markAsComplete = new Button("Mark as complete");
         markAsComplete.setOnAction(value->{
@@ -94,21 +116,36 @@ public class MainScreen {
             }
         });
 
+        //add sort, newtask, and newSubTask into a VBox
         one.getChildren().addAll(sort,newTask,newSubTask,markAsComplete);
 
-        VBox two = new VBox();
-        Button search = new Button("Search");
-        search.setOnAction(value->{ primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
 
+
+
+        VBox two = new VBox();
+
+        //search button
+        Button search = new Button("Search");
+        //when the search button is pressed
+        search.setOnAction(value->{
+            //enter the Search page
+            primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
         });
+
+        //modify task button
         Button modifyTask = new Button("Modify Task");
+        //when the "modify task" button is pressed
         modifyTask.setOnAction(value->{
             primaryStage.setScene(ModifyTaskScreen.getModifyTaskScene(primaryStage,taskListView.getSelectionModel().getSelectedItem()));
         });
+
+        //add new section button
         Button addSection = new Button("Add new Section");
+        //when the "add new section" button is pressed
         addSection.setOnAction(value->{
 
         });
+
         Button removeTask = new Button("Remove Task");
         removeTask.setOnAction(value ->{
             Task workingTask = taskListView.getSelectionModel().getSelectedItem();
@@ -121,18 +158,31 @@ public class MainScreen {
             taskListView.getSelectionModel().selectFirst();
         });
 
+    //put search, modifyTask, and addSection in the same VBox
         two.getChildren().addAll(search,modifyTask,addSection,removeTask);
+
+
+
+
+
         VBox three = new VBox();
 
+        //exit program
         Button close = new Button("Exit Program");
+        //when the user clicks the "exit program" button
         close.setOnAction(value->{
+            //try to logout the user
             try {
+                //logout the user
                 Manager.logout();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //close the program
             System.exit(0);
         });
+
+        //logout button
         Button logout = new Button("Logout");
         logout.setOnAction(value->{
             try {
@@ -153,6 +203,9 @@ public class MainScreen {
 
 
 
+
+
+        //build the scene
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
         innerThree.getChildren().addAll(close,logout);
@@ -165,7 +218,12 @@ public class MainScreen {
         three.setSpacing(240);
         root.setSpacing(10);
         root.setBackground(BLUEBACKGROUND);
-        return new Scene(root,650,350);
+
+
+
+        //return the sceen
+        return new Scene(root,600,350);
+
 
     }
 }

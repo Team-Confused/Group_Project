@@ -35,8 +35,6 @@ import javafx.stage.Stage;
 public class UI extends Application {
 
 
-
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -60,6 +58,7 @@ public class UI extends Application {
             }
         };
         sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
             @Override
             public void handle(WorkerStateEvent event) {
                 //this block is the code that happens after 6 seconds
