@@ -25,16 +25,16 @@ package Todo_Manager;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Log
 public class Sort {
 
     //arrayLists
     ArrayList<Task> tasks = new ArrayList<>();
+    ArrayList<Task> sortedTasks = new ArrayList<>();
     ArrayList<String> labelList = new ArrayList<>();
 
     //booleans
@@ -60,8 +60,19 @@ public class Sort {
     void sortByTask(ArrayList tasks)
     {
         log.info("sort tasks by task");
-        Collections.sort(tasks);
-        log.info("sorted tasks:" +tasks);
+        ArrayList simpleTasks = new ArrayList();
+        for(int i =0; i<tasks.size(); i++)
+         simpleTasks.add(tasks.get(i).toString());
+        simpleTasks.sort((Comparator) tasks);
+
+        log.info("sorted tasks:" + sortedTasks);
+
+        tasks = sortedTasks;
+    }
+
+    void sortbyLabel(ArrayList tasks)
+    {
+
 
     }
 

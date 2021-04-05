@@ -71,6 +71,19 @@ public class SortScreen  {
         });
 
 
+        //go to the main menu
+        VBox mainbox = new VBox();
+        Button mainMenu = new Button("Main Menu");
+        mainbox.getChildren().addAll(mainMenu,comboBox);
+        mainbox.setAlignment(Pos.BOTTOM_CENTER);
+        mainbox.setSpacing(50);
+
+        //if the button is pressed to add a new task
+        mainMenu.setOnAction(value->{
+            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+        });
+
+
         //Adding button to hbox
         HBox box = new HBox();
         box.getChildren().add(button);
@@ -100,6 +113,7 @@ public class SortScreen  {
         sortbar.setLeft(box1); // checkbox - vbox
         sortbar.setBottom(box); // sort button
         sortbar.setCenter(dropdownbox);
+        sortbar.setRight(mainbox);
         sortbar.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Scene scene = new Scene(sortbar, 600, 400);
