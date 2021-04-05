@@ -51,7 +51,7 @@ public class UI extends Application {
             @Override
             protected Void call() throws Exception {
                 try {
-                    Thread.sleep(1000);//This is how long it stays on the splash screen todo: reset to 5000 it's just lower to make testing faster
+                    Thread.sleep(6000);//This is how long it stays on the splash screen
                 } catch (InterruptedException e) {
                 }
                 return null;

@@ -50,7 +50,7 @@ public class AddLabelScreen {
         add.setOnAction(value->{
             if(!labelIn.getText().isBlank()) {
                 try {
-                    Manager.addLabel(workingTask, labelIn.getText());
+                    Manager.addLabel(labelIn.getText(),workingTask);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,3 +1,3 @@
-[{"title":"test","description":"test\ts dfsdfvfsdfds","deadline":"Apr 14, 2021, 12:00:00 AM","priority":"Medium","taskCompleted":false,"labelList":[],"subtaskList":[]},{"title":"sadfsdfsf","description":"sdfsdfdfsdfasf","deadline":"Apr 15, 2021, 12:00:00 AM","priority":"Medium","taskCompleted":false,"labelList":[],"subtaskList":[]}]
+[{"title":"test","description":"test\ts dfsdfvfsdfds","deadline":"Apr 14, 2021, 12:00:00 AM","priority":"Medium","taskCompleted":false,"labelList":["test","fff"],"subtaskList":[]},{"title":"sadfsdfsf","description":"sdfsdfdfsdfasf","deadline":"Apr 15, 2021, 12:00:00 AM","priority":"Medium","taskCompleted":false,"labelList":[],"subtaskList":[]}]
 []
 []

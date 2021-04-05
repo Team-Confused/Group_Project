@@ -258,7 +258,19 @@ public class Manager {
         tasks.remove(workingTask);
         saveUserData();
     }
+    public static void removeSubTask(Task workingTask,SubTask subtask) throws IOException {
+        workingTask.removeSubTask(subtask);
+        saveUserData();
+    }
 
+    public static void addLabel(String label, Task workingTask) throws IOException {
+        workingTask.addLabel(label);
+        saveUserData();
+    }
+    public static void removeLabel(String label, Task workingTask) throws IOException {
+        workingTask.removeLabel(label);
+        saveUserData();
+    }
 
     //addTask
     /*
@@ -285,10 +297,11 @@ public class Manager {
         the parameters are Title and Description (both are strings)
         there is no return
      */
-     static void addSection(String title, String description) {
+     static void addSection(String title, String description) throws IOException {
         Section section = new Section(title, description);
         //add the new section to sections
         sections.add(section);
+        saveUserData();
     }
 
     //addSubTask

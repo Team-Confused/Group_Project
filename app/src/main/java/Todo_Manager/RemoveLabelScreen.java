@@ -76,7 +76,7 @@ public class RemoveLabelScreen {
         removeLabel.setOnAction(value->{
             if(!labelView.getItems().isEmpty()) {
                 try {
-                    Manager.removeLabel(workingTask, labelView.getSelectionModel().getSelectedItem());
+                    Manager.removeLabel(labelView.getSelectionModel().getSelectedItem(),workingTask);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -27,13 +27,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -241,7 +239,7 @@ public class MainScreen {
 
 
         //return the sceen
-        return new Scene(root,600,350);
+        return new Scene(root,650,350);
 
 
     }
