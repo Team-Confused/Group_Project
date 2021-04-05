@@ -122,7 +122,7 @@ public class Manager {
         }
     }
 
-    private static void saveUserData() throws IOException {
+    static void saveUserData() throws IOException {
         //saves data of the logged in user
         Gson gson = new Gson();
         FileWriter file = new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", true);
@@ -159,19 +159,20 @@ public class Manager {
         }
     }
 
-    private static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
-        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
+     static void addTask( String title, String description, Date deadline,Priority priority) throws IOException {
+        Task task = new Task(title, description, deadline,priority,labelList,subtaskList);
         tasks.add(task);
         saveUserData();
     }
 
-    private static void addSection(String title, String description){
+     static void addSection(String title, String description) throws IOException{
         Section section = new Section(title, description);
         sections.add(section);
+      //  return true;
     }
 
-   private static void addSubTask(String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException{
-        SubTask subTask = new SubTask(title,description,deadline,priority,taskCompleted);
+     static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException{
+        SubTask subTask = new SubTask(title,description,deadline,priority);
         subtaskList.add(subTask);
 
     }

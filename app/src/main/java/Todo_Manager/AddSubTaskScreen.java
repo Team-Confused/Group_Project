@@ -23,7 +23,8 @@
  */
 package Todo_Manager;
 
-import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -32,19 +33,25 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AddSubTaskScreen extends Application {
-    @Override
-    public void start(Stage primaryStage) {
+import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.Date;
+
+public class AddSubTaskScreen{
+    public static Scene getAddSubTaskScreen(Stage primaryStage) throws Exception{
 
         //Labels
         Label SubTask = new Label("Sub-Task Name: ");
         Label Description = new Label(" Description: ");
         Label dueDate = new Label(" Date: ");
         Label priority = new Label("Priority");
+        Label error = new Label("You have an empty field.");
+        error.setVisible(false);
+        ObservableList<Priority> options = FXCollections.observableArrayList(Priority.Low, Priority.Medium,Priority.High,Priority.ASAP);
 
-        //Fields
-        ComboBox combobox = new ComboBox();
-        combobox.getItems().addAll("Highest","High", "Medium","Low");
+        //Fields for data
+        ComboBox<Priority> priorityIn = new ComboBox<Priority>(options);
         DatePicker date = new DatePicker();
         TextArea description = new TextArea();
         TextField subTask = new TextField();
@@ -52,6 +59,21 @@ public class AddSubTaskScreen extends Application {
         // Next Button
         Button next = new Button("Next");
         next.setAlignment(Pos.CENTER_RIGHT);
+        next.setOnAction(value ->{
+            Boolean pass = false;
+            if(subTask.getText().isBlank()|| description.getText().isBlank()||date.getValue() == null){
+                error.setVisible(true);
+            }
+            else{
+                try{
+                    Manager.addSubTask(subTask.getText(), description.getText(), Date.from(Instant.from(date.getValue().atStartOfDay(ZoneId.systemDefault()))),priorityIn.getSelectionModel().getSelectedItem());
+
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+            }
+        });
 
         //Adding Button to Hbox
         HBox hBox = new HBox();
@@ -69,8 +91,9 @@ public class AddSubTaskScreen extends Application {
         grid.add(priority, 0,2);
         grid.add(subTask, 1,0);
         grid.add(date, 1,1);
-        grid.add(combobox, 1,2);
+        grid.add(priorityIn, 1,2);
         grid.add(description, 1,3);
+        grid.add(error,1,8);
         grid.setHgap(10);
         grid.setVgap(10);
 
@@ -82,11 +105,8 @@ public class AddSubTaskScreen extends Application {
         pane.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Scene scene = new Scene(pane, 600,350 );
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        return scene;
     }
-    public static void main(String[] args){
-        launch(args);
-    }
+
 
 }

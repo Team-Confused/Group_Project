@@ -12,19 +12,37 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class Test extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+import java.io.IOException;
+
+public class AddSectionScreen{
+    public static Scene getAddSectionScreen(Stage primaryStage) throws Exception {
         //Fields
         Label title = new Label("Section Name :");
         Label description = new Label("Description : ");
+        Label error = new Label("You have an empty field.");
+        error.setVisible(false);
         TextField name = new TextField();
         TextArea des = new TextArea();
+
 
         //Button
         Button button = new Button("Add");
         button.setAlignment(Pos.CENTER_RIGHT);
-      //  button.setOnAction();
+        button.setOnAction(value ->{
+            Boolean pass = false;
+            if(name.getText().isBlank()||des.getText().isBlank()) {
+                error.setVisible(true);
+            }
+            else{
+                try{
+                    Manager.addSection(name.getText(),des.getText());
+
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                    primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+            }
+        });
 
         //HBox
         HBox hBox = new HBox();
@@ -37,6 +55,7 @@ public class Test extends Application {
         grid.add(description,0,1);
         grid.add(name,1,0);
         grid.add(des,1,1);
+        grid.add(error,1,8);
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
@@ -48,7 +67,8 @@ public class Test extends Application {
         pane.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Scene scene = new Scene(pane, 600, 350);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+       // primaryStage.setScene(scene);
+      //  primaryStage.show();
+        return scene;
     }
 }

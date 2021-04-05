@@ -48,6 +48,13 @@ public class SubTask {
     @Setter
     private boolean taskCompleted;
 
+    public SubTask(String title, String description, Date deadline, Priority priority) {
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+        this.priority = priority;
+    }
+
 
     public String toString(){
         String ret = "\n"+title+"\n"+description+"\n"+deadline+"\n"+priority+"\nIs this complete? "+taskCompleted;
