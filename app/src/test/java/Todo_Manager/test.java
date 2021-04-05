@@ -89,6 +89,17 @@ public class test {
     }
 
 
+    @Test
+    public void testRemoveTask() throws IOException {
+        Manager.login("email@gmail.com", "password");
+        Task task = new Task("test","test",testDate,Priority.High);
+        Manager.addTask(task.getTitle(),task.getDescription(),task.getDeadline(),task.getPriority());
+        Manager.removeTask(task);
+        assertFalse("The task has been removed, so it should not exist in the list",Manager.getTasks().contains(task));
+    }
+
+
+
 
 
 }
