@@ -285,7 +285,7 @@ public class Manager {
         the parameters are Title and Description (both are strings)
         there is no return
      */
-    private static void addSection(String title, String description) {
+     static void addSection(String title, String description) {
         Section section = new Section(title, description);
         //add the new section to sections
         sections.add(section);
@@ -296,9 +296,8 @@ public class Manager {
         add a new sub-task to a task
         parameters: title of sub-task, description, deadline, priority, and boolean of completeness
      */
-    private static void addSubTask(String title, String description, Date deadline, Priority priority,
-                                   boolean taskCompleted) throws IOException {
-        SubTask subTask = new SubTask(title, description, deadline, priority, taskCompleted);
+     static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException {
+        SubTask subTask = new SubTask(title, description, deadline, priority);
         //add new subtask
         subtaskList.add(subTask);
 
