@@ -38,7 +38,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AddSectionScreen{
-    public static Scene getAddSectionScreen(Stage primaryStage) throws Exception {
+    public static Scene getAddSectionScreen(Stage primaryStage)  {
         //Fields
         Label title = new Label("Section Name :");
         Label description = new Label("Description : ");
