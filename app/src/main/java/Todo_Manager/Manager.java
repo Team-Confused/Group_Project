@@ -52,7 +52,7 @@ public class Manager {
     @Getter
     private static User loggedInUser;
     private static ArrayList<Section> sections = new ArrayList<>();
-
+    @Getter
     private static ArrayList<SubTask> subtaskList = new ArrayList<>();
 
 
@@ -272,10 +272,18 @@ public class Manager {
         saveUserData();
     }
 
-    public static void addSubTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
-       SubTask subTask = new SubTask(title, description, deadline, priority);
+    //addSubTask
+    /*
+        add a new sub-task to a task
+        parameters: title of sub-task, description, deadline, priority, and boolean of completeness
+     */
+    static void addSubTask(Task workingTask,String title, String description, Date deadline, Priority priority) throws IOException {
+        SubTask subTask = new SubTask(title, description, deadline, priority);
+        //add new subtask
         workingTask.addSubTask(subTask);
         saveUserData();
+        // subtaskList.add(subTask);
+
     }
 
     //addTask
@@ -310,18 +318,7 @@ public class Manager {
         saveUserData();
     }
 
-    //addSubTask
-    /*
-        add a new sub-task to a task
-        parameters: title of sub-task, description, deadline, priority, and boolean of completeness
-     */
-    /*
-     static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException {
-        SubTask subTask = new SubTask(title, description, deadline, priority);
-        //add new subtask
-        subtaskList.add(subTask);
 
-    } */
 
 
     //search
