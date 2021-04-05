@@ -30,21 +30,27 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
 
 public class test {
+    private static Date testDate;
     @BeforeClass
     public static void beforeClass() throws IOException {
         Manager.loadUsers();
-
-
+        testDate = new Date();
     }
+
     @Before
     public void beforeEach() throws IOException {
-        assertTrue("Login test for existing user",Manager.login("example@gmail.com", "newPassword"));
+        //assertTrue("Login test for existing user",Manager.login("example@gmail.com", "newPassword"));
 
+    }
+    @After
+    public void afterEach() throws IOException {
+        Manager.logout();
     }
 
     @AfterClass
@@ -53,18 +59,36 @@ public class test {
     }
 
     @Test
-
     public void testAddUserThatAlreadyExists() throws IOException {
-        assertFalse("Should fail because user already exists",Manager.addUser("kevin","bacon","password","sdfsadfsdf","email@gmail.com",Paths.get("../ConfusedLogo.jpg"),false));
-        Manager.logout();
-        assertTrue("Should succeed because user exists",Manager.login("email@gmail.com","password"));
+        Boolean expected = Manager.addUser("kevin", "bacon", "password", "sdfsadfsdf", "email@gmail.com", Paths.get("../ConfusedLogo.jpg"), false);
+        assertFalse("Should fail because user already exists", expected);
+
     }
 
     @Test
-    public void testLoginForUser(){
-
+    public void testLoginForUser() throws IOException {
+        assertTrue("Should succeed because user exists", Manager.login("email@gmail.com", "password"));
     }
 
+    @Test
+    public void testAddTask() throws IOException {
+        Manager.login("email@gmail.com", "password");
+        Manager.addTask("test","test",testDate,Priority.High);
+        Task expected = new Task("test","test",testDate,Priority.High);
+        assertEquals("Created task\n"+expected+" should be equal to task created in manager\n"+Manager.getTasks().get(Manager.getTasks().size()-1),expected,Manager.getTasks().get(Manager.getTasks().size()-1));
+        Manager.removeTask(expected);
+    }
+
+    @Test
+    public void testTaskModification() throws IOException {
+        Manager.login("email@gmail.com", "password");
+        Manager.addTask("test","test",testDate,Priority.High);
+        Manager.modifyTask(Manager.getTasks().get(Manager.getTasks().size()-1),"test but edited","test",testDate,Priority.High);
+        Task expected = new Task("test but edited","test",testDate,Priority.High);
+        assertEquals("edited task should be equal to created task",expected,Manager.getTasks().get(Manager.getTasks().size()-1));
+    }
+
+    
 
 
 }

@@ -42,6 +42,7 @@ public class MainScreen {
     public static Scene getMainScene(Stage primaryStage){
         ListView<Task> taskListView= new ListView<>();
         taskListView.getItems().addAll(Manager.getTasks());
+
         //The entire lambda expression below makes text wrap.
         taskListView.setCellFactory(param -> new ListCell<Task>(){
             @Override
@@ -68,6 +69,7 @@ public class MainScreen {
                 }
             }
         });
+        taskListView.getSelectionModel().selectFirst();
         VBox one = new VBox();
         Button sort = new Button("Sort");
         sort.setOnAction(value->{
@@ -81,7 +83,19 @@ public class MainScreen {
         newSubTask.setOnAction(value->{
 
         });
-        one.getChildren().addAll(sort,newTask,newSubTask);
+
+        Button markAsComplete = new Button("Mark as complete");
+        markAsComplete.setOnAction(value->{
+            taskListView.getSelectionModel().getSelectedItem().setTaskCompleted(true);
+            try {
+                Manager.saveUserData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        one.getChildren().addAll(sort,newTask,newSubTask,markAsComplete);
+
         VBox two = new VBox();
         Button search = new Button("Search");
         search.setOnAction(value->{ primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
@@ -89,13 +103,25 @@ public class MainScreen {
         });
         Button modifyTask = new Button("Modify Task");
         modifyTask.setOnAction(value->{
-
+            primaryStage.setScene(ModifyTaskScreen.getModifyTaskScene(primaryStage,taskListView.getSelectionModel().getSelectedItem()));
         });
         Button addSection = new Button("Add new Section");
         addSection.setOnAction(value->{
 
         });
-        two.getChildren().addAll(search,modifyTask,addSection);
+        Button removeTask = new Button("Remove Task");
+        removeTask.setOnAction(value ->{
+            Task workingTask = taskListView.getSelectionModel().getSelectedItem();
+            try {
+                Manager.removeTask(workingTask);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            taskListView.getItems().remove(workingTask);
+            taskListView.getSelectionModel().selectFirst();
+        });
+
+        two.getChildren().addAll(search,modifyTask,addSection,removeTask);
         VBox three = new VBox();
 
         Button close = new Button("Exit Program");
@@ -125,6 +151,8 @@ public class MainScreen {
             primaryStage.setScene(passwordResetScreen.getPasswordResetScreen(primaryStage));
         });
 
+
+
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
         innerThree.getChildren().addAll(close,logout);
@@ -137,7 +165,7 @@ public class MainScreen {
         three.setSpacing(240);
         root.setSpacing(10);
         root.setBackground(BLUEBACKGROUND);
-        return new Scene(root,600,350);
+        return new Scene(root,650,350);
 
     }
 }

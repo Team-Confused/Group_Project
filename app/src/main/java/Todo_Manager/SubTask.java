@@ -26,7 +26,7 @@ package Todo_Manager;
 import lombok.*;
 
 import java.util.Date;
-@ToString
+
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class SubTask {
@@ -45,6 +45,12 @@ public class SubTask {
     @Getter
     @Setter
     private boolean taskCompleted;
+
+
+    public String toString(){
+        String ret = "\n"+title+"\n"+description+"\n"+deadline+"\n"+priority+"\nIs this complete? "+taskCompleted;
+        return ret;
+    }
 
 
 }

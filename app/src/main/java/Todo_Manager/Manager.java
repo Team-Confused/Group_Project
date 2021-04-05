@@ -33,6 +33,8 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -80,10 +82,13 @@ public class Manager {
         Then, clear the tasks, labels, and sections
      */
     public static void logout() throws IOException {
-        log.info("saving user " + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName() + "'s data due to logout");
         saveUsers();
+        if(loggedInUser != null) {
+            log.info("saving user " + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName() + "'s data due to logout");
 
-        log.info("logged out user:" + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName());
+
+            log.info("logged out user:" + getLoggedInUser().getFirstName() + " " + getLoggedInUser().getLastName());
+        }
         loggedInUser = null;
 
         //empty the tasks, labels, and sections
@@ -147,7 +152,7 @@ public class Manager {
             }
         }
 
-        private static void saveUserData () throws IOException {
+        public static void saveUserData () throws IOException {
             //saves data of the logged in user
             Gson gson = new Gson();
             FileWriter file = new FileWriter("./UserFiles/" + loggedInUser.getId() + ".json", true);
@@ -185,19 +190,32 @@ public class Manager {
         }
 
 
-    private static void addTask( String title, String description, Date deadline,String priority,boolean taskCompleted) throws IOException {
-        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
-        tasks.add(task);
-        saveUserData();
-    }
+//    public static void addTask( String title, String description, Date deadline,Priority priority,boolean taskCompleted) throws IOException {
+//        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
+//        tasks.add(task);
+//        saveUserData();
+//    }
     //todo unfuck
-//        public static void addTask (String title, String description, Date deadline, Priority priority) throws
-//        IOException {
-//            Task task = new Task(title, description, deadline, priority);
-//            tasks.add(task);
-//            saveUserData();
-//        }
-
+        public static void addTask (String title, String description, Date deadline, Priority priority) throws
+        IOException {
+            Task task = new Task(title, description, deadline, priority);
+            if(tasks == null){
+                tasks = new ArrayList<>();
+            }
+            tasks.add(task);
+            saveUserData();
+        }
+        public static void modifyTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
+            workingTask.setTitle(title);
+            workingTask.setDescription(description);
+            workingTask.setDeadline(deadline);
+            workingTask.setPriority(priority);
+            saveUserData();
+        }
+        public static void removeTask(Task workingTask) throws IOException {
+                tasks.remove(workingTask);
+                saveUserData();
+        }
 
         private static void addSection (String title, String description) throws IOException {
             Section section = new Section(title, description);
@@ -323,7 +341,8 @@ public class Manager {
 //        //login generic user
             // Manager.loadUsers();
             //System.out.println(users);
-            //  login("example@gmail.com","newPassword");
+           // login("example@gmail.com","newPassword");
+            //saveUserData();
             // addTask("sdfsdf","sdf sdf sd weg re grerge rgeerg.",new Date(444,4,4),Priority.Low,false);
 
 //        //reset password of generic user
@@ -335,7 +354,7 @@ public class Manager {
 //        System.out.println(users);
 //
 //
-//
+
 //        //loadUserData();
 //        saveUserData();
 

@@ -1,7 +1,5 @@
 [
   {
-<<<<<<< Updated upstream
-=======
     "firstName": "John",
     "lastName": "Doe",
     "password": "newPassword",
@@ -12,7 +10,6 @@
     "isAdmin": false
   },
   {
->>>>>>> Stashed changes
     "firstName": "Daniel",
     "lastName": "Igbokwe",
     "password": "daniel",

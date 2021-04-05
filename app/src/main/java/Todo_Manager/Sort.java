@@ -65,7 +65,7 @@ public class Sort {
         }
         for (Task element : tasks){
             if(priority == true){
-                if(p == element.getPriority()){
+                if(p.equals(element.getPriority())){
                     System.out.print(tasks);
                 }
             }

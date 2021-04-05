@@ -28,60 +28,55 @@ import lombok.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
-
+@EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Task {
     @NonNull
     @Getter
+    @Setter
     private String title;
     @Getter
     @NonNull
+    @Setter
     private String description;
     @Getter
     @NonNull
+    @Setter
     private Date deadline;
     @Getter
     @NonNull
+    @Setter
     private Priority priority;
     @Getter
     @Setter
     private boolean taskCompleted;
     @Getter
-    @NonNull
     private ArrayList<String> lableList;
     @Getter
-    @NonNull
     private String taskProject;
     @Getter
-    @NonNull
     private Section section;
     @Getter
-    @NonNull
     private ArrayList<SubTask> subtaskList;
 
-<<<<<<< Updated upstream
-    public Task(String title, String description, Date deadline,String priority,boolean taskCompleted, ArrayList<String> labelist, ArrayList<SubTask> subtaskList){
-=======
+
+    //public Task(String title, String description, Date deadline,Priority priority,boolean taskCompleted, ArrayList<String> labelist, ArrayList<SubTask> subtaskList){
+
     public Task(String title, String description, Date deadline,Priority priority){
->>>>>>> Stashed changes
      this.title = title;
      this.description = description;
      this.deadline = deadline;
      this.priority = priority;
-<<<<<<< Updated upstream
      this.taskCompleted = taskCompleted;
-     this.lableList=labelist;
-     this.subtaskList = subtaskList;
-=======
+     //this.lableList=labelist;
      this.taskCompleted = false;
->>>>>>> Stashed changes
 
     }
 
     public String toString(){
-        String ret = title+"\n"+description+"\n"+priority+"\nIs this complete? "+taskCompleted;
-
+        String ret = title+"\n"+description+"\n"+deadline+"\n"+priority+"\nIs this complete? "+taskCompleted;
+            ret+="\nSubtasks:"+subtaskList;
         return ret;
     }
 
