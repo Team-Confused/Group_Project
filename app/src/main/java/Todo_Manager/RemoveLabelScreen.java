@@ -86,6 +86,7 @@ public class RemoveLabelScreen {
         HBox root = new HBox();
         root.getChildren().addAll(labelView,removeLabel);
         root.setAlignment(Pos.BASELINE_LEFT);
+        root.setBackground(BLUEBACKGROUND);
         return new Scene(root,600,400);
     }
 }
