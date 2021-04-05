@@ -25,6 +25,7 @@ package Todo_Manager;
 
 import lombok.*;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class Task {
     @Getter
     private Section section;
     @Getter
-    private ArrayList<SubTask> subtaskList;
+    private static ArrayList<SubTask> subtaskList;
 
 
 
@@ -77,6 +78,20 @@ public class Task {
      this.taskCompleted = false;
 
     }
+/*
+    public static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException {
+        SubTask subTask = new SubTask(title, description, deadline, priority);
+        subtaskList.add(subTask);
+    }
+    */
+
+     /*
+    public void addSubTask(SubTask subtask){
+        SubTask subTask = new SubTask(title, description, deadline, priority);
+        subtaskList.add(subtask);
+    }
+     */
+
     public void addLabel(String label){
         labelList.add(label);
 
@@ -95,4 +110,8 @@ public class Task {
         return ret;
     }
 
+    public void addSubTask(SubTask subTask) {
+        SubTask subTask1 = new SubTask(title, description, deadline, priority);
+        subtaskList.add(subTask1);
+    }
 }

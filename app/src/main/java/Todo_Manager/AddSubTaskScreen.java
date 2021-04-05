@@ -39,7 +39,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class AddSubTaskScreen{
-    public static Scene getAddSubTaskScreen(Stage primaryStage) {
+    public static Scene getAddSubTaskScreen(Stage primaryStage, Task workingTask) {
 
         //Labels
         Label SubTask = new Label("Sub-Task Name: ");
@@ -66,7 +66,7 @@ public class AddSubTaskScreen{
             }
             else{
                 try{
-                    Manager.addSubTask(subTask.getText(), description.getText(), Date.from(Instant.from(date.getValue().atStartOfDay(ZoneId.systemDefault()))),priorityIn.getSelectionModel().getSelectedItem());
+                   Manager.addSubTask(workingTask,subTask.getText(), description.getText(), Date.from(Instant.from(date.getValue().atStartOfDay(ZoneId.systemDefault()))),priorityIn.getSelectionModel().getSelectedItem());
 
                 }catch (IOException e){
                     e.printStackTrace();

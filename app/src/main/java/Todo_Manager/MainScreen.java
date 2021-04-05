@@ -101,7 +101,7 @@ public class MainScreen {
         //if the button is pressed to add a new subtask
         newSubTask.setOnAction(value->{
             //Enter new Sub-task screen
-            primaryStage.setScene(AddSubTaskScreen.getAddSubTaskScreen(primaryStage));
+            primaryStage.setScene(AddSubTaskScreen.getAddSubTaskScreen(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
 
         });
 
