@@ -102,6 +102,8 @@ public class MainScreen {
         Button newSubTask = new Button("Add new Subtask");
         //if the button is pressed to add a new subtask
         newSubTask.setOnAction(value->{
+            //Enter new Sub-task screen
+            primaryStage.setScene(AddSubTaskScreen.getAddSubTaskScreen(primaryStage));
 
         });
 
@@ -158,6 +160,7 @@ public class MainScreen {
         Button addSection = new Button("Add new Section");
         //when the "add new section" button is pressed
         addSection.setOnAction(value->{
+            primaryStage.setScene(AddSectionScreen.getAddSectionScreen(primaryStage));
 
         });
 

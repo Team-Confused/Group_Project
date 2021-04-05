@@ -39,7 +39,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class AddSubTaskScreen{
-    public static Scene getAddSubTaskScreen(Stage primaryStage) throws Exception{
+    public static Scene getAddSubTaskScreen(Stage primaryStage) {
 
         //Labels
         Label SubTask = new Label("Sub-Task Name: ");

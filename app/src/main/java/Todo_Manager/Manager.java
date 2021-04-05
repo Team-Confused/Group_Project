@@ -285,7 +285,7 @@ public class Manager {
         the parameters are Title and Description (both are strings)
         there is no return
      */
-     static void addSection(String title, String description) {
+     static void addSection(String title, String description) throws IOException {
         Section section = new Section(title, description);
         //add the new section to sections
         sections.add(section);
