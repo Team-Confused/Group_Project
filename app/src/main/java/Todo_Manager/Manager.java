@@ -313,7 +313,6 @@ public class Manager {
         SubTask subTask = new SubTask(title, description, deadline, priority);
         //add new subtask
         subtaskList.add(subTask);
-
     }
 
 
