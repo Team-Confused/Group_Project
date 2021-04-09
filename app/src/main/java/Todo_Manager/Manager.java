@@ -39,6 +39,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
+
+
 @Log
 public class Manager {
 
@@ -245,8 +247,7 @@ public class Manager {
 //        saveUserData();
 //    }
 
-    public static void modifyTask(Task workingTask, String title, String description, Date
-            deadline, Priority priority) throws IOException {
+    public static void modifyTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
         workingTask.setTitle(title);
         workingTask.setDescription(description);
         workingTask.setDeadline(deadline);
@@ -277,13 +278,12 @@ public class Manager {
         add a new sub-task to a task
         parameters: title of sub-task, description, deadline, priority, and boolean of completeness
      */
-    static void addSubTask(Task workingTask,String title, String description, Date deadline, Priority priority) throws IOException {
+    public static void addSubTask(Task workingTask,String title, String description, Date deadline, Priority priority) throws IOException {
         SubTask subTask = new SubTask(title, description, deadline, priority);
         //add new subtask
+      //  subtaskList.add(subTask);
         workingTask.addSubTask(subTask);
         saveUserData();
-        // subtaskList.add(subTask);
-
     }
 
     //addTask
@@ -357,12 +357,12 @@ public class Manager {
         for (Task element : tasks) {
             if (element.getTitle() == object) {
                 //if one is found, add it to the returned list
-                taskSearch.add(element);
+               taskSearch.add(element);
             }
             //if no matches are found, log it as such
-            else {
+            //else {
                 System.out.println("Search not found for: " + object);
-            }
+           // }
         }
         return taskSearch;
 

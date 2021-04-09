@@ -60,7 +60,7 @@ public class Task {
     @Getter
     private Section section;
     @Getter
-    private static ArrayList<SubTask> subtaskList;
+    public ArrayList<SubTask> subtaskList = new ArrayList<>();
 
 
 
@@ -110,8 +110,8 @@ public class Task {
         return ret;
     }
 
-    public void addSubTask(SubTask subTask) {
-        SubTask subTask1 = new SubTask(title, description, deadline, priority);
+    public void addSubTask(SubTask subTask) throws IOException {
+       SubTask subTask1 = new SubTask(title, description, deadline, priority);
         subtaskList.add(subTask1);
     }
 }
