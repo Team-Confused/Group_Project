@@ -46,6 +46,9 @@ public class MainScreen {
         ListView<Task> taskListView= new ListView<>();
         taskListView.getItems().addAll(Manager.getTasks());
 
+        //update taskListView
+
+
         //The entire lambda expression below makes text wrap.
         taskListView.setCellFactory(param -> new ListCell<Task>(){
             @Override

@@ -56,22 +56,21 @@ public class Sort {
     */
 
     //sort by the task name (alphabetical)
-    static ArrayList sortByTask(ArrayList tasks)
+    static ArrayList sortByTask()
     {
+        //create a temporary ArrayList
         ArrayList<Task> sortedTasks = Manager.getTasks();
-        //System.out.println("unsorted Tasks");
-        //log.info("unsorted tasks:" + sortedTasks);
 
+        //sort the temporary ArrayList based on the task title
         sortedTasks.sort((u1, u2) -> u1.getTitle().compareTo(u2.getTitle()) );
 
-        //System.out.println("sorted Tasks");
-        //log.info("sorted tasks:" + sortedTasks);
+        log.info("sorted tasks: (based on task [alphabetical])\n" + sortedTasks);
 
         return sortedTasks;
     }
 
     //sort by label
-    static ArrayList sortByLabel(ArrayList tasks)
+    static ArrayList sortByLabel(String tasks)
     {
         log.info("sort by label");
         ArrayList sortedTasks = new ArrayList();
@@ -84,8 +83,7 @@ public class Sort {
     //date setter
     @Setter
     Date date;
-
-    static ArrayList sortByDate(ArrayList tasks)
+    static ArrayList sortByDate(LocalDate tasks)
     {
         ArrayList sortedTasks = new ArrayList();
 
@@ -93,23 +91,23 @@ public class Sort {
     }
     
     //sort by priority
-    static ArrayList sortByPriority(ArrayList tasks)
+    static ArrayList sortByPriority(Priority tasks)
     {
         ArrayList sortedTasks = new ArrayList();
         
         return sortedTasks;
     }
 
-    public static ArrayList sortBy(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority, LocalDate date) throws IOException {
+    public static ArrayList sortBy(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority, LocalDate date, String label, Priority priority) throws IOException {
         //list of tasks
         ArrayList tasks = Manager.getTasks();
         ArrayList sortedTasks = new ArrayList();
 
         //if we are sorting by task
-        if(isTask) sortedTasks = sortByTask(tasks);
-        else if(isLabel) sortedTasks = sortByLabel(tasks);
-        else if(isDate) sortedTasks = sortByDate(tasks);
-        else if(isPriority) sortedTasks = sortByPriority(tasks);
+        if(isTask) sortedTasks = sortByTask();
+        else if(isLabel) sortedTasks = sortByLabel(label);
+        else if(isDate) sortedTasks = sortByDate(date);
+        else if(isPriority) sortedTasks = sortByPriority(priority);
 
         return sortedTasks;
     }
