@@ -111,12 +111,18 @@ public class test {
         Sort.sortBy(true,false,false,false, null, null, null);
 
         //sort by label
+        String label = Manager.getLabelList().get(0);
+        Sort.sortBy(false,true,false,false, null, label, null);
+
 
         //sort by date
 
 
 
         //assertFalse("The task has been removed, so it should not exist in the list");
+        //logout
+        Manager.logout();
+
     }
 
 

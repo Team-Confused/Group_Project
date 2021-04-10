@@ -70,10 +70,32 @@ public class Sort {
     }
 
     //sort by label
-    static ArrayList sortByLabel(String tasks)
+    static ArrayList sortByLabel(String label)
     {
-        log.info("sort by label");
-        ArrayList sortedTasks = new ArrayList();
+        System.out.println(Manager.getTasks());
+        //create a temporary ArrayList
+        ArrayList<Task> sortedTasks = new ArrayList<Task>(); // = Manager.getTasks();
+
+
+        if(!label.isEmpty())
+        {
+            //sort the temporary ArrayList based on the number of terms in the label list
+
+            //sortedTasks.sort((u1, u2) -> u1.getLabelList().size().compareTo(u2.getLabelList().size()) );
+        }
+        else
+        {
+            //sort the temporary ArrayList based on the tasks containing the same label inputted
+            for(Task task : Manager.getTasks())
+            {
+                if(task.getLabelList().contains(label))
+                {
+                    sortedTasks.add(task);
+                }
+            }
+        }
+
+        log.info("sorted tasks: (based on task [alphabetical])\n" + sortedTasks);
 
         return sortedTasks;
     }
