@@ -44,6 +44,7 @@ public class SortScreen  {
 
     //create the a scene to sort
     public static Scene getSortScene(Stage primaryStage)  {
+        Date selectedDate;
 
 
 
@@ -70,8 +71,8 @@ public class SortScreen  {
 
             //call sort
             try {
-                Sort.setDate(date.getValue());
-                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected());
+
+                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue());
             } catch (IOException e) {
                 e.printStackTrace();
             }

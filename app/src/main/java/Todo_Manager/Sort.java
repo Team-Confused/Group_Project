@@ -1,28 +1,3 @@
-<<<<<<< HEAD
-package Todo_Manager;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-public class Sort {
-    ArrayList<Task> tasks = new ArrayList<>();
-    ArrayList<String> labelList = new ArrayList<>();
-    boolean label;
-    boolean task;
-    boolean subTask;
-    boolean sortDate;
-    Date date;
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Sort() {  //
-
-        for (Task element : tasks) {
-            if (task = true) {
-                System.out.println(tasks);   // not to sure if this solves I tried using return tasks which resulted in an error
-=======
 /**
  * MIT License
  *
@@ -47,6 +22,7 @@ public class Sort {
  * SOFTWARE.
  */
 package Todo_Manager;
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -55,114 +31,88 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/*
+sort by:
+ labels (user created tags associated with items) (alphabetical)
+ priority
+ due date
+ alphabetical -- optional
+ */
+
 @Log
 public class Sort {
-
     //arrayLists
-    static ArrayList<Task> tasks = new ArrayList<>();
-    static ArrayList<Task> sortedTasks = new ArrayList<>();
-    ArrayList<String> labelList = new ArrayList<>();
+    static ArrayList<Task> tasks,sortedTasks = new ArrayList<>();
 
     //booleans
-    boolean label;
-    boolean task;
-    boolean sortDate;
-    boolean priority;
+    boolean label, task, sortDate, priority;
 
-    Date date;
-    String p;
-
-    //date setter
-    public static void setDate(LocalDate date) {
-        date = date;
-    }
 
     //enum for Priority
-    public enum Priority {
+    /*
+    public enum tempPriority {
         Low,Medium,High,ASAP;
     }
+    */
 
     //sort by the task name (alphabetical)
-    static void sortByTask(ArrayList tasks)
+    static ArrayList sortByTask(ArrayList tasks)
     {
-        log.info("sort tasks by task");
-        ArrayList simpleTasks = new ArrayList();
-        for(int i =0; i<tasks.size(); i++)
-         simpleTasks.add(tasks.get(i).toString());
-        simpleTasks.sort((Comparator) tasks);
+        ArrayList<Task> sortedTasks = Manager.getTasks();
+        //System.out.println("unsorted Tasks");
+        //log.info("unsorted tasks:" + sortedTasks);
 
-        log.info("sorted tasks:" + sortedTasks);
+        sortedTasks.sort((u1, u2) -> u1.getTitle().compareTo(u2.getTitle()) );
 
-        tasks = sortedTasks;
+        //System.out.println("sorted Tasks");
+        //log.info("sorted tasks:" + sortedTasks);
+
+        return sortedTasks;
     }
 
-    static void sortbyLabel(ArrayList tasks)
+    //sort by label
+    static ArrayList sortByLabel(ArrayList tasks)
     {
         log.info("sort by label");
+        ArrayList sortedTasks = new ArrayList();
+
+        return sortedTasks;
     }
 
-    static void sortbyDate(ArrayList tasks)
+
+    // sort by date
+    //date setter
+    @Setter
+    Date date;
+
+    static ArrayList sortByDate(ArrayList tasks)
     {
+        ArrayList sortedTasks = new ArrayList();
 
+        return sortedTasks;
+    }
+    
+    //sort by priority
+    static ArrayList sortByPriority(ArrayList tasks)
+    {
+        ArrayList sortedTasks = new ArrayList();
+        
+        return sortedTasks;
     }
 
-    public static void sortBy(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority) throws IOException {
+    public static ArrayList sortBy(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority, LocalDate date) throws IOException {
         //list of tasks
         ArrayList tasks = Manager.getTasks();
+        ArrayList sortedTasks = new ArrayList();
 
         //if we are sorting by task
-        if(isTask)sortByTask(tasks);
-        else if(isLabel)sortbyLabel(tasks);
-        else if(isDate)sortbyDate(tasks);
+        if(isTask) sortedTasks = sortByTask(tasks);
+        else if(isLabel) sortedTasks = sortByLabel(tasks);
+        else if(isDate) sortedTasks = sortByDate(tasks);
+        else if(isPriority) sortedTasks = sortByPriority(tasks);
 
-
-        /*
-        for (Task element : tasks) {
-            if (task == true) {
-                System.out.println(tasks);
->>>>>>> release/v1.0.0
-            }
-        }
-
-        for (Task element : tasks) {
-<<<<<<< HEAD
-            if (sortDate = true) {
-                if (date == element.getDeadline()) {
-=======
-            if (sortDate == true) {
-                if (date.before(element.getDeadline())) {
->>>>>>> release/v1.0.0
-                    System.out.println(element);
-                }
-            }
-        }
-        for (String element : labelList) {
-<<<<<<< HEAD
-            if (label = true) {
-                System.out.println(labelList);
-            }
-
-
-        }
-    }
-=======
-            if (label == true) {
-                System.out.println(labelList);
-            }
-        }
-        for (Task element : tasks){
-            if(priority == true){
-                if(p.equals(element.getPriority())){
-                    System.out.print(tasks);
-                }
-            }
-        }
-
-
-
-         */
+        return sortedTasks;
     }
 
 
->>>>>>> release/v1.0.0
 }
