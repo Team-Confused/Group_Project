@@ -43,6 +43,15 @@ public class SearchScreen  {
         TextField searchText = new TextField();
         //searchText.setPromptText();
 
+        //go to the main menu
+        VBox mainbox = new VBox();
+        Button mainMenu = new Button("Main Menu");
+        //if the button is pressed to add a new task
+        mainMenu.setOnAction(value->{
+            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+        });
+
+
 
         // search Button
         Button button = new Button();
@@ -82,10 +91,15 @@ public class SearchScreen  {
         box.getChildren().add(button);
         box.setAlignment(Pos.CENTER_RIGHT);
 
+        HBox box1 = new HBox();
+        box1.getChildren().add(mainMenu);
+        box1.setAlignment(Pos.BASELINE_LEFT);
+
         // Boderpane
         BorderPane searchbar = new BorderPane();
         searchbar.setPadding(new Insets(20));
         searchbar.setRight(searchText);
+        searchbar.setLeft(box1);
 
         searchbar.setBottom(box);
         searchbar.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));

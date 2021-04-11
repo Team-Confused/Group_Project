@@ -25,6 +25,7 @@ package Todo_Manager;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.control.ListView;
 import lombok.Getter;
 import lombok.extern.java.Log;
 
@@ -354,15 +355,15 @@ public class Manager {
     static ArrayList<Task> searchTask(String object) throws IOException {
         ArrayList<Task> taskSearch = new ArrayList<>();
         //search thorough each element in the list of tasks for any matches to the parameter
-        for (Task element : tasks) {
-            if (element.getTitle() == object) {
-                //if one is found, add it to the returned list
-               taskSearch.add(element);
+        for (Task workingTask : tasks) {
+            if (tasks.contains(workingTask)){
+                if(object == workingTask.getTitle()){
+                    taskSearch.add(workingTask);
+                    System.out.println(taskSearch);
+                }
+
             }
-            //if no matches are found, log it as such
-            //else {
-                System.out.println("Search not found for: " + object);
-           // }
+
         }
         return taskSearch;
 

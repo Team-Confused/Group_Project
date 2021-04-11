@@ -111,7 +111,6 @@ public class Task {
     }
 
     public void addSubTask(SubTask subTask) throws IOException {
-       SubTask subTask1 = new SubTask(title, description, deadline, priority);
-        subtaskList.add(subTask1);
+        subtaskList.add(subTask);
     }
 }
