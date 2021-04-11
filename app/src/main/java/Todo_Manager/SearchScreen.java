@@ -63,24 +63,24 @@ public class SearchScreen  {
             boolean check = false;
 
             //get the user's text input
-           // String search = searchText.getText();
+            String search = searchText.getText();
             //automatically fail if the user didn't provide a search parameter
-            if (searchText.getText().isBlank()) {
-                 check = false;
 
-            }
             //if the user provided input to search
-            else {
-                try {
-                    //run the Search method in Manager with the user input as its parameter
-
-
-                    //do the same thing, except with Manager's searchTask method
-                    Manager.searchTask(searchText.getText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if(search.isBlank()) {
+                check = false;
             }
+                else{
+                    try {
+                        //run the Search method in Manager with the user input as its parameter
+                        //do the same thing, except with Manager's searchTask method
+                        Manager.searchTask(search);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
 
         });
 

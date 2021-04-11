@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class Test extends Application {
 
-    ListView<ArrayList> tasksearchListView = new ListView<>();
-       //tasksearchListView.setItems()
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        ///ListView<Task> taskListView= new ListView<>();
+        //taskListView.getItems().addAll(Manager.searchTask());
 
     };
 
-    private class taskSearch {
-    }
+
 }

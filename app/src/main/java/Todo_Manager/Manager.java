@@ -242,12 +242,6 @@ public class Manager {
     }
 
 
-//    public static void addTask( String title, String description, Date deadline,Priority priority,boolean taskCompleted) throws IOException {
-//        Task task = new Task(title, description, deadline,priority,taskCompleted, labelList,subtaskList);
-//        tasks.add(task);
-//        saveUserData();
-//    }
-
     public static void modifyTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
         workingTask.setTitle(title);
         workingTask.setDescription(description);
@@ -321,31 +315,6 @@ public class Manager {
 
 
 
-
-    //search
-    /*
-        search the labels
-        parameter: Object of a search parameter
-        returns an arrayList of labels matching the search parameter
-     */
-    static ArrayList<String> Search(String object) throws IOException {
-        ArrayList<String> labelSearch = new ArrayList<>();
-        //for each element in the list of labels
-        for (String element : labelList) {
-            //if the element contains the search parameter
-            if (element.contains(object)) {
-                //add it to the returned ArrayList
-                labelSearch.add(element);
-            }
-            //if there are no matches, log as such
-            else {
-                log.info("Search not found for:" + object);
-            }
-        }
-        return labelSearch;
-    }
-
-
     //searchTask
     /*
         searches through the tasks for an inputted parameter
@@ -353,20 +322,18 @@ public class Manager {
         returns and arrayList of all tasks containing the search parameter
      */
     static ArrayList<Task> searchTask(String object) throws IOException {
-        ArrayList<Task> taskSearch = new ArrayList<>();
+        ArrayList<Task> taskSearch = new ArrayList<Task>();
         //search thorough each element in the list of tasks for any matches to the parameter
-        for (Task workingTask : tasks) {
-            if (tasks.contains(workingTask)){
-                if(object == workingTask.getTitle()){
-                    taskSearch.add(workingTask);
-                    System.out.println(taskSearch);
+        for (Task workingTask : Manager.getTasks()) {
+            if(workingTask.getTitle().contains(object) || workingTask.getLabelList().contains(object)) {
+                taskSearch.add(workingTask);
                 }
 
-            }
+
 
         }
+      System.out.println(taskSearch);
         return taskSearch;
-
     }
 
 
