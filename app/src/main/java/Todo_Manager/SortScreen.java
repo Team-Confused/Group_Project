@@ -39,12 +39,15 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class SortScreen  {
+public class
+SortScreen  {
 
 
     //create the a scene to sort
     public static Scene getSortScene(Stage primaryStage)  {
-
+        Date selectedDate;
+        Priority priority = null;
+        String label = null;
 
 
         // Check box for sort
@@ -67,11 +70,11 @@ public class SortScreen  {
         button.setText("Sort");
         //when button is pressed
         button.setOnAction(value ->{
-
             //call sort
             try {
-                Sort.setDate(date.getValue());
-                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected());
+
+                
+                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority);
             } catch (IOException e) {
                 e.printStackTrace();
             }
