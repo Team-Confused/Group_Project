@@ -58,9 +58,7 @@ public class Task {
     @Getter
     private String taskProject;
     @Getter
-    private Section section;
-    @Getter
-    private static ArrayList<SubTask> subtaskList;
+    private ArrayList<SubTask> subtaskList;
 
 
 
@@ -111,7 +109,6 @@ public class Task {
     }
 
     public void addSubTask(SubTask subTask) {
-        SubTask subTask1 = new SubTask(title, description, deadline, priority);
-        subtaskList.add(subTask1);
+        subtaskList.add(subTask);
     }
 }

@@ -155,12 +155,25 @@ public class MainScreen {
         });
 
         //add new section button
-        Button addSection = new Button("Add new Section");
+        Button Sections = new Button("Add or Remove\nSections");
         //when the "add new section" button is pressed
-        addSection.setOnAction(value->{
-            primaryStage.setScene(AddSectionScreen.getAddSectionScreen(primaryStage));
+        Sections.setOnAction(value->{
+            primaryStage.setScene(SectionViewScreen.getAddTaskToSectionScene(primaryStage));
+        });
+        Button addTaskToSection = new Button("Add task to\na section");
+
+        addTaskToSection.setOnAction(value->{
+            primaryStage.setScene(AddTaskToSectionScreen.getAddTaskToSectionScene(primaryStage,taskListView.getSelectionModel().getSelectedItem()));
 
         });
+        Button removeTaskFromSection = new Button("Remove task from\na section");
+
+        removeTaskFromSection.setOnAction(value->{
+            primaryStage.setScene(RemoveTaskFromSectionScreen.getRemoveTaskFromSectionScene(primaryStage,taskListView.getSelectionModel().getSelectedItem()));
+
+
+        });
+
 
         Button removeTask = new Button("Remove Task");
         removeTask.setOnAction(value ->{
@@ -182,7 +195,7 @@ public class MainScreen {
         });
 
     //put search, modifyTask, and addSection in the same VBox
-        two.getChildren().addAll(search,modifyTask,addSection,removeTask,removeLabel);
+        two.getChildren().addAll(search,modifyTask,Sections,addTaskToSection,removeTaskFromSection,removeTask,removeLabel);
 
 
         VBox three = new VBox();

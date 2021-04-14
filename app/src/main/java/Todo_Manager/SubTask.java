@@ -53,11 +53,12 @@ public class SubTask {
         this.description = description;
         this.deadline = deadline;
         this.priority = priority;
+        taskCompleted = false;
     }
 
 
     public String toString(){
-        String ret = "\n"+title+"\n"+description+"\n"+deadline+"\n"+priority+"\nIs this complete? "+taskCompleted;
+        String ret = "\n"+this.title+"\n"+this.description+"\n"+this.deadline+"\n"+this.priority+"\nIs this complete? "+this.taskCompleted;
         return ret;
     }
 

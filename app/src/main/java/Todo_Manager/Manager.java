@@ -51,6 +51,7 @@ public class Manager {
     private static ArrayList<String> labelList = new ArrayList<>();
     @Getter
     private static User loggedInUser;
+    @Getter
     private static ArrayList<Section> sections = new ArrayList<>();
     @Getter
     private static ArrayList<SubTask> subtaskList = new ArrayList<>();
@@ -258,7 +259,8 @@ public class Manager {
         tasks.remove(workingTask);
         saveUserData();
     }
-    public static void removeSubTask(Task workingTask,SubTask subtask) throws IOException {
+
+    public static void removeSubTask(Task workingTask, SubTask subtask) throws IOException {
         workingTask.removeSubTask(subtask);
         saveUserData();
     }
@@ -267,6 +269,7 @@ public class Manager {
         workingTask.addLabel(label);
         saveUserData();
     }
+
     public static void removeLabel(String label, Task workingTask) throws IOException {
         workingTask.removeLabel(label);
         saveUserData();
@@ -277,12 +280,11 @@ public class Manager {
         add a new sub-task to a task
         parameters: title of sub-task, description, deadline, priority, and boolean of completeness
      */
-    static void addSubTask(Task workingTask,String title, String description, Date deadline, Priority priority) throws IOException {
+    static void addSubTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
         SubTask subTask = new SubTask(title, description, deadline, priority);
         //add new subtask
         workingTask.addSubTask(subTask);
         saveUserData();
-        // subtaskList.add(subTask);
 
     }
 
@@ -311,14 +313,25 @@ public class Manager {
         the parameters are Title and Description (both are strings)
         there is no return
      */
-     static void addSection(String title, String description) throws IOException {
+    public static void addSection(String title, String description) throws IOException {
         Section section = new Section(title, description);
         //add the new section to sections
         sections.add(section);
         saveUserData();
     }
 
-
+    public static void removeSection(Section section) throws IOException {
+        sections.remove(section);
+        saveUserData();
+    }
+    public static void addTaskToSection(Task workingTask, Section workingSection) throws IOException {
+        workingSection.addTask(workingTask);
+        saveUserData();
+    }
+    public static void removeTaskFromSection(Task workingTask, Section workingSection) throws IOException {
+        workingSection.removeTask(workingTask);
+        saveUserData();
+    }
 
 
     //search

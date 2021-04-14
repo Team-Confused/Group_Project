@@ -25,10 +25,13 @@ package Todo_Manager;
 
 import lombok.*;
 
+import java.util.ArrayList;
+
 //project lombok operators
-@ToString
+
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
+@RequiredArgsConstructor(access =  AccessLevel.PUBLIC)
 public class Section {
     //ensure that it is not null
     @NonNull
@@ -43,6 +46,21 @@ public class Section {
     @Getter
     //declare the string "description" for the description
     private String description;
+    @NonNull
+    @Getter
+    private ArrayList<Task> taskList = new ArrayList<>();
+
+    public void addTask(Task task){
+        taskList.add(task);
+    }
+    public void removeTask(Task task){
+        taskList.remove(task);
+    }
+
+    @Override
+    public String toString(){
+        return title+"\n"+description;
+    }
 
 
 }
