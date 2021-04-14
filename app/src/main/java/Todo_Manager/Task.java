@@ -58,7 +58,8 @@ public class Task {
     @Getter
     private String taskProject;
     @Getter
-    private ArrayList<SubTask> subtaskList;
+    public ArrayList<SubTask> subtaskList = new ArrayList<>();
+
 
 
 
@@ -108,7 +109,8 @@ public class Task {
         return ret;
     }
 
-    public void addSubTask(SubTask subTask) {
+
+    public void addSubTask(SubTask subTask) throws IOException {
         subtaskList.add(subTask);
     }
 }
