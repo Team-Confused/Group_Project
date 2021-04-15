@@ -357,11 +357,8 @@ public class Manager {
             if(workingTask.getTitle().contains(object) || workingTask.getLabelList().contains(object)) {
                 taskSearch.add(workingTask);
                 }
-
-
-
         }
-      System.out.println(taskSearch);
+      //System.out.println(taskSearch);
         return taskSearch;
     }
 

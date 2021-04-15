@@ -147,7 +147,11 @@ public class MainScreen {
         //when the search button is pressed
         search.setOnAction(value->{
             //enter the Search page
-            primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
+            try {
+                primaryStage.setScene(SearchScreen.getSearchScene(primaryStage));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         //modify task button
