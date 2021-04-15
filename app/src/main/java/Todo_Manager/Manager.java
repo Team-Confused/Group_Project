@@ -80,6 +80,13 @@ public class Manager {
                     //at this point, user exists and password is correct.
                     //set this person in the list of users to be "logged in"
                     loggedInUser = u;
+                    //check to insure that the folder for user data exists
+                    File tempFile = new File("./UserFiles");
+                    boolean exists = tempFile.exists();
+                    if (!exists) {
+                        tempFile.mkdir();
+                    }
+
                     //load their user data
                     loadUserData();
                     //return a success
@@ -177,15 +184,20 @@ public class Manager {
     public static void loadUsers() throws IOException {
         //loads user list
         Gson gson = new Gson();
-        Type usersType = new TypeToken<ArrayList<User>>() {
-        }.getType();
-        try {
-            //populate the "users" ArrayList with the data from the JSON file
-            users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
-            //System.out.println("users:"+users);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        //checks if file exists
+        File tempFile = new File("./Users.json");
+        boolean exists = tempFile.exists();
+        if(exists) {
+            Type usersType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            try {
+                //populate the "users" ArrayList with the data from the JSON file
+                users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
+                //System.out.println("users:"+users);
+            } catch (IOException ex) {
+                ex.printStackTrace();
 
+            }
         }
     }
 
@@ -239,6 +251,8 @@ public class Manager {
             labelList = gson.fromJson(test.readLine(), labelsToken);
             test.close();
 
+        }else{
+             tempFile.createNewFile();
         }
     }
 
