@@ -38,5 +38,35 @@
     "email": "HolyGreatness@heavenmail.org",
     "photo": "/home/john/CS2263/Group_Project/Group_Project/ConfusedLogo.jpg",
     "isAdmin": true
+  },
+  {
+    "firstName": "test",
+    "lastName": "test",
+    "password": "test",
+    "id": "b6727919-8bd1-4a8a-86f9-7172d38e0f69",
+    "bio": "test",
+    "email": "test",
+    "photo": "D:\\Downloads\\sauro.png",
+    "isAdmin": false
+  },
+  {
+    "firstName": "test",
+    "lastName": "test",
+    "password": "test",
+    "id": "9effabbe-12ec-4a73-a2fd-cffff32f5813",
+    "bio": "test",
+    "email": "test3",
+    "photo": "D:\\Downloads\\sauro.png",
+    "isAdmin": false
+  },
+  {
+    "firstName": "test",
+    "lastName": "test2",
+    "password": "test",
+    "id": "fe59e674-2b9b-449b-b871-ba2a27778b8e",
+    "bio": "test",
+    "email": "test2",
+    "photo": "D:\\Downloads\\sauro.png",
+    "isAdmin": false
   }
 ]

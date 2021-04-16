@@ -100,6 +100,7 @@ public class test {
     }
 
 
+<<<<<<< HEAD
     @Test
     public void testSort() throws IOException {
         //logout any current user
@@ -124,6 +125,32 @@ public class test {
         Manager.logout();
 
     }
+=======
+//    @Test
+//    public void testSort() throws IOException {
+//        //logout any current user
+//        Manager.logout();
+//        //login
+//        Manager.login("theShieldHero@fourHChurch.com", "shieldHero");
+//
+//        //sort by task (alphabetical)
+//        Sort.sortBy(true,false,false,false, null, null, null);
+//
+//        //sort by label
+//        String label = Manager.getLabelList().get(0);
+//        Sort.sortBy(false,true,false,false, null, label, null);
+//
+//
+//        //sort by date
+//
+//
+//
+//        //assertFalse("The task has been removed, so it should not exist in the list");
+//        //logout
+//        Manager.logout();
+//
+//    }
+>>>>>>> fa81668c92ed130972d4361630438dc44671e050
 
 
 

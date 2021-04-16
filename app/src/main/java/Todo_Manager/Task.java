@@ -58,9 +58,8 @@ public class Task {
     @Getter
     private String taskProject;
     @Getter
-    private Section section;
-    @Getter
     public ArrayList<SubTask> subtaskList = new ArrayList<>();
+
 
 
 
@@ -109,6 +108,7 @@ public class Task {
         ret+="\nLabels: "+labelList;
         return ret;
     }
+
 
     public void addSubTask(SubTask subTask) throws IOException {
         subtaskList.add(subTask);

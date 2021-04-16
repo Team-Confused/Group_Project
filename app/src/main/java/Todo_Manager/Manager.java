@@ -54,6 +54,7 @@ public class Manager {
     private static ArrayList<String> labelList = new ArrayList<>();
     @Getter
     private static User loggedInUser;
+    @Getter
     private static ArrayList<Section> sections = new ArrayList<>();
     @Getter
     private static ArrayList<SubTask> subtaskList = new ArrayList<>();
@@ -78,7 +79,16 @@ public class Manager {
                     //at this point, user exists and password is correct.
                     //set this person in the list of users to be "logged in"
                     loggedInUser = u;
+<<<<<<< HEAD
                     log.info("logged-in: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+=======
+                    //check to insure that the folder for user data exists
+                    File tempFile = new File("./UserFiles");
+                    boolean exists = tempFile.exists();
+                    if (!exists) {
+                        tempFile.mkdir();
+                    }
+>>>>>>> fa81668c92ed130972d4361630438dc44671e050
 
                     //load their user data
                     loadUserData();
@@ -179,15 +189,20 @@ public class Manager {
     public static void loadUsers() throws IOException {
         //loads user list
         Gson gson = new Gson();
-        Type usersType = new TypeToken<ArrayList<User>>() {
-        }.getType();
-        try {
-            //populate the "users" ArrayList with the data from the JSON file
-            users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
-            //System.out.println("users:"+users);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        //checks if file exists
+        File tempFile = new File("./Users.json");
+        boolean exists = tempFile.exists();
+        if(exists) {
+            Type usersType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            try {
+                //populate the "users" ArrayList with the data from the JSON file
+                users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
+                //System.out.println("users:"+users);
+            } catch (IOException ex) {
+                ex.printStackTrace();
 
+            }
         }
     }
 
@@ -241,6 +256,8 @@ public class Manager {
             labelList = gson.fromJson(test.readLine(), labelsToken);
             test.close();
 
+        }else{
+             tempFile.createNewFile();
         }
     }
 
@@ -257,7 +274,8 @@ public class Manager {
         tasks.remove(workingTask);
         saveUserData();
     }
-    public static void removeSubTask(Task workingTask,SubTask subtask) throws IOException {
+
+    public static void removeSubTask(Task workingTask, SubTask subtask) throws IOException {
         workingTask.removeSubTask(subtask);
         saveUserData();
     }
@@ -266,6 +284,7 @@ public class Manager {
         workingTask.addLabel(label);
         saveUserData();
     }
+
     public static void removeLabel(String label, Task workingTask) throws IOException {
         workingTask.removeLabel(label);
         saveUserData();
@@ -276,7 +295,8 @@ public class Manager {
         add a new sub-task to a task
         parameters: title of sub-task, description, deadline, priority, and boolean of completeness
      */
-    public static void addSubTask(Task workingTask,String title, String description, Date deadline, Priority priority) throws IOException {
+    static void addSubTask(Task workingTask, String title, String description, Date deadline, Priority priority) throws IOException {
+
         SubTask subTask = new SubTask(title, description, deadline, priority);
         //add new subtask
       //  subtaskList.add(subTask);
@@ -309,14 +329,25 @@ public class Manager {
         the parameters are Title and Description (both are strings)
         there is no return
      */
-     static void addSection(String title, String description) throws IOException {
+    public static void addSection(String title, String description) throws IOException {
         Section section = new Section(title, description);
         //add the new section to sections
         sections.add(section);
         saveUserData();
     }
 
-
+    public static void removeSection(Section section) throws IOException {
+        sections.remove(section);
+        saveUserData();
+    }
+    public static void addTaskToSection(Task workingTask, Section workingSection) throws IOException {
+        workingSection.addTask(workingTask);
+        saveUserData();
+    }
+    public static void removeTaskFromSection(Task workingTask, Section workingSection) throws IOException {
+        workingSection.removeTask(workingTask);
+        saveUserData();
+    }
 
     //searchTask
     /*
@@ -331,11 +362,8 @@ public class Manager {
             if(workingTask.getTitle().contains(object) || workingTask.getLabelList().contains(object)) {
                 taskSearch.add(workingTask);
                 }
-
-
-
         }
-      System.out.println(taskSearch);
+      //System.out.println(taskSearch);
         return taskSearch;
     }
 

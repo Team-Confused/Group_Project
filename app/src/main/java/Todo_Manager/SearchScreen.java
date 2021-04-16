@@ -27,6 +27,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -37,7 +38,7 @@ import java.io.IOException;
 public class SearchScreen  {
 
     // search GUI
-    public static  Scene getSearchScene(Stage primaryStage) {
+    public static  Scene getSearchScene(Stage primaryStage) throws IOException {
 
         //"search box" text field
         TextField searchText = new TextField();
@@ -51,7 +52,8 @@ public class SearchScreen  {
             primaryStage.setScene(MainScreen.getMainScene(primaryStage));
         });
 
-
+        ListView<Task> SearchView= new ListView<>();
+     //   String search = searchText.getText();
 
         // search Button
         Button button = new Button();
@@ -59,11 +61,11 @@ public class SearchScreen  {
         //when button is pressed
         button.setOnAction(value -> {
             //logic for calling the Search method in Manager
-
+            String search = searchText.getText();
             boolean check = false;
 
             //get the user's text input
-            String search = searchText.getText();
+          //  String search = searchText.getText();
             //automatically fail if the user didn't provide a search parameter
 
             //if the user provided input to search
@@ -71,14 +73,20 @@ public class SearchScreen  {
                 check = false;
             }
                 else{
-                    try {
-                        //run the Search method in Manager with the user input as its parameter
-                        //do the same thing, except with Manager's searchTask method
-                        Manager.searchTask(search);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                //run the Search method in Manager with the user input as its parameter
+                //do the same thing, except with Manager's searchTask method
+                // Manager.searchTask(search);
+
+
+                try {
+                    SearchView.getItems().addAll(Manager.searchTask(search));
+                    SearchView.getSelectionModel().getSelectedItem();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
+                //SearchView.getSelectionModel().getSelectedItem();
+            }
 
 
 
@@ -100,6 +108,7 @@ public class SearchScreen  {
         searchbar.setPadding(new Insets(20));
         searchbar.setRight(searchText);
         searchbar.setLeft(box1);
+        searchbar.setCenter(SearchView);
 
         searchbar.setBottom(box);
         searchbar.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
