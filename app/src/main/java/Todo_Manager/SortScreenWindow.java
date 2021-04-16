@@ -81,7 +81,7 @@ public class SortScreenWindow {
 
         //button
         Button sortButton = new Button("Sort");
-        Button mainMenu = new Button("Main Menu");
+        //Button mainMenu = new Button("Main Menu");
 
 
         Label sortParameters = new Label("sortParameters: ");
@@ -97,7 +97,9 @@ public class SortScreenWindow {
         taskOrderCB.setVisible(false);
 
         CheckBox labelsCB = new CheckBox("Labels");
-        ComboBox labelsListCB = new ComboBox((ObservableList) Manager.getLabelList());
+        ObservableList labels = FXCollections.observableArrayList(Manager.getLabelList());
+        ComboBox labelsListCB = new ComboBox(labels);
+        labelsListCB.setVisible(false);
 
         CheckBox dateCB = new CheckBox("Date");
         DatePicker datePickerThing = new DatePicker();
@@ -114,6 +116,28 @@ public class SortScreenWindow {
 
 
         //event triggers
+
+        //task ascending or descending
+        taskCB.setOnAction(value ->{
+            taskOrderCB.setVisible(true);
+        });
+
+        //labels list combo box
+        labelsCB.setOnAction(value ->{
+            labelsListCB.setVisible(true);
+        });
+
+        //date
+        dateCB.setOnAction(value ->{
+            datePickerThing.setVisible(true);
+        });
+
+        //priority
+        priorityCB.setOnAction(value ->{
+            priorityComboBox.setVisible(true);
+        });
+
+        //sort button
         sortButton.setOnAction(value ->{
             //call sort
             try {
@@ -155,7 +179,7 @@ public class SortScreenWindow {
 
 
         root.add(sortButton,1,4);
-        root.add(mainMenu, 2,4);
+        //root.add(mainMenu, 2,4);
         root.add(error,1,5);
 
         //background
