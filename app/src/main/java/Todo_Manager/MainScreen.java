@@ -32,19 +32,30 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import lombok.Setter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainScreen {
+
+    //the list of tasks to be dsiplayed
+    @Setter
+    static ArrayList<Task> listOfTasks = new ArrayList();
+
+
     //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
 
     //main screen
     public static Scene getMainScene(Stage primaryStage){
 
+        //set the list of tasks to display
+        listOfTasks = Manager.getTasks();
+
         //initialize taskListView and have it hold the tasks
         ListView<Task> taskListView= new ListView<>();
-        taskListView.getItems().addAll(Manager.getTasks());
+        taskListView.getItems().addAll(listOfTasks);
 
         //update taskListView
 
@@ -89,7 +100,8 @@ public class MainScreen {
         //when sort button is pressed
         sort.setOnAction(value->{
             //enter the sort screen
-            primaryStage.setScene(SortScreen.getSortScene(primaryStage));
+            //primaryStage.setScene(SortScreen.getSortScene(primaryStage));
+            SortScreenWindow.createNewWindow();
         });
 
         //add a new task

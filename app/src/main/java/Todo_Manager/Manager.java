@@ -68,7 +68,6 @@ public class Manager {
         //load the users
         loadUsers();
         User temp;  //create a temporary user
-        log.info("Users: " + users);
 
         //for each user in the set of users,
         for (User u : users) {
@@ -79,8 +78,12 @@ public class Manager {
                     //at this point, user exists and password is correct.
                     //set this person in the list of users to be "logged in"
                     loggedInUser = u;
+                    log.info("logged-in: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+
                     //load their user data
                     loadUserData();
+                    log.info("loaded user data for: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+
                     //return a success
                     return true;
                 }
@@ -342,8 +345,6 @@ public class Manager {
         Logout a user by their unique user id (UUID)
         There is no return
     */
-
-
 //    public static void logoutUser(UUID id) throws IOException {
 //        //write to log that no users are logged in
 //        log.info("logged out user:" + id);

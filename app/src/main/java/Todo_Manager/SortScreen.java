@@ -74,7 +74,7 @@ SortScreen  {
             try {
 
                 
-                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority);
+                MainScreen.setListOfTasks(Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,10 +88,6 @@ SortScreen  {
         mainbox.setAlignment(Pos.BOTTOM_CENTER);
         mainbox.setSpacing(50);
 
-        //if the button is pressed to add a new task
-        mainMenu.setOnAction(value->{
-            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
-        });
 
 
         //Adding button to hbox
