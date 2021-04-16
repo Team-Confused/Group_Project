@@ -55,7 +55,7 @@ SortScreen  {
         CheckBox cb2 = new CheckBox("Labels");
         CheckBox cb3 = new CheckBox("Date");
         CheckBox cb4 = new CheckBox("Priority");
-       // checkbox1.setIndeterminate(false);\
+       // checkbox1.setIndeterminate(false);
 
         ComboBox comboBox = new ComboBox();
         comboBox.getItems().addAll("Highest","High", "Medium","Low");

@@ -3,6 +3,7 @@ package Todo_Manager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -10,12 +11,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
 
+@Log
 public class SortScreenWindow {
 
     //define the background color
@@ -94,6 +97,7 @@ public class SortScreenWindow {
         taskOrderCB.setVisible(false);
 
         CheckBox labelsCB = new CheckBox("Labels");
+        ComboBox labelsListCB = new ComboBox((ObservableList) Manager.getLabelList());
 
         CheckBox dateCB = new CheckBox("Date");
         DatePicker datePickerThing = new DatePicker();
@@ -108,9 +112,35 @@ public class SortScreenWindow {
         Label error = new Label("You have an empty field.");
         error.setVisible(false);
 
-        VBox one = new VBox();
 
-        //todo make a vbox to hold the things with dropdown options (date, ordering for title sort, priority) use mainscreen UI as a reference
+        //event triggers
+        sortButton.setOnAction(value ->{
+            //call sort
+            try {
+                //task, label, date, priority
+                log.info("Sort tasks of:" + Manager.getLoggedInUser().getFirstName() + " " + Manager.getLoggedInUser().getLastName() +
+                        "\n Options Selected: " +
+                        "\n\ttask: " + taskCB.isSelected() + "\torder: " + taskOrderCB.getSelectionModel().getSelectedItem() +
+                        "\n\tlabel: " + labelsCB.isSelected() );
+
+                Priority priorityValue = (Priority) priorityComboBox.getSelectionModel().getSelectedItem();
+                MainScreen.setListOfTasks(Sort.sortBy(taskCB.isSelected(),
+                                            labelsCB.isSelected(),
+                                            dateCB.isSelected(),
+                                            priorityCB.isSelected(),
+                                            datePickerThing.getValue(),
+                                            labelsListCB.getSelectionModel().getSelectedItem().toString(),
+                                            priorityValue));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        //VBox one = new VBox();
+        //one.getChildren().addAll();
+
+        root.setVgap(10);
+        root.setAlignment(Pos.CENTER);
 
         root.add(taskCB,0,0);
         root.add(taskOrderCB,1,0);

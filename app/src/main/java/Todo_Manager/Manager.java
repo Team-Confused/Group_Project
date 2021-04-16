@@ -79,16 +79,13 @@ public class Manager {
                     //at this point, user exists and password is correct.
                     //set this person in the list of users to be "logged in"
                     loggedInUser = u;
-<<<<<<< HEAD
                     log.info("logged-in: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
-=======
                     //check to insure that the folder for user data exists
                     File tempFile = new File("./UserFiles");
                     boolean exists = tempFile.exists();
                     if (!exists) {
                         tempFile.mkdir();
                     }
->>>>>>> fa81668c92ed130972d4361630438dc44671e050
 
                     //load their user data
                     loadUserData();

@@ -68,5 +68,15 @@
     "email": "test2",
     "photo": "D:\\Downloads\\sauro.png",
     "isAdmin": false
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "password": "password",
+    "id": "f84c506a-3cbb-4d40-bab0-92af5f98f670",
+    "bio": "Only child of the Does",
+    "email": "email@gmail.com",
+    "photo": "/home/john/CS2263/Group_Project/Group_Project/ConfusedLogo.jpg",
+    "isAdmin": false
   }
 ]
