@@ -31,9 +31,11 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 
 public class UI extends Application {
-
 
     public static void main(String[] args) {
         launch(args);

@@ -54,7 +54,7 @@ public class Task {
     @Setter
     private boolean taskCompleted;
     @Getter
-    private ArrayList<String> labelList;
+    private ArrayList<String> labelList = new ArrayList<>();
     @Getter
     private String taskProject;
     @Getter
@@ -71,29 +71,13 @@ public class Task {
      this.description = description;
      this.deadline = deadline;
      this.priority = priority;
-     this.taskCompleted = taskCompleted;
-     this.labelList=new ArrayList<>();
-     this.subtaskList = new ArrayList<>();
      this.taskCompleted = false;
 
     }
-/*
-    public static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException {
-        SubTask subTask = new SubTask(title, description, deadline, priority);
-        subtaskList.add(subTask);
-    }
-    */
 
-     /*
-    public void addSubTask(SubTask subtask){
-        SubTask subTask = new SubTask(title, description, deadline, priority);
-        subtaskList.add(subtask);
-    }
-     */
 
     public void addLabel(String label){
         labelList.add(label);
-
     }
     public void removeLabel(String label){
         labelList.remove(label);

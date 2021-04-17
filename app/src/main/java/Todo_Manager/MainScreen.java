@@ -209,7 +209,7 @@ public class MainScreen {
         Button removeLabel = new Button("Remove label");
         removeLabel.setOnAction(value->{
             if(!taskListView.getItems().isEmpty()) {
-                primaryStage.setScene(RemoveLabelScreen.getAddLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
+                primaryStage.setScene(RemoveLabelScreen.getRemoveLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
             }
         });
 
