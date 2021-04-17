@@ -78,5 +78,15 @@
     "email": "email@gmail.com",
     "photo": "/home/john/CS2263/Group_Project/Group_Project/ConfusedLogo.jpg",
     "isAdmin": false
+  },
+  {
+    "firstName": "Kyle",
+    "lastName": "Pippinpaddlesicopolis",
+    "password": "avatar",
+    "id": "cb1accff-d9f4-459a-81a1-2a1cc74ed6cc",
+    "bio": "avatar \naang@gmail.com",
+    "email": "aang@gmail.com",
+    "photo": "/home/john/CS2263/Group_Project/Group_Project/ConfusedLogo.jpg",
+    "isAdmin": false
   }
 ]

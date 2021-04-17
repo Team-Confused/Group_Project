@@ -19,7 +19,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Log
-public class SortScreenWindow {
+public class
+SortScreenWindow {
 
     //define the background color
     private static final Background GreenBackground = new Background(new BackgroundFill(Color.color(0.00,0.48,0.40, 0.9), CornerRadii.EMPTY, Insets.EMPTY));
@@ -88,31 +89,34 @@ public class SortScreenWindow {
         Label SortTitle = new Label("Sort");
 
 
+        //checkboxes//
 
-
-        //checkboxes
+        //task
         CheckBox taskCB = new CheckBox("Task");
         ComboBox taskOrderCB = new ComboBox();
         taskOrderCB.getItems().addAll("Ascending", "Descending");
         taskOrderCB.setVisible(false);
 
+        //labels
         CheckBox labelsCB = new CheckBox("Labels");
         ObservableList labels = FXCollections.observableArrayList(Manager.getLabelList());
+        System.out.println("labels:"+labels);
+
+        Task Task = new Task();
+        System.out.println("observable array list" + Task.getLabelList() );
         ComboBox labelsListCB = new ComboBox(labels);
         labelsListCB.setVisible(false);
 
+        //date
         CheckBox dateCB = new CheckBox("Date");
         DatePicker datePickerThing = new DatePicker();
         datePickerThing.setVisible(false);
 
+        //priority
         CheckBox priorityCB = new CheckBox("Priority");
-
         ComboBox priorityComboBox = new ComboBox();
         priorityComboBox.getItems().addAll("Highest","High", "Medium","Low");
         priorityComboBox.setVisible(false);
-
-        Label error = new Label("You have an empty field.");
-        error.setVisible(false);
 
 
         //event triggers
@@ -180,7 +184,7 @@ public class SortScreenWindow {
 
         root.add(sortButton,1,4);
         //root.add(mainMenu, 2,4);
-        root.add(error,1,5);
+        //root.add(error,1,5);
 
         //background
         root.setBackground(GreenBackground);
