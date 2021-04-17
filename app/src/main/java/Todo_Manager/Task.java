@@ -54,7 +54,8 @@ public class Task {
     @Setter
     private boolean taskCompleted;
     @Getter
-    private ArrayList<String> labelList;
+    @NonNull
+    private ArrayList<String> labelList = new ArrayList<>();
     @Getter
     private String taskProject;
     @Getter
