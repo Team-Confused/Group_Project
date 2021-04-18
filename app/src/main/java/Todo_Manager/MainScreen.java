@@ -183,7 +183,7 @@ public class MainScreen {
         });
 
         //add new section button
-        Button Sections = new Button("Add or Remove\nSections");
+        Button Sections = new Button("Sections");
         //when the "add new section" button is pressed
         Sections.setOnAction(value->{
             primaryStage.setScene(SectionViewScreen.getAddTaskToSectionScene(primaryStage));
@@ -254,6 +254,12 @@ public class MainScreen {
             primaryStage.setScene(LoginOrRegisterScreen.getLogRegScreen(primaryStage));
         });
 
+        //view all tasks
+        Button viewAll = new Button("View all Tasks");
+        viewAll.setOnAction(value ->{
+            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+        });
+
         //"Password Reset" button
         Button reset = new Button("Password Reset");
         //on the clicking of button "Password Reset", go to the password reset page
@@ -269,7 +275,7 @@ public class MainScreen {
         //build the scene
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
-        innerThree.getChildren().addAll(close,logout);
+        innerThree.getChildren().addAll(close,logout,viewAll);
         innerThree.setSpacing(10);
         three.getChildren().addAll(innerThree,reset);
         HBox root = new HBox();
@@ -283,7 +289,7 @@ public class MainScreen {
 
 
         //return the sceen
-        return new Scene(root,650,350);
+        return new Scene(root,700,400);
 
 
     }
