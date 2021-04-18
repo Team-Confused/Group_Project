@@ -58,6 +58,12 @@ public class LoginScreen {
         //set the visibility of the "error" label
         error.setVisible(false);
 
+        Button mainMenu = new Button("MAIN");
+        //if the button is pressed to add a new task
+        mainMenu.setOnAction(value->{
+            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+        });
+
         //login button
         Button login = new Button("Login");
         //when the login button is pressed
@@ -110,6 +116,7 @@ public class LoginScreen {
         grid.setAlignment(Pos.CENTER);
         grid.add(emailL,0,0);
         grid.add(passwordL,0,1);
+        grid.add(mainMenu, 2, 2);
         grid.add(emailIn,1,0);
         grid.add(passwordIn,1,1);
         grid.add(login,1,2);

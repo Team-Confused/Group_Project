@@ -31,7 +31,7 @@ import java.util.Date;
 //project lombok calls
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class SubTask {
+public class  SubTask {
     @NonNull
     @Getter
     private String title;
