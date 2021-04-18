@@ -87,8 +87,13 @@ public class SectionViewScreen {
             }
             primaryStage.setScene(MainScreen.getMainScene(primaryStage));
         });
+        Button view = new Button("View all tasks in section");
+        view.setOnAction(value->{
+            primaryStage.setScene(MainScreen.getCustomMainScene(primaryStage,labelView.getSelectionModel().getSelectedItem().getTaskList()));
+
+        });
         HBox root = new HBox();
-        root.getChildren().addAll(labelView, add,remove);
+        root.getChildren().addAll(labelView, add,remove, view);
         root.setAlignment(Pos.BASELINE_LEFT);
         root.setBackground(BLUEBACKGROUND);
         return new Scene(root, 600, 400);
