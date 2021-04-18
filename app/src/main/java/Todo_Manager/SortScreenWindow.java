@@ -16,6 +16,7 @@ import lombok.extern.java.Log;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Log
@@ -99,12 +100,23 @@ SortScreenWindow {
 
         //labels
         CheckBox labelsCB = new CheckBox("Labels");
-        ObservableList labels = FXCollections.observableArrayList(Manager.getLabelList());
-        System.out.println("labels:"+labels);
 
         Task Task = new Task();
-        System.out.println("observable array list" + Task.getLabelList() );
-        ComboBox labelsListCB = new ComboBox(labels);
+
+        ObservableList labels = FXCollections.observableArrayList();
+        //System.out.println("labels:"+labels);
+
+        for (Task task : Manager.getTasks())
+        {
+            System.out.println("observable array list" + task.getLabel() );
+            if(task.getLabel() != null)
+            labels.add(task.getLabel());
+        }
+        System.out.println("labels: " + labels);
+
+
+        ComboBox labelsListCB = new ComboBox();
+        labelsListCB.getItems().addAll(labels);
         labelsListCB.setVisible(false);
 
         //date
@@ -174,6 +186,7 @@ SortScreenWindow {
         root.add(taskOrderCB,1,0);
 
         root.add(labelsCB,0,1);
+        root.add(labelsListCB, 1,1);
 
         root.add(dateCB,0,2);
         root.add(datePickerThing,1,2);

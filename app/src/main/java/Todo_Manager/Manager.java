@@ -251,6 +251,7 @@ public class Manager {
             Type labelsToken = new TypeToken<ArrayList<String>>() {
             }.getType();
             labelList = gson.fromJson(test.readLine(), labelsToken);
+            labelList.add(gson.fromJson(test.readLine(), labelsToken));
             test.close();
 
         }else{
@@ -278,7 +279,11 @@ public class Manager {
     }
 
     public static void addLabel(String label, Task workingTask) throws IOException {
+        //add the new label to the current task
         workingTask.addLabel(label);
+
+        //add the new label to the label list
+        labelList.add(label);
         saveUserData();
     }
 

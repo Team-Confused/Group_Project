@@ -91,7 +91,7 @@ public class Task {
         subtaskList.add(subtask);
     }
      */
-
+    public ArrayList<String> getLabel(){return labelList;}
     public void addLabel(String label){
         labelList.add(label);
 
