@@ -23,6 +23,7 @@
  */
 package Todo_Manager;
 
+import com.google.common.io.Resources;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -73,18 +74,26 @@ public class SplashScreen {
         copyright.setWrapText(true);
         copyright.setTextAlignment(TextAlignment.CENTER);
 
-        //include team image in splashscreen.
-        InputStream is = SplashScreen.class.getClassLoader().getResourceAsStream("ConfusedLogo.jpg");
-        BackgroundImage backgroundImage = new BackgroundImage(new Image(is, 800, 350, false, true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
+
 
         StackPane pane = new StackPane();
         pane.setAlignment(Pos.TOP_CENTER);
         pane.getChildren().addAll(copyright);
 
-        //set the background
-        pane.setBackground(new Background(backgroundImage));
+        //include team image in splashscreen
+        //only run if the image can actually be loaded
+        try {
+            InputStream is = SplashScreen.class.getClassLoader().getResourceAsStream("ConfusedLogo.jpg");
+            BackgroundImage backgroundImage = new BackgroundImage(new Image(is, 800, 350, false, true),
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
+
+            //set the background
+            pane.setBackground(new Background(backgroundImage));
+        }
+        catch (Exception e){}
+
+
         Scene splashScene = new Scene(pane, 600, 500);
 
         return splashScene;
