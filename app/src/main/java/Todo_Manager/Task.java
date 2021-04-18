@@ -72,19 +72,11 @@ public class Task {
      this.description = description;
      this.deadline = deadline;
      this.priority = priority;
-     this.taskCompleted = taskCompleted;
-     this.labelList=new ArrayList<>();
-     this.subtaskList = new ArrayList<>();
      this.taskCompleted = false;
 
     }
-/*
-    public static void addSubTask(String title, String description, Date deadline, Priority priority) throws IOException {
-        SubTask subTask = new SubTask(title, description, deadline, priority);
-        subtaskList.add(subTask);
-    }
-    */
 
+<<<<<<< HEAD
      /*
     public void addSubTask(SubTask subtask){
         SubTask subTask = new SubTask(title, description, deadline, priority);
@@ -92,9 +84,11 @@ public class Task {
     }
      */
     public ArrayList<String> getLabel(){return labelList;}
+=======
+
+>>>>>>> d18ff7d5775f6da740f86d268909df2af18e2b0d
     public void addLabel(String label){
         labelList.add(label);
-
     }
     public void removeLabel(String label){
         labelList.remove(label);

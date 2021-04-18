@@ -38,6 +38,7 @@ import static org.junit.Assert.*;
 
 public class test {
     private static Date testDate;
+
     @BeforeClass
     public static void beforeClass() throws IOException {
         Manager.loadUsers();
@@ -49,6 +50,7 @@ public class test {
         //assertTrue("Login test for existing user",Manager.login("example@gmail.com", "newPassword"));
 
     }
+
     @After
     public void afterEach() throws IOException {
         Manager.logout();
@@ -74,33 +76,33 @@ public class test {
     @Test
     public void testAddTask() throws IOException {
         Manager.login("email@gmail.com", "password");
-        Manager.addTask("test","test",testDate,Priority.High);
-        Task expected = new Task("test","test",testDate,Priority.High);
-        assertEquals("Created task\n"+expected+" should be equal to task created in manager\n"+Manager.getTasks().get(Manager.getTasks().size()-1),expected,Manager.getTasks().get(Manager.getTasks().size()-1));
+        Manager.addTask("test", "test", testDate, Priority.High);
+        Task expected = new Task("test", "test", testDate, Priority.High);
+        assertEquals("Created task\n" + expected + " should be equal to task created in manager\n" + Manager.getTasks().get(Manager.getTasks().size() - 1), expected, Manager.getTasks().get(Manager.getTasks().size() - 1));
         Manager.removeTask(expected);
     }
 
     @Test
     public void testTaskModification() throws IOException {
         Manager.login("email@gmail.com", "password");
-        Manager.addTask("test","test",testDate,Priority.High);
-        Manager.modifyTask(Manager.getTasks().get(Manager.getTasks().size()-1),"test but edited","test",testDate,Priority.High);
-        Task expected = new Task("test but edited","test",testDate,Priority.High);
-        assertEquals("edited task should be equal to created task",expected,Manager.getTasks().get(Manager.getTasks().size()-1));
+        Manager.addTask("test", "test", testDate, Priority.High);
+        Manager.modifyTask(Manager.getTasks().get(Manager.getTasks().size() - 1), "test but edited", "test", testDate, Priority.High);
+        Task expected = new Task("test but edited", "test", testDate, Priority.High);
+        assertEquals("edited task should be equal to created task", expected, Manager.getTasks().get(Manager.getTasks().size() - 1));
     }
 
 
     @Test
     public void testRemoveTask() throws IOException {
         Manager.login("email@gmail.com", "password");
-        Task task = new Task("test","test",testDate,Priority.High);
-        Manager.addTask(task.getTitle(),task.getDescription(),task.getDeadline(),task.getPriority());
+        Task task = new Task("test", "test", testDate, Priority.High);
+        Manager.addTask(task.getTitle(), task.getDescription(), task.getDeadline(), task.getPriority());
         Manager.removeTask(task);
-        assertFalse("The task has been removed, so it should not exist in the list",Manager.getTasks().contains(task));
+        assertFalse("The task has been removed, so it should not exist in the list", Manager.getTasks().contains(task));
     }
 
 
-<<<<<<< HEAD
+
     @Test
     public void testSort() throws IOException {
         //logout any current user
@@ -125,7 +127,7 @@ public class test {
         Manager.logout();
 
     }
-=======
+
 //    @Test
 //    public void testSort() throws IOException {
 //        //logout any current user
@@ -148,11 +150,14 @@ public class test {
 //        //assertFalse("The task has been removed, so it should not exist in the list");
 //        //logout
 //        Manager.logout();
+
 //
 //    }
->>>>>>> fa81668c92ed130972d4361630438dc44671e050
 
 
+
+
+    //   }
 
 
 }

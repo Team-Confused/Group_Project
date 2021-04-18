@@ -36,26 +36,35 @@ import lombok.Setter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainScreen {
 
     //the list of tasks to be dsiplayed
-    @Setter
-    static ArrayList<Task> listOfTasks = new ArrayList();
+
+
 
 
     //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
-
+    private static ListView<Task> taskListView;
     //main screen
+    public static void setListOfTasks(ArrayList<Task> taskList){
+        taskListView = new ListView<>();
+        taskListView.getItems().addAll(taskList);
+    }
     public static Scene getMainScene(Stage primaryStage){
+        //returns the main screen with the full task list
+        return getCustomMainScene(primaryStage,Manager.getTasks());
+    }
 
-        //set the list of tasks to display
-        listOfTasks = Manager.getTasks();
+
+    public static Scene getCustomMainScene(Stage primaryStage,ArrayList<Task> taskList){
+        //returns the main screen with whatever list is input.
 
         //initialize taskListView and have it hold the tasks
-        ListView<Task> taskListView= new ListView<>();
-        taskListView.getItems().addAll(listOfTasks);
+        taskListView= new ListView<>();
+        taskListView.getItems().addAll(taskList);
 
         //update taskListView
 
@@ -209,7 +218,7 @@ public class MainScreen {
         Button removeLabel = new Button("Remove label");
         removeLabel.setOnAction(value->{
             if(!taskListView.getItems().isEmpty()) {
-                primaryStage.setScene(RemoveLabelScreen.getAddLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
+                primaryStage.setScene(RemoveLabelScreen.getRemoveLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
             }
         });
 

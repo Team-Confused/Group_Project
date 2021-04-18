@@ -58,7 +58,7 @@ SortScreen  {
        // checkbox1.setIndeterminate(false);
 
         ComboBox comboBox = new ComboBox();
-        comboBox.getItems().addAll("Highest","High", "Medium","Low");
+        comboBox.getItems().addAll(Priority.ASAP,Priority.High,Priority.Medium,Priority.Low);
 
 
         //datepicker to select date for sort parameter
@@ -74,7 +74,7 @@ SortScreen  {
             try {
 
                 
-                MainScreen.setListOfTasks(Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority));
+                primaryStage.setScene(MainScreen.getCustomMainScene(primaryStage,Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority)));
             } catch (IOException e) {
                 e.printStackTrace();
             }

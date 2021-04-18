@@ -31,16 +31,20 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import java.io.FileNotFoundException;
+
 
 public class UI extends Application {
-
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws FileNotFoundException {
         //this is the code for the scene that stays up for 6 seconds
 
         primaryStage.setScene(SplashScreen.getSplashScene());
