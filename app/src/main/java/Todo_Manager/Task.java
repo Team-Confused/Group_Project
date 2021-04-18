@@ -76,7 +76,6 @@ public class Task {
 
     }
 
-<<<<<<< HEAD
      /*
     public void addSubTask(SubTask subtask){
         SubTask subTask = new SubTask(title, description, deadline, priority);
@@ -84,9 +83,7 @@ public class Task {
     }
      */
     public ArrayList<String> getLabel(){return labelList;}
-=======
 
->>>>>>> d18ff7d5775f6da740f86d268909df2af18e2b0d
     public void addLabel(String label){
         labelList.add(label);
     }
