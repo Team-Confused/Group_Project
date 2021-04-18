@@ -28,7 +28,6 @@
 package Todo_Manager;
 
 
-
 import lombok.extern.java.Log;
 
 import java.io.IOException;
@@ -52,6 +51,7 @@ public class App {
 
         //begin the UI
         UI.main(args);
+
     }
 }
 

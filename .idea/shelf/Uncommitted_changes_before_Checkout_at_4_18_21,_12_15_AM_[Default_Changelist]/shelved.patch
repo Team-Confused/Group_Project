@@ -1,0 +1,57 @@
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <annotationProcessing>\n      <profile default=\"true\" name=\"Default\" enabled=\"true\" />\n      <profile name=\"Gradle Imported\" enabled=\"true\">\n        <outputRelativeToContentRoot value=\"true\" />\n        <processorPath useClasspath=\"false\">\n          <entry name=\"$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar\" />\n        </processorPath>\n        <module name=\"app_main\" />\n      </profile>\n    </annotationProcessing>\n    <bytecodeTargetLevel target=\"15\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 5ee9b0b729f75dbe0d321125c97bdc138c859065)
++++ b/.idea/compiler.xml	(date 1618725947512)
+@@ -8,7 +8,8 @@
+         <processorPath useClasspath="false">
+           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar" />
+         </processorPath>
+-        <module name="app_main" />
++        <module name="Todo_Manager.app.main" />
++        <module name="Todo_Manager.app.test" />
+       </profile>
+     </annotationProcessing>
+     <bytecodeTargetLevel target="15" />
+Index: .idea/modules/Group_Project.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules/Group_Project.iml b/.idea/modules/Group_Project.iml
+new file mode 100644
+--- /dev/null	(date 1618725796441)
++++ b/.idea/modules/Group_Project.iml	(date 1618725796441)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$/../.." />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"delegatedBuild\" value=\"true\" />\n        <option name=\"testRunner\" value=\"GRADLE\" />\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleHome\" value=\"$PROJECT_DIR$/../../../../Gradle/gradle-6.8.1\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n          </set>\n        </option>\n        <option name=\"useAutoImport\" value=\"true\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 5ee9b0b729f75dbe0d321125c97bdc138c859065)
++++ b/.idea/gradle.xml	(date 1618725911583)
+@@ -15,7 +15,6 @@
+             <option value="$PROJECT_DIR$/app" />
+           </set>
+         </option>
+-        <option name="useAutoImport" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>

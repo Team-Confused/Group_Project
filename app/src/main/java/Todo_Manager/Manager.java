@@ -69,7 +69,6 @@ public class Manager {
         //load the users
         loadUsers();
         User temp;  //create a temporary user
-        log.info("Users: " + users);
 
         //for each user in the set of users,
         for (User u : users) {
@@ -80,8 +79,18 @@ public class Manager {
                     //at this point, user exists and password is correct.
                     //set this person in the list of users to be "logged in"
                     loggedInUser = u;
+                    log.info("logged-in: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+                    //check to insure that the folder for user data exists
+                    File tempFile = new File("./UserFiles");
+                    boolean exists = tempFile.exists();
+                    if (!exists) {
+                        tempFile.mkdir();
+                    }
+
                     //load their user data
                     loadUserData();
+                    log.info("loaded user data for: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+
                     //return a success
                     return true;
                 }
@@ -177,15 +186,20 @@ public class Manager {
     public static void loadUsers() throws IOException {
         //loads user list
         Gson gson = new Gson();
-        Type usersType = new TypeToken<ArrayList<User>>() {
-        }.getType();
-        try {
-            //populate the "users" ArrayList with the data from the JSON file
-            users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
-            //System.out.println("users:"+users);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        //checks if file exists
+        File tempFile = new File("./Users.json");
+        boolean exists = tempFile.exists();
+        if(exists) {
+            Type usersType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            try {
+                //populate the "users" ArrayList with the data from the JSON file
+                users = gson.fromJson(Files.readString(Paths.get("./Users.json")), usersType);
+                //System.out.println("users:"+users);
+            } catch (IOException ex) {
+                ex.printStackTrace();
 
+            }
         }
     }
 
@@ -237,8 +251,11 @@ public class Manager {
             Type labelsToken = new TypeToken<ArrayList<String>>() {
             }.getType();
             labelList = gson.fromJson(test.readLine(), labelsToken);
+            labelList.add(gson.fromJson(test.readLine(), labelsToken));
             test.close();
 
+        }else{
+             tempFile.createNewFile();
         }
     }
 
@@ -262,7 +279,11 @@ public class Manager {
     }
 
     public static void addLabel(String label, Task workingTask) throws IOException {
+        //add the new label to the current task
         workingTask.addLabel(label);
+
+        //add the new label to the label list
+        labelList.add(label);
         saveUserData();
     }
 
@@ -354,8 +375,6 @@ public class Manager {
         Logout a user by their unique user id (UUID)
         There is no return
     */
-
-
 //    public static void logoutUser(UUID id) throws IOException {
 //        //write to log that no users are logged in
 //        log.info("logged out user:" + id);

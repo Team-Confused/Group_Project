@@ -55,10 +55,10 @@ SortScreen  {
         CheckBox cb2 = new CheckBox("Labels");
         CheckBox cb3 = new CheckBox("Date");
         CheckBox cb4 = new CheckBox("Priority");
-       // checkbox1.setIndeterminate(false);\
+       // checkbox1.setIndeterminate(false);
 
         ComboBox comboBox = new ComboBox();
-        comboBox.getItems().addAll("Highest","High", "Medium","Low");
+        comboBox.getItems().addAll(Priority.ASAP,Priority.High,Priority.Medium,Priority.Low);
 
 
         //datepicker to select date for sort parameter
@@ -74,7 +74,7 @@ SortScreen  {
             try {
 
                 
-                Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority);
+                primaryStage.setScene(MainScreen.getCustomMainScene(primaryStage,Sort.sortBy(cb1.isSelected(), cb2.isSelected(), cb3.isSelected(), cb4.isSelected(), date.getValue(), label, priority)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,10 +88,6 @@ SortScreen  {
         mainbox.setAlignment(Pos.BOTTOM_CENTER);
         mainbox.setSpacing(50);
 
-        //if the button is pressed to add a new task
-        mainMenu.setOnAction(value->{
-            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
-        });
 
 
         //Adding button to hbox

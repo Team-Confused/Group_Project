@@ -17,8 +17,6 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.9'
 
 
-
-
 }
 
 repositories {
@@ -62,9 +60,20 @@ test {
     //if it says tests not recieved, uncomment this, run it, then comment it back out and run it again
     //useJUnitPlatform()
 }
- javafx{
+javafx {
 
     version = "15.0.1"
     modules = ['javafx.controls']
 }
+
+jar {
+    manifest {
+        attributes "Main-Class": "Todo_Manager.App"
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
 

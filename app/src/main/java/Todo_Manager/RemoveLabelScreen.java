@@ -42,7 +42,7 @@ public class RemoveLabelScreen {
 
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
 
-    public static Scene getAddLabelScene(Stage primaryStage, Task workingTask){
+    public static Scene getRemoveLabelScene(Stage primaryStage, Task workingTask){
         ListView<String> labelView= new ListView<>();
         labelView.getItems().addAll(workingTask.getLabelList());
         labelView.setCellFactory(param -> new ListCell<String>(){

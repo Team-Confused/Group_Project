@@ -32,12 +32,17 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class SplashScreen {
     //define the backgound color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
 
     //splash screen
-    public static Scene getSplashScene() {
+    public static Scene getSplashScene() throws FileNotFoundException {
         Label copyright = new Label("MIT License\n" +
                 "\n" +
                 "Copyright (c) 2021 Team-Confused\n" +
@@ -68,11 +73,12 @@ public class SplashScreen {
         copyright.setWrapText(true);
         copyright.setTextAlignment(TextAlignment.CENTER);
 
-        //include team image in splashscreen
-        Image img = new Image("file:ConfusedLogo.jpg");
-        BackgroundImage backgroundImage = new BackgroundImage(new Image(img.getUrl(), 800, 350, false, true),
+        //include team image in splashscreen.
+        InputStream is = SplashScreen.class.getClassLoader().getResourceAsStream("ConfusedLogo.jpg");
+        BackgroundImage backgroundImage = new BackgroundImage(new Image(is, 800, 350, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
+
         StackPane pane = new StackPane();
         pane.setAlignment(Pos.TOP_CENTER);
         pane.getChildren().addAll(copyright);
