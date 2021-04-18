@@ -33,11 +33,13 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.Setter;
+import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log
 public class MainScreen {
 
     //the list of tasks to be dsiplayed
@@ -48,10 +50,12 @@ public class MainScreen {
     //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
     private static ListView<Task> taskListView;
+
     //main screen
     public static void setListOfTasks(ArrayList<Task> taskList){
         taskListView = new ListView<>();
         taskListView.getItems().addAll(taskList);
+        log.info("list of Tasks updated in Main Screen.");
     }
     public static Scene getMainScene(Stage primaryStage){
         //returns the main screen with the full task list

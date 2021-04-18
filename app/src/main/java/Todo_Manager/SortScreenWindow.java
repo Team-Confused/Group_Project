@@ -101,6 +101,9 @@ SortScreenWindow {
 
     public static void createNewWindow() {
 
+        //create an instance of the window
+        Stage window = new Stage();
+
 
         GridPane root = new GridPane();
 
@@ -192,11 +195,12 @@ SortScreenWindow {
                                             dateCB.isSelected(),
                                             priorityCB.isSelected(),
                                             datePickerThing.getValue(),
-                                            labelsListCB.getSelectionModel().getSelectedItem().toString(),
+                                            (String) labelsListCB.getSelectionModel().getSelectedItem(),
                                             priorityValue));
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            window.close();
         });
 
         //VBox one = new VBox();
@@ -231,7 +235,6 @@ SortScreenWindow {
         // create scene containing the content
         Scene scene = new Scene(content,400,250);
 
-        Stage window = new Stage();
         window.setScene(scene);
 
         // make window visible
