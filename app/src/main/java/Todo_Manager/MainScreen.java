@@ -23,6 +23,8 @@
  */
 package Todo_Manager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -42,20 +44,32 @@ import java.util.List;
 @Log
 public class MainScreen {
 
-    //the list of tasks to be dsiplayed
-
-
+    //initial vars
+    private static HBox root = new HBox();
+    private static VBox one = new VBox();
+    private static VBox two = new VBox();
+    private static VBox three = new VBox();
 
 
     //define the background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
     private static ListView<Task> taskListView;
 
+    //update scene
+    public static void updateScene()
+    {
+        root.getChildren().clear();
+        root.getChildren().addAll(taskListView,one,two,three);
+        System.out.println("the scene has been updated in mainScreen");
+    }
+
+
     //main screen
     public static void setListOfTasks(ArrayList<Task> taskList){
         taskListView = new ListView<>();
-        taskListView.getItems().addAll(taskList);
-        log.info("list of Tasks updated in Main Screen.");
+        ObservableList tasks = FXCollections.observableArrayList(taskList);
+        taskListView.setItems(tasks); // .addAll(taskList);
+        log.info("list of Tasks set in Main Screen.");
     }
     public static Scene getMainScene(Stage primaryStage){
         //returns the main screen with the full task list
@@ -106,16 +120,11 @@ public class MainScreen {
 
 
 
-        VBox one = new VBox();
+
 
         //sort button
         Button sort = new Button("Sort");
-        //when sort button is pressed
-        sort.setOnAction(value->{
-            //enter the sort screen
-            //primaryStage.setScene(SortScreen.getSortScene(primaryStage));
-            SortScreenWindow.createNewWindow();
-        });
+
 
         //add a new task
         Button newTask = new Button("Add new Task");
@@ -165,7 +174,6 @@ public class MainScreen {
 
 
 
-        VBox two = new VBox();
 
         //search button
         Button search = new Button("Search");
@@ -230,7 +238,6 @@ public class MainScreen {
         two.getChildren().addAll(search,modifyTask,Sections,addTaskToSection,removeTaskFromSection,removeTask,removeLabel);
 
 
-        VBox three = new VBox();
 
         //exit program
         Button close = new Button("Exit Program");
@@ -282,8 +289,23 @@ public class MainScreen {
         innerThree.getChildren().addAll(close,logout,viewAll);
         innerThree.setSpacing(10);
         three.getChildren().addAll(innerThree,reset);
-        HBox root = new HBox();
-        root.getChildren().addAll(taskListView,one,two,three);
+
+
+        //when sort button is pressed
+        sort.setOnAction(value->{
+            //enter the sort screen
+            //primaryStage.setScene(SortScreen.getSortScene(primaryStage));
+            SortScreenWindow.createNewWindow();
+            //taskListView.refresh();
+            //setListOfTasks();
+            updateScene();
+            System.out.println("scene updated mainscreen by sort button");
+
+        });
+
+        updateScene();
+
+
         one.setSpacing(10);
         two.setSpacing(10);
         three.setSpacing(240);

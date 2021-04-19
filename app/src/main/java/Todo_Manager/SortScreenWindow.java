@@ -197,6 +197,7 @@ SortScreenWindow {
                                             datePickerThing.getValue(),
                                             (String) labelsListCB.getSelectionModel().getSelectedItem(),
                                             priorityValue));
+                MainScreen.updateScene();
             } catch (IOException e) {
                 e.printStackTrace();
             }
