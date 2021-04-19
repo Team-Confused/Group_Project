@@ -58,10 +58,10 @@ public class LoginScreen {
         //set the visibility of the "error" label
         error.setVisible(false);
 
-        Button mainMenu = new Button("MAIN");
+        Button mainMenu = new Button("BACK");
         //if the button is pressed to add a new task
         mainMenu.setOnAction(value->{
-            primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+            primaryStage.setScene(LoginOrRegisterScreen.getLogRegScreen(primaryStage));
         });
 
         //login button
