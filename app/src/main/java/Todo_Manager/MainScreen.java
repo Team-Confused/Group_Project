@@ -82,6 +82,14 @@ public class MainScreen {
     public static Scene getCustomMainScene(Stage primaryStage,ArrayList<Task> taskList){
         //returns the main screen with whatever list is input.
 
+        //initial vars
+          root = new HBox();
+          one = new VBox();
+          two = new VBox();
+          three = new VBox();
+
+
+
         //initialize taskListView and have it hold the tasks
         taskListView= new ListView<>();
         taskListView.getItems().addAll(taskList);
