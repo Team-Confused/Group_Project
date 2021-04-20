@@ -22,12 +22,16 @@
  * SOFTWARE.
  */
 package Todo_Manager;
+import javafx.scene.control.Label;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,13 +52,6 @@ public class Sort {
     boolean label, task, sortDate, priority;
 
 
-    //enum for Priority
-    /*
-    public enum tempPriority {
-        Low,Medium,High,ASAP;
-    }
-    */
-
     //sort by the task name (alphabetical)
     static ArrayList sortByTask()
     {
@@ -63,41 +60,27 @@ public class Sort {
 
         //sort the temporary ArrayList based on the task title
         sortedTasks.sort((u1, u2) -> u1.getTitle().compareTo(u2.getTitle()) );
-
         log.info("sorted tasks: (based on task [alphabetical])\n" + sortedTasks);
-
         return sortedTasks;
     }
 
     //sort by label
-    static ArrayList sortByLabel(String label)
+    static ArrayList sortByLabel(Object label)
     {
-        //tasks
-        //System.out.println(Manager.getTasks());
-
         //create a temporary ArrayList
-        ArrayList<Task> sortedTasks = new ArrayList<Task>(); // = Manager.getTasks();
+        ArrayList<Task> sortedTasks = new ArrayList<Task>();
 
-        //there is a label provided to filter
-        if(!label.isEmpty())
+        //sort the temporary ArrayList based on the tasks containing the same label inputted
+        for(Task task : Manager.getTasks())
         {
-            //sort the temporary ArrayList based on the number of terms in the label list
-            //sortedTasks.sort((u1, u2) -> u1.getLabelList().size().compareTo(u2.getLabelList().size()) );
-        }
-        //there is no label provided
-        else
-        {
-            //sort the temporary ArrayList based on the tasks containing the same label inputted
-            for(Task task : Manager.getTasks())
+            //if the task's label is the same as the label parameter
+            if(task.getLabel().equals(label))
             {
-                if(task.getLabelList().contains(label))
-                {
-                    sortedTasks.add(task);
-                }
+                //add the task in Tasks to the list
+                sortedTasks.add(task);
             }
         }
-
-        log.info("sorted tasks: (based on task [alphabetical])\n" + sortedTasks);
+        log.info("sorted tasks: (based on label)\n" + sortedTasks);
 
         return sortedTasks;
     }
@@ -107,31 +90,48 @@ public class Sort {
     //date setter
     @Setter
     Date date;
-    static ArrayList sortByDate(LocalDate tasks)
+    static ArrayList sortByDate()
     {
-        ArrayList sortedTasks = new ArrayList();
+        //create a temporary ArrayList
+        ArrayList<Task> sortedTasks = Manager.getTasks();
 
+
+        //sort the temporary ArrayList based on the task duedate
+        sortedTasks.sort((u1, u2) -> u1.getDeadline().compareTo(u2.getDeadline()));
+        log.info("sorted tasks: (based on date)\n" + sortedTasks);
         return sortedTasks;
+
     }
     
     //sort by priority
-    static ArrayList sortByPriority(Priority tasks)
+    static ArrayList sortByPriority(Priority priority)
     {
         ArrayList sortedTasks = new ArrayList();
-        
+        for(Task task : Manager.getTasks())
+        {
+            if(task.getPriority().equals(priority))
+            {
+                sortedTasks.add(task);
+            }
+        }
         return sortedTasks;
     }
 
-    public static ArrayList sortBy(boolean isTask, boolean isLabel, boolean isDate, boolean isPriority, LocalDate date, String label, Priority priority) throws IOException {
+    public static ArrayList sortBy(boolean isTask, boolean isLabel, Object label, boolean isDate, boolean isPriority, Priority priority) throws IOException {
         //list of tasks
         ArrayList tasks = Manager.getTasks();
         ArrayList sortedTasks = new ArrayList();
 
+        log.info("isTask: " + isTask + "\ttaskSortType: "   +
+                            "\nisLAbel: " + isLabel + "\tlabel: " +label +
+                            "\nisDate" + isDate + "\tdate: "  +
+                            "\nisPriority: " + isPriority + "\tpriority: " + priority);
         //if we are sorting by task
         if(isTask) sortedTasks = sortByTask();
         else if(isLabel) sortedTasks = sortByLabel(label);
-        else if(isDate) sortedTasks = sortByDate(date);
+        else if(isDate) sortedTasks = sortByDate();
         else if(isPriority) sortedTasks = sortByPriority(priority);
+        else sortedTasks = Manager.getTasks();
 
         return sortedTasks;
     }

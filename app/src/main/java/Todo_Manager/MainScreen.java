@@ -64,13 +64,15 @@ public class MainScreen {
     }
 
 
-    //main screen
+    //settfor the list of tasks (this is needed to allow for sorting)
     public static void setListOfTasks(ArrayList<Task> taskList){
         taskListView = new ListView<>();
         ObservableList tasks = FXCollections.observableArrayList(taskList);
         taskListView.setItems(tasks); // .addAll(taskList);
         log.info("list of Tasks set in Main Screen.");
     }
+
+    //main screen
     public static Scene getMainScene(Stage primaryStage){
         //returns the main screen with the full task list
         return getCustomMainScene(primaryStage,Manager.getTasks());
@@ -108,8 +110,6 @@ public class MainScreen {
                     setWrapText(true);
 
                     setText(item.toString());
-
-
                 }
             }
         });
@@ -118,12 +118,18 @@ public class MainScreen {
 
 
 
-
-
-
-
         //sort button
         Button sort = new Button("Sort");
+        //when sort button is pressed
+        sort.setOnAction(value->{
+            //enter the sort screen
+            SortScreenWindow.createNewWindow();
+
+            //method call to update the scene
+            updateScene();
+            log.info("scene updated in MainScreen by sort button");
+
+        });
 
 
         //add a new task
@@ -142,7 +148,7 @@ public class MainScreen {
 
         });
 
-
+        //mark selected task as complete
         Button markAsComplete = new Button("Mark as complete");
         markAsComplete.setOnAction(value->{
             taskListView.getSelectionModel().getSelectedItem().setTaskCompleted(true);
@@ -153,12 +159,15 @@ public class MainScreen {
             }
         });
 
+        //add label button
         Button addLabel = new Button("Add label");
         addLabel.setOnAction(value->{
             if(!taskListView.getItems().isEmpty()) {
                 primaryStage.setScene(AddLabelScreen.getAddLabelScene(primaryStage, taskListView.getSelectionModel().getSelectedItem()));
             }
         });
+
+        //remove subtask button
         Button removeSubTask = new Button("Remove Subtask");
         removeSubTask.setOnAction(value->{
             if(!taskListView.getItems().isEmpty()) {
@@ -280,9 +289,6 @@ public class MainScreen {
         });
 
 
-
-
-
         //build the scene
         reset.setAlignment(Pos.BOTTOM_RIGHT);
         VBox innerThree = new VBox();
@@ -291,18 +297,7 @@ public class MainScreen {
         three.getChildren().addAll(innerThree,reset);
 
 
-        //when sort button is pressed
-        sort.setOnAction(value->{
-            //enter the sort screen
-            //primaryStage.setScene(SortScreen.getSortScene(primaryStage));
-            SortScreenWindow.createNewWindow();
-            //taskListView.refresh();
-            //setListOfTasks();
-            updateScene();
-            System.out.println("scene updated mainscreen by sort button");
-
-        });
-
+        //method call to update the scene
         updateScene();
 
 
