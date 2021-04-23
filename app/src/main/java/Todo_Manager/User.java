@@ -30,7 +30,7 @@ import java.nio.file.Path;
 import java.util.UUID;
 
 //project Lombok calls
-@ToString
+
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 
@@ -60,7 +60,9 @@ public class User{
     private String photo;
     @Getter
     private boolean isAdmin;
-
+    public String toString(){
+        return firstName+lastName+"\n"+email;
+    }
 
 
 }

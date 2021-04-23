@@ -51,15 +51,16 @@ public class adminMainScreen {
 
 
     //compile list of users and their UUIDs
-    public static List stringOfUsers()
+    public static List<User> stringOfUsers()
     {
-        List<String> stringofUsers = new ArrayList<String>();
+        List<User> stringofUsers = new ArrayList<User>();
+        stringofUsers.addAll(Manager.getUsers());
         //for each user, add a short string of their simple information to the list "stringofUsers"
-        for(User user : Manager.getUsers())
-        {
-            //format the added string as (<firstName> <lastName> "UUID:" <UUID>)
-            stringofUsers.add(user.getFirstName() + " " + user.getLastName() + "\tUUID:" + user.getId());
-        }
+//        for(User user : Manager.getUsers())
+//        {
+//            //format the added string as (<firstName> <lastName> "UUID:" <UUID>)
+//            stringofUsers.add(user.getFirstName() + " " + user.getLastName() + "\tUUID:" + user.getId());
+//        }
 
         //return the list
         return stringofUsers;
@@ -67,7 +68,7 @@ public class adminMainScreen {
 
     public static Scene getAdminMainScene(Stage primaryStage){
 
-        ListView<String> taskListView= new ListView<>();
+        ListView<User> taskListView= new ListView<>();
         taskListView.getItems().addAll(stringOfUsers());
 
         //VBoxes
@@ -110,7 +111,7 @@ public class adminMainScreen {
         //on the clicking of button "Password Reset", go to the password reset page
         reset.setOnAction(value->{
             //go to the password reset page
-            primaryStage.setScene(passwordResetScreen.getPasswordResetScreen(primaryStage));
+            primaryStage.setScene(passwordResetScreen.getAdminPasswordResetScreen(primaryStage,taskListView.getSelectionModel().getSelectedItem()));
         });
 
         //create the layout ... all of it

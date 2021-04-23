@@ -1,18 +1,18 @@
 /**
  * MIT License
- *
+ * <p>
  * Copyright (c) 2021 Team-Confused
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -49,19 +49,19 @@ public class passwordResetScreen {
     //definition of background color
     private static final Background BLUEBACKGROUND = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
 
-    public static Scene getPasswordResetScreen(Stage primaryStage){
+    public static Scene getPasswordResetScreen(Stage primaryStage) {
         //boolean that stores if the user is an admin
         boolean isAdmin = Manager.getLoggedInUser().isAdmin();
 
-        log.info("user "+Manager.getLoggedInUser().getFirstName() + " " + Manager.getLoggedInUser().getLastName() + " is an admin: " + isAdmin);
+        log.info("user " + Manager.getLoggedInUser().getFirstName() + " " + Manager.getLoggedInUser().getLastName() + " is an admin: " + isAdmin);
 
         //if the user is admin
-        if(isAdmin)
-            return getAdminPasswordResetScreen(primaryStage);
-
+        if (isAdmin) {
+            //return getAdminPasswordResetScreen(primaryStage);
+        }
         //if the user is not an admin, or some error occurs in determining if the user is an admin (for security reasons)
-        else
             return getUserPasswordResetScreen(primaryStage);
+
     }
 
 
@@ -104,7 +104,7 @@ public class passwordResetScreen {
                 resetPassword = -1;
             }
             //confirm that the user-imputed "old password" matches what the password is currently known as
-            else if(oldPasswordText.equals(Manager.getLoggedInUser().getPassword())){
+            else if (oldPasswordText.equals(Manager.getLoggedInUser().getPassword())) {
                 try {
 
                     //reset the password
@@ -133,13 +133,13 @@ public class passwordResetScreen {
         GridPane passwordResetScreen = new GridPane();
         passwordResetScreen.setBackground(BLUEBACKGROUND);
         passwordResetScreen.setAlignment(Pos.CENTER);
-        passwordResetScreen.add(userMode, 1,0);
-        passwordResetScreen.add(oldPasswordL,0,1);
-        passwordResetScreen.add(newPasswordL,0,2);
-        passwordResetScreen.add(oldPassword,1,1);
-        passwordResetScreen.add(newPassword,1,2);
-        passwordResetScreen.add(changePassword,1,3);
-        passwordResetScreen.add(error,1,4);
+        passwordResetScreen.add(userMode, 1, 0);
+        passwordResetScreen.add(oldPasswordL, 0, 1);
+        passwordResetScreen.add(newPasswordL, 0, 2);
+        passwordResetScreen.add(oldPassword, 1, 1);
+        passwordResetScreen.add(newPassword, 1, 2);
+        passwordResetScreen.add(changePassword, 1, 3);
+        passwordResetScreen.add(error, 1, 4);
         passwordResetScreen.setHgap(5);
         passwordResetScreen.setVgap(5);
 
@@ -148,14 +148,13 @@ public class passwordResetScreen {
     }
 
 
-    public static Scene getAdminPasswordResetScreen(Stage primaryStage)
-    {
+    public static Scene getAdminPasswordResetScreen(Stage primaryStage, User workingUser) {
         //text input fields (old password, new password)
-        TextField user = new TextField();
+        // TextField user = new TextField();
         PasswordField newPassword = new PasswordField();
 
         //labels
-        Label userL = new Label("User UUID:");
+        //Label userL = new Label("User UUID:");
         Label newPasswordL = new Label("New Password: ");
         Label error = new Label("Error in resetting password.");
 
@@ -174,19 +173,19 @@ public class passwordResetScreen {
             int resetPassword = -1;
 
             //get the strings the user had provided
-            String userUUIDText = user.getText();
+            //String userUUIDText = user.getText();
             String newPasswordText = newPassword.getText();
 
             //filter out (auto-fail) if either of the fields is empty
-            if (newPasswordText.isBlank() || userUUIDText.isBlank()) {
+            if (newPasswordText.isBlank()) {
                 resetPassword = -1;
             }
 
             //reset the selected user's password
-            else{
+            else {
                 try {
                     //reset the password
-                    resetPassword = Manager.adminPasswordReset( UUID.fromString(userUUIDText), newPasswordText);
+                    resetPassword = Manager.adminPasswordReset(workingUser.getId(), newPasswordText);
                 } catch (IOException e) {
                     e.printStackTrace();
 
@@ -194,7 +193,7 @@ public class passwordResetScreen {
             }
 
             if (resetPassword == 1) {
-                primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+                primaryStage.setScene(adminMainScreen.getAdminMainScene(primaryStage));
 
             }
             //if there was an error in changing the password
@@ -212,15 +211,15 @@ public class passwordResetScreen {
         passwordResetScreen.setAlignment(Pos.CENTER);
 
         //labels
-        passwordResetScreen.add(userMode, 1,0);
-        passwordResetScreen.add(userL,0,1);
-        passwordResetScreen.add(newPasswordL,0,3);
+        passwordResetScreen.add(userMode, 1, 0);
+        //passwordResetScreen.add(userL,0,1);
+        passwordResetScreen.add(newPasswordL, 0, 3);
 
         //text input fields
-        passwordResetScreen.add(user,1,1);
-        passwordResetScreen.add(newPassword,1,3);
-        passwordResetScreen.add(changePassword,1,4);
-        passwordResetScreen.add(error,1,5);
+        //passwordResetScreen.add(user,1,1);
+        passwordResetScreen.add(newPassword, 1, 3);
+        passwordResetScreen.add(changePassword, 1, 4);
+        passwordResetScreen.add(error, 1, 5);
         passwordResetScreen.setHgap(5);
         passwordResetScreen.setVgap(5);
 
