@@ -81,16 +81,17 @@ public class Manager {
                     loggedInUser = u;
                     log.info("logged-in: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
                     //check to insure that the folder for user data exists
-                    File tempFile = new File("./UserFiles");
-                    boolean exists = tempFile.exists();
-                    if (!exists) {
-                        tempFile.mkdir();
+                    if(!loggedInUser.isAdmin()) {
+                        File tempFile = new File("./UserFiles");
+                        boolean exists = tempFile.exists();
+                        if (!exists) {
+                            tempFile.mkdir();
+                        }
+
+                        //load their user data
+                        loadUserData();
+                        log.info("loaded user data for: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
                     }
-
-                    //load their user data
-                    loadUserData();
-                    log.info("loaded user data for: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
-
                     //return a success
                     return true;
                 }

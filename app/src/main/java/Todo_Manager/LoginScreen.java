@@ -101,10 +101,13 @@ public class LoginScreen {
                 boolean isAdmin = Manager.getLoggedInUser().isAdmin();
 
                 //if the user is an admin, get the admin scene
-                if(isAdmin) primaryStage.setScene(adminMainScreen.getAdminMainScene(primaryStage));
-
+                if(isAdmin){
+                    primaryStage.setScene(adminMainScreen.getAdminMainScene(primaryStage));
+                }
                 //if the user is not an admin, get the generic main scene
-                else primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+                else {
+                    primaryStage.setScene(MainScreen.getMainScene(primaryStage));
+                }
 
             }
 

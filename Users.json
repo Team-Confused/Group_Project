@@ -88,5 +88,25 @@
     "email": "aang@gmail.com",
     "photo": "/home/john/CS2263/Group_Project/Group_Project/ConfusedLogo.jpg",
     "isAdmin": false
+  },
+  {
+    "firstName": "admin",
+    "lastName": "admin",
+    "password": "admin",
+    "id": "cc6383a8-1dde-48b7-87c4-e7654ba43439",
+    "bio": "sdfsdfsda",
+    "email": "admin",
+    "photo": "D:\\Downloads\\sauro.png",
+    "isAdmin": true
+  },
+  {
+    "firstName": "adasdf",
+    "lastName": "asdfsdfasdfs",
+    "password": "admin1",
+    "id": "21ff7f31-e7e5-4b73-81dd-3d0310ace407",
+    "bio": "sadfsdfsdfsdf",
+    "email": "admin1",
+    "photo": "D:\\Downloads\\sauro.png",
+    "isAdmin": true
   }
 ]
